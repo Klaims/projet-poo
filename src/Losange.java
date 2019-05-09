@@ -21,8 +21,11 @@ public class Losange extends ObjetBasique implements Informations, CalculsGeomet
 
 	@Override
 	public double calculPerimetre() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		double dist1 = this.getPoint(0).distance(this.getPoint(1));
+		double dist2 = this.getPoint(1).distance(this.getPoint(2));
+		
+		return 2*dist1 + 2*dist2;
 	}
 
 	@Override
