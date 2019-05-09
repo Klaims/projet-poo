@@ -11,7 +11,7 @@ public class Segment extends ObjetBasique implements Informations{
   }
                 
   public String toString(){
-    return ("Il s'agit d'un segment qui relie le point (" + this.getPoint(0).getPosX() + ", " + this.getPoint(0).getPosY() + " et le point (" + getPoint(1).getPosX() + ", " + getPoint(1).getPosY() + ").")
+    return ("Il s'agit d'un segment qui relie le point (" + this.getPoint(0).getPosX() + ", " + this.getPoint(0).getPosY() + " et le point (" + getPoint(1).getPosX() + ", " + getPoint(1).getPosY() + ").");
   }
 
 }
