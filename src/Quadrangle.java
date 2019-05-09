@@ -11,5 +11,6 @@ public class Quadrangle extends ObjetBasique implements Informations{
 		this.addPoint(p3);
 		
 		this.setRef(null);
+		
 	}
 }
