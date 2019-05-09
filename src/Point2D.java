@@ -34,6 +34,11 @@ public class Point2D {
 		this.posY = posY;
 		
 	}
+	
+	public double distance(Point2D p) {
+		
+		return Math.sqrt( Math.pow(p.posX - this.posX, 2) + Math.pow(p.posY - this.posX, 2) );
+	}
 
 	public String toString() {
 		
