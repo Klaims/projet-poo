@@ -1,5 +1,5 @@
 
-public class Quadrangle extends ObjetBasique {
+public class Quadrangle extends ObjetBasique implements Informations{
 	
 	private double rayon;
 	
@@ -9,5 +9,7 @@ public class Quadrangle extends ObjetBasique {
 		this.addPoint(p1);
 		this.addPoint(p2);
 		this.addPoint(p3);
+		
+		this.setRef(null);
 	}
 }
