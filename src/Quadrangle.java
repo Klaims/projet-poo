@@ -1,5 +1,5 @@
 
-public class Quadrangle extends ObjetBasique implements Informations{
+public class Quadrangle extends ObjetBasique implements Informations, CalculsGeometriques{
 	
 	private double rayon;
 	
@@ -10,6 +10,7 @@ public class Quadrangle extends ObjetBasique implements Informations{
 		this.addPoint(p3);
 		this.setRef(null);
 	}
+<<<<<<< HEAD
 	
 	public double calculAire() {
 		// on découpe le quadrangle en deux triangles
@@ -35,5 +36,18 @@ public class Quadrangle extends ObjetBasique implements Informations{
 	    
 	    //on retourne la valeur du périmetre
 	    return perimetre;
+=======
+
+	@Override
+	public double calculPerimetre() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double calculAire() {
+		// TODO Auto-generated method stub
+		return 0;
+>>>>>>> refs/remotes/origin/master
 	}
 }

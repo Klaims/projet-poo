@@ -1,5 +1,5 @@
 
-public class Losange extends ObjetBasique implements Informations{
+public class Losange extends ObjetBasique implements Informations, CalculsGeometriques{
 	
 	public Losange(Point2D p1, Point2D p2, Point2D p3 , Point2D p4) {
 		
@@ -8,15 +8,26 @@ public class Losange extends ObjetBasique implements Informations{
 		this.addPoint(p3);
 		this.addPoint(p4);
 		
-		
 	}
 	
 	public String toString() {
 		
 		return    ("Le losange est composé des quatres points :"
-				  + "  p1 (" + (this.getPoint(0).getPosX() + "," + (this.getPoint(0).getPosY() + ")"
+				  + " p1 (" + (this.getPoint(0).getPosX() + "," + (this.getPoint(0).getPosY() + ")"
 				  + " p2 (" +  ( this.getPoint(1)).getPosX()) + " , " +  this.getPoint(1).getPosY() + ")" 
 				  + " p3 (" +  ( this.getPoint(2)).getPosX() + " , " +  this.getPoint(2).getPosY() + ")"  
 				  + " p4 (" +  ( this.getPoint(3)).getPosX()) + " , " +  this.getPoint(3).getPosY() + ")");
+	}
+
+	@Override
+	public double calculPerimetre() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double calculAire() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
