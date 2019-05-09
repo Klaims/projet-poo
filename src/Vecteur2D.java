@@ -34,7 +34,6 @@ public class Vecteur2D {
 	public void setP2(Point2D p2) {
 		
 		this.p2 = p2;
-		
 	}
 
 	public boolean getSens() {
