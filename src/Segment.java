@@ -1,4 +1,4 @@
-public class Segment extends ObjetBasique{
+public class Segment extends ObjetBasique implements Informations{
   
   public Segment(Point2D p1, Point2D p2){
     // On ajoute les points à l'ArrayList
@@ -8,6 +8,10 @@ public class Segment extends ObjetBasique{
     double x = (p1.getPosX() + p2.getPosX())/2;
     double y = (p1.getPosY() + p2.getPosY())/2;
     this.setRef(new Point2D(x, y);
+  }
+                
+  public String toString(){
+    return ("Il s'agit d'un segment qui relie le point (" + points.get(0).getPosX() + ", " + points.get(0).getPosY() + " et le point (" + points.get(1).getPosX() + ", " + points.get(1).getPosY() + ").")
   }
 
 }
