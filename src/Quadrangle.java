@@ -1,5 +1,5 @@
 
-public class Quadrangle extends ObjetBasique implements Informations{
+public class Quadrangle extends ObjetBasique implements Informations, CalculsGeometriques{
 	
 	private double rayon;
 	
@@ -11,6 +11,17 @@ public class Quadrangle extends ObjetBasique implements Informations{
 		this.addPoint(p3);
 		
 		this.setRef(null);
-		
+	}
+
+	@Override
+	public double calculPerimetre() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double calculAire() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
