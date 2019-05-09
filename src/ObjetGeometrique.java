@@ -4,7 +4,7 @@ public abstract class ObjetGeometrique {
 
 	private ArrayList<Point2D> points;
 	
-	public Point2D getPoint2D(int i) {
+	public Point2D getPoint(int i) {
 		
 		return points.get(i);
 	}
