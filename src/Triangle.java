@@ -1,7 +1,7 @@
 public class Triangle extends ObjetBasique implements CalculsGeometriques, Informations{
 
   // constructeur 
-  public Triangle(Point2D p1, Point2D p2, Point2D p3){
+  public Triangle(Point p1, Point p2, Point p3){
       // on ajoute les points à l'arraylist
       this.addPoint(p1);
       this.addPoint(p2);
@@ -10,7 +10,7 @@ public class Triangle extends ObjetBasique implements CalculsGeometriques, Infor
       // on calcule le point de référence
       double x = (p1.getPosX() + p2.getPosX() + p3.getPosX())/3;
       double y = (p1.getPosY() + p2.getPosY() + p3.getPosY())/3;
-      this.setRef(new Point2D(x, y));
+      this.setRef(new Point(x, y));
     }
   
   
