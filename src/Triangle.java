@@ -30,8 +30,15 @@ public class Triangle extends ObjetBasique implements CalculsGeometriques, Infor
     return perimetre;
   }
  
-  public double calculAire(){
-    // à faire
+    public double calculAire(){  
+    // On calcule la hauteur du triangle 
+	double x = (p1.getPosX() + p2.getPosX())/2; // calcul des coordonnées du milieu entre p1 et p2
+	double y = (p1.getPosY() + p2.getPosY())/2;
+	double H = sqrt(pow((p3.getPosX()-x), 2) + pow((p3.getPosY()-y), 2)); // on calcule la hauteur
+	double B = sqrt(pow((p1.getPosX()-p2.getPosX()), 2) + pow((p1.getPosY()-p2.getPosY()), 2)); // on calcule la base 
+	// Calcul de l'aire : base*hauteur/2
+	return (B*H)/2
+	
   }
   
   
