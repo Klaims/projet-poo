@@ -1,5 +1,15 @@
 
 public abstract class ObjetBasique extends ObjetGeometrique{
 
-	// TODO
+	private Point2D ref;
+	
+	public Point2D getRef() {
+		
+		return this.ref;
+	}
+	
+	public void setRef(Point2D r) {
+		
+		this.ref = r;
+	}
 }
