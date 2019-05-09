@@ -10,6 +10,7 @@ public class Rectangle extends ObjetGeometrique {
 		this.addPoint(p4);
 		
 		
+		
 	}
 	
 	public String toString() {
