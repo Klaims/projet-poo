@@ -24,7 +24,7 @@ public class Triangle extends ObjetBasique implements CalculsGeometriques, Infor
     //calcul  et ajout distance entre p2 et p3
     perimetre = perimetre + Math.sqrt(Math.pow((this.getPoint(1).getPosX()-this.getPoint(2).getPosX()), 2) + Math.pow((this.getPoint(1).getPosY()-this.getPoint(2).getPosY()), 2));
     //calcul et ajout distance entre p3 et p1
-    perimetre = perimetre + Math.sqrt(Math.pow((this.getPoint(02.getPosX()-this.getPoint(0).getPosX()), 2) + Math.pow((this.getPoint(2).getPosY()-this.getPoint(0).getPosY()), 2));
+    perimetre = perimetre + Math.sqrt(Math.pow((this.getPoint(2).getPosX()-this.getPoint(0).getPosX()), 2) + Math.pow((this.getPoint(2).getPosY()-this.getPoint(0).getPosY()), 2));
     
     //on retourne la valeur du périmetre
     return perimetre;
@@ -44,7 +44,7 @@ public class Triangle extends ObjetBasique implements CalculsGeometriques, Infor
   
  // ------------------ classes implémentées par Informations ------------------
   public String toString(){
-    return ("Il s'agit d'un segment composé des points : (" + this.getPoint(0).getPosX() + ", " + this.getPoint(0).getPosY() + ", (" + this.getPoint(1).getPosX() + ", " + this.getPoint(1).getPosY() + ") et (" + this.getPoint(2).getPosX() + ", " + this.getPoint(2).getPosY() + ").")
+    return ("Il s'agit d'un segment composé des points : (" + this.getPoint(0).getPosX() + ", " + this.getPoint(0).getPosY() + ", (" + this.getPoint(1).getPosX() + ", " + this.getPoint(1).getPosY() + ") et (" + this.getPoint(2).getPosX() + ", " + this.getPoint(2).getPosY() + ").");
   }
 
 }
