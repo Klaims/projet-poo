@@ -10,7 +10,6 @@ public class Quadrangle extends ObjetBasique implements Informations, CalculsGeo
 		this.addPoint(p3);
 		this.setRef(null);
 	}
-<<<<<<< HEAD
 	
 	public double calculAire() {
 		// on découpe le quadrangle en deux triangles
@@ -36,18 +35,6 @@ public class Quadrangle extends ObjetBasique implements Informations, CalculsGeo
 	    
 	    //on retourne la valeur du périmetre
 	    return perimetre;
-=======
 
-	@Override
-	public double calculPerimetre() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public double calculAire() {
-		// TODO Auto-generated method stub
-		return 0;
->>>>>>> refs/remotes/origin/master
 	}
 }
