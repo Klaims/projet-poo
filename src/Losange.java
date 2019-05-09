@@ -13,9 +13,9 @@ public class Losange extends ObjetBasique implements Informations{
 	public String toString() {
 		
 		return("Le losange est composé des quatres points :"
-				  + "  p1 (" + (this.getPoint2D(0).getPosX() + "," + (this.getPoint2D(0).getPosY() + ")"
-				  + " p2 (" +  ( this.getPoint2D(1)).getPosX()) + " , " +  this.getPoint2D(1).getPosY() + ")" 
-				  + " p3 (" +  ( this.getPoint2D(2)).getPosX() + " , " +  this.getPoint2D(2).getPosY() + ")"  
-				  + " p4 (" +  ( this.getPoint2D(3)).getPosX()) + " , " +  this.getPoint2D(3).getPosY() + ")");
+				  + "  p1 (" + (this.getPoint(0).getPosX() + "," + (this.getPoint(0).getPosY() + ")"
+				  + " p2 (" +  ( this.getPoint(1)).getPosX()) + " , " +  this.getPoint(1).getPosY() + ")" 
+				  + " p3 (" +  ( this.getPoint(2)).getPosX() + " , " +  this.getPoint(2).getPosY() + ")"  
+				  + " p4 (" +  ( this.getPoint(3)).getPosX()) + " , " +  this.getPoint(3).getPosY() + ")");
 	}
 }
