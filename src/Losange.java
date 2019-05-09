@@ -8,6 +8,7 @@ public class Losange extends ObjetBasique implements Informations{
 		this.addPoint(p3);
 		this.addPoint(p4);
 		
+		
 	}
 	
 	public String toString() {
