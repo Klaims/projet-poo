@@ -1,11 +1,15 @@
+/Informations.class
+/Losange.class
 /ObjetBasique.class
 /ObjetConstruit.class
 /ObjetGeometrique.class
 /Point2D.class
 /Quadrangle.class
+/Rectangle.class
 /Segment.class
 /Triangle.class
 /Vecteur2D.class
+<<<<<<< HEAD
 /Losange.class
 /Segment.class
 /Triangle.class
@@ -17,3 +21,5 @@
 /Informations.class
 >>>>>>> refs/remotes/origin/master
 /CalculsGeometriques.class
+=======
+>>>>>>> refs/remotes/origin/master
