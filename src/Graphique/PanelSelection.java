@@ -3,13 +3,14 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 public class PanelSelection extends JPanel {
+	
+	private String statut; // Indique le mode dans lequel on se trouve
 
 	public PanelSelection() {
 		
@@ -17,6 +18,7 @@ public class PanelSelection extends JPanel {
 		this.setPreferredSize( new Dimension(1200,70) );
 		this.setBackground( Color.DARK_GRAY );
 		this.setLayout( new BorderLayout() );
+		this.setStatut("Aucun");
 		
 		// Contenu
 		
@@ -48,13 +50,27 @@ public class PanelSelection extends JPanel {
 		btnQuad.setText("Quadrangle");
 		pnlBoutons.add(btnQuad);
 		
+		BoutonOutil btnAucun = new BoutonOutil();
+		btnAucun.setText("Aucun");
+		btnAucun.setEnabled(false);
+		pnlBoutons.add(btnAucun);
+		
 		this.add(pnlBoutons, BorderLayout.WEST);
 		
 		// Statut
 		JLabel lblStatut = new JLabel("Statut : Aucun");
 		lblStatut.setForeground(Color.WHITE);
 		lblStatut.setFont(new Font("Arial", Font.BOLD, 32));
+		lblStatut.setBorder( new EmptyBorder(2, 2, 2, 40) );
 		
 		this.add(lblStatut, BorderLayout.EAST);
+	}
+
+	public String getStatut() {
+		return statut;
+	}
+
+	public void setStatut(String statut) {
+		this.statut = statut;
 	}
 }

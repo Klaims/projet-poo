@@ -19,8 +19,17 @@ public class BoutonOutil extends JButton implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		JLabel label = ((JLabel) this.getParent().getParent().getComponent(1));
+		JLabel label = ((JLabel) this.getParent().getParent().getComponent(1)); // Label statut
+		String nouvStatut = ((BoutonOutil) e.getSource()).getText(); // Nouveau statut
 		
-		label.setText("Statut : " + ((BoutonOutil) e.getSource()).getText() );
+		for(int i=0; i<7; i++) {
+			
+			 ( (BoutonOutil) this.getParent().getComponent(i) ).setEnabled(true);
+		} // Remet tous les boutons enabled
+		
+		((BoutonOutil) e.getSource()).setEnabled(false); // Disable le bouton utilisé
+		
+		( (PanelSelection)this.getParent().getParent() ).setStatut(nouvStatut); // Changement de la variable statut
+		label.setText("Statut : " + nouvStatut ); // Changement du label statut 
 	}
 }
