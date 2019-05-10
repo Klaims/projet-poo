@@ -1,8 +1,10 @@
 package ObjetsBasiques;
 import General.ObjetBasique;
 import General.Point2D;
+import Interfaces.CalculsGeometriques;
+import Interfaces.Informations;
 
-public class Rectangle extends ObjetBasique {
+public class Rectangle extends ObjetBasique implements Informations, CalculsGeometriques{
 	
 
 	public Rectangle(Point2D p1, Point2D p2, Point2D p3 , Point2D p4) {
@@ -17,11 +19,12 @@ public class Rectangle extends ObjetBasique {
 	
 	public String toString() {
 		
-		return    ( " Le rectangle est composé des quatres points : "
-				  + "  p1 (" + ( this.getPoint(0).getPosX() + "," + (this.getPoint(0).getPosY() + ")"
-				  + " p2 (" +  ( this.getPoint(1)).getPosX()) + " , " +  this.getPoint(1).getPosY() + ")" 
-				  + " p3 (" +  ( this.getPoint(2)).getPosX() + " , " +  this.getPoint(2).getPosY() + ")"  
-				  + " p4 (" +  ( this.getPoint(3)).getPosX()) + " , " +  this.getPoint(3).getPosY() + ")");
+		return    ( "\n"
+				  + "Type : Rectangle \n"
+				  + "p1 (" + ( this.getPoint(0).getPosX() + " , " + (this.getPoint(0).getPosY() + ")\n"
+				  + "p2 (" +  ( this.getPoint(1)).getPosX()) + " , " +  this.getPoint(1).getPosY() + ")\n" 
+				  + "p3 (" +  ( this.getPoint(2)).getPosX() + " , " +  this.getPoint(2).getPosY() + ")\n"  
+				  + "p4 (" +  ( this.getPoint(3)).getPosX()) + " , " +  this.getPoint(3).getPosY() + ")");
 	}
 	
 	public double calculAire() {
@@ -33,5 +36,11 @@ public class Rectangle extends ObjetBasique {
 	 
 	 return(aire);
 				
+	}
+
+	@Override
+	public double calculPerimetre() {
+
+		return 0;
 	}
 }

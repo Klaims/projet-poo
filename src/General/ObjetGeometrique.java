@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public abstract class ObjetGeometrique {
 
-	private ArrayList<Point2D> points;
+	private ArrayList<Point2D> points = new ArrayList<Point2D>(); 
 	
 	public Point2D getPoint(int i) {
 		
@@ -12,7 +12,7 @@ public abstract class ObjetGeometrique {
 	
 	public void addPoint(Point2D p) {
 		
-		points.add(p);
+		this.points.add(p);
 	}
 	
 	public void supprimer() {

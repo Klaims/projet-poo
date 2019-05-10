@@ -17,11 +17,12 @@ public class Losange extends ObjetBasique implements Informations, CalculsGeomet
 	
 	public String toString() {
 		
-		return    ("Le losange est composé des quatres points :"
-				  + " p1 (" + (this.getPoint(0).getPosX() + "," + (this.getPoint(0).getPosY() + ")"
-				  + " p2 (" +  ( this.getPoint(1)).getPosX()) + " , " +  this.getPoint(1).getPosY() + ")" 
-				  + " p3 (" +  ( this.getPoint(2)).getPosX() + " , " +  this.getPoint(2).getPosY() + ")"  
-				  + " p4 (" +  ( this.getPoint(3)).getPosX()) + " , " +  this.getPoint(3).getPosY() + ")");
+		return    ( "\n"
+				  + "Type : Losange \n"
+				  + "p1 (" + ( this.getPoint(0).getPosX() + " , " + (this.getPoint(0).getPosY() + ")\n"
+				  + "p2 (" +  ( this.getPoint(1)).getPosX()) + " , " +  this.getPoint(1).getPosY() + ")\n" 
+				  + "p3 (" +  ( this.getPoint(2)).getPosX() + " , " +  this.getPoint(2).getPosY() + ")\n"  
+				  + "p4 (" +  ( this.getPoint(3)).getPosX()) + " , " +  this.getPoint(3).getPosY() + ")");
 	}
 
 	@Override

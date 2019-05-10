@@ -10,11 +10,10 @@ public class Cercle extends ObjetBasique  implements CalculsGeometriques, Inform
 	
 	public Cercle(Point2D p, int r) {
 		
+		this.addPoint(p);
 		this.setRef(p);
 		this.rayon=r;
-		
 	}
-
 	
 	public double calculPerimetre() {
 		
@@ -29,5 +28,14 @@ public class Cercle extends ObjetBasique  implements CalculsGeometriques, Inform
 		double aire = Math.PI*Math.pow(rayon, 2);
 		
 		return(aire);
+	}
+	
+	public String toString() {
+		
+		return    ( "\n"
+				  + "Type : Cercle \n"
+				  + "Rayon = " + this.rayon + "\n"
+				  + "Centre = (" + ( this.getPoint(0).getPosX() + " , " + (this.getPoint(0).getPosY() +")" ) )
+				  );
 	}
 }
