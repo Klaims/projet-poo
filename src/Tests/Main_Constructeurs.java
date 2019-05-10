@@ -1,3 +1,4 @@
+package Tests;
 import General.Point2D;
 import ObjetsBasiques.Cercle;
 import ObjetsBasiques.Losange;
@@ -6,7 +7,7 @@ import ObjetsBasiques.Rectangle;
 import ObjetsBasiques.Segment;
 import ObjetsBasiques.Triangle;
 
-public class Main {
+public class Main_Constructeurs {
 
 	public static void main(String[] args) {
 		
