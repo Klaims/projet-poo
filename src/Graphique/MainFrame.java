@@ -10,6 +10,7 @@ public class MainFrame extends JFrame {
 	public MainFrame() {
 		
 		// Settings de la fenetre
+		this.setTitle("Dessin");
 		this.setSize( new Dimension(1200,800) );
 		this.setResizable(false);
 		this.setLocationRelativeTo(null); // Permet de centrer
