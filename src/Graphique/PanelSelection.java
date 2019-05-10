@@ -51,7 +51,7 @@ public class PanelSelection extends JPanel {
 		this.add(pnlBoutons, BorderLayout.WEST);
 		
 		// Statut
-		JLabel lblStatut = new JLabel("Statut : ");
+		JLabel lblStatut = new JLabel("Statut : Aucun");
 		lblStatut.setForeground(Color.WHITE);
 		lblStatut.setFont(new Font("Arial", Font.BOLD, 32));
 		
