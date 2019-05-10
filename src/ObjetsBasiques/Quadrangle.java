@@ -36,9 +36,23 @@ public class Quadrangle extends ObjetBasique implements CalculsGeometriques, Inf
 	}
 
 	@Override
-	public double calculAire() {
-		// TODO Auto-generated method stub
-		return 0;
+	public double calculAire() { // TEMPORAIRE JSP COMMENT CA MARCHE
+		
+		// Longueurs des côtés
+		double longueur1 = this.getPoint(0).distance( this.getPoint(1) );
+		double longueur2 = this.getPoint(1).distance( this.getPoint(2) );
+		double longueur3 = this.getPoint(2).distance( this.getPoint(3) );
+		double longueur4 = this.getPoint(3).distance( this.getPoint(0) );
+		
+		// Longueurs des diagonales 
+		double diagonale1 = this.getPoint(0).distance( this.getPoint(2) );
+		double diagonale2 = this.getPoint(1).distance( this.getPoint(3) );
+		
+		return ((double) 1/4) * (	4 * diagonale1 * diagonale2
+								-	Math.pow(( 	  longueur2*longueur2 
+												+ longueur4*longueur4
+												- longueur1*longueur1
+												- longueur3*longueur3 ),2 ) );
 	}
 	
 	@Override

@@ -30,6 +30,8 @@ public class Main {
 		
 		Quadrangle quad = new Quadrangle(5, p1, p2, p3, p4);
 		System.out.println(quad);
+		System.out.println(quad.calculPerimetre());
+		System.out.println(quad.calculAire());
 		
 		Rectangle rect = new Rectangle(p1, p2, p3, p4);
 		System.out.println(rect);
