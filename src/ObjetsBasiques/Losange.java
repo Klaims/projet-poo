@@ -41,9 +41,9 @@ public class Losange extends ObjetBasique implements Informations, CalculsGeomet
 	@Override
 	public double calculAire() {
 
-		double longueur1= this.getPoint(0).distance( this.getPoint(1) );
-		double longueur2= this.getPoint(1).distance( this.getPoint(2) );
+		double longueur1= this.getPoint(0).distance( this.getPoint(2) );
+		double longueur2= this.getPoint(1).distance( this.getPoint(3) );
 		
-		return (longueur1 * longueur2) / 2.0; 
+		return (longueur1 * longueur2) / 2; 
 	}
 }
