@@ -2,9 +2,11 @@ package Graphique;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class PanelSelection extends JPanel {
@@ -21,7 +23,6 @@ public class PanelSelection extends JPanel {
 		// Boutons
 		JPanel pnlBoutons = new JPanel();
 		pnlBoutons.setBackground(new Color(0,0,0,1));
-		pnlBoutons.setLayout( new GridLayout(1,6,10,10) );
 		
 		BoutonOutil btnSeg = new BoutonOutil();
 		btnSeg.setText("Segment");
@@ -48,5 +49,12 @@ public class PanelSelection extends JPanel {
 		pnlBoutons.add(btnQuad);
 		
 		this.add(pnlBoutons, BorderLayout.WEST);
+		
+		// Statut
+		JLabel lblStatut = new JLabel("Statut : ");
+		lblStatut.setForeground(Color.WHITE);
+		lblStatut.setFont(new Font("Arial", Font.BOLD, 32));
+		
+		this.add(lblStatut, BorderLayout.EAST);
 	}
 }
