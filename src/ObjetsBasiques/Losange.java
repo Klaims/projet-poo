@@ -8,11 +8,13 @@ public class Losange extends ObjetBasique implements Informations, CalculsGeomet
 	
 	public Losange(Point2D p1, Point2D p2, Point2D p3 , Point2D p4) {
 		
+		// Ajout à l'arraylist
 		this.addPoint(p1);
 		this.addPoint(p2);
 		this.addPoint(p3);
 		this.addPoint(p4);
 		
+		// Point de ref
 	}
 	
 	public String toString() {
@@ -27,13 +29,21 @@ public class Losange extends ObjetBasique implements Informations, CalculsGeomet
 
 	@Override
 	public double calculPerimetre() {
-		// TODO Auto-generated method stub
-		return 0;
+
+	    double perimetre = 0;
+	    
+	    perimetre += this.getPoint(0).distance( this.getPoint(1) ) * 2 ;
+	    perimetre += this.getPoint(1).distance( this.getPoint(2) ) * 2 ;
+	    
+	    return perimetre;
 	}
 
 	@Override
 	public double calculAire() {
-		// TODO Auto-generated method stub
-		return 0;
+
+		double longueur1= this.getPoint(0).distance( this.getPoint(1) );
+		double longueur2= this.getPoint(1).distance( this.getPoint(2) );
+		
+		return (longueur1 * longueur2) / 2.0; 
 	}
 }

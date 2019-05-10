@@ -33,5 +33,4 @@ public class Main {
 		Losange lsge = new Losange(p1, p2, p3, p4);
 		System.out.println(lsge);
 	}
-
 }

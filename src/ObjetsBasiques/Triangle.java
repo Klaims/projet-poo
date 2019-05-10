@@ -33,14 +33,9 @@ public class Triangle extends ObjetBasique implements CalculsGeometriques, Infor
  
 	  public double calculAire(){ 
 		  
-		// On calcule la hauteur du triangle 
-		double x = (this.getPoint(0).getPosX() + this.getPoint(1).getPosX())/2; // calcul des coordonnées du milieu entre p1 et p2
-		double y = (this.getPoint(0).getPosY() + this.getPoint(1).getPosY())/2;
-		double H = Math.sqrt(Math.pow((this.getPoint(2).getPosX()-x), 2) + Math.pow((this.getPoint(2).getPosY()-y), 2)); // on calcule la hauteur
-		double B = Math.sqrt(Math.pow((this.getPoint(0).getPosX()-this.getPoint(1).getPosX()), 2) + Math.pow((this.getPoint(0).getPosY()-this.getPoint(1).getPosY()), 2)); // on calcule la base 
-		// Calcul de l'aire : base*hauteur/2
-		return (B*H)/2;
-	
+		  return ((double) 1/2) * 	(	this.getPoint(0).getPosX() * ( this.getPoint(1).getPosY() - this.getPoint(2).getPosY() )
+					  				+	this.getPoint(1).getPosX() * ( this.getPoint(2).getPosY() - this.getPoint(0).getPosY() )
+					  				+	this.getPoint(2).getPosX() * ( this.getPoint(0).getPosY() - this.getPoint(1).getPosY() ) );
 	  }
 
 	  public String toString() {

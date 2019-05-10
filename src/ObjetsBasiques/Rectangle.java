@@ -9,11 +9,13 @@ public class Rectangle extends ObjetBasique implements Informations, CalculsGeom
 
 	public Rectangle(Point2D p1, Point2D p2, Point2D p3 , Point2D p4) {
 		
+		// Ajout à l'arraylist
 		this.addPoint(p1);
 		this.addPoint(p2);
 		this.addPoint(p3);
 		this.addPoint(p4);
 		
+		// Point de ref
 		this.setRef(null);
 	}
 	
@@ -27,20 +29,25 @@ public class Rectangle extends ObjetBasique implements Informations, CalculsGeom
 				  + "p4 (" +  ( this.getPoint(3)).getPosX()) + " , " +  this.getPoint(3).getPosY() + ")");
 	}
 	
+	@Override
 	public double calculAire() {
 		
-		 double longueur1 = Math.sqrt(  Math.pow( this.getPoint(1).getPosX() -  this.getPoint(0).getPosX(), 2)  + Math.pow( this.getPoint(1).getPosY() -  this.getPoint(0).getPosY(), 2)   ) ;
-		 double longueur2 = Math.sqrt(  Math.pow( this.getPoint(3).getPosX() -  this.getPoint(2).getPosX(), 2)  + Math.pow( this.getPoint(3).getPosY() -  this.getPoint(2).getPosY(), 2)   ) ;
+		 double longueur1 = this.getPoint(0).distance( this.getPoint(1) );
+		 double longueur2 = this.getPoint(1).distance( this.getPoint(2) );
 	 
 		 double aire = longueur1*longueur2;
 	 
-	 return(aire);
-				
+	 return(aire);	
 	}
 
 	@Override
 	public double calculPerimetre() {
 
-		return 0;
+	    double perimetre = 0;
+	    
+	    perimetre += this.getPoint(0).distance( this.getPoint(1) ) * 2 ;
+	    perimetre += this.getPoint(1).distance( this.getPoint(2) ) * 2 ;
+	    
+	    return perimetre;
 	}
 }
