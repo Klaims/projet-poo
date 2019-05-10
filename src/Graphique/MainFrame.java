@@ -27,6 +27,9 @@ public class MainFrame extends JFrame {
 		PanelInfos pnlInfos = new PanelInfos();
 		pnlMain.add(pnlInfos, BorderLayout.EAST);
 		
+		PanelDessin pnlDessin = new PanelDessin();
+		pnlMain.add(pnlDessin, BorderLayout.CENTER);
+		
 		// Toujours à la fin
 		this.setVisible(true);
 	}
