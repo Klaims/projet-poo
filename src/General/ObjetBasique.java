@@ -1,4 +1,4 @@
-package Autres;
+package General;
 public abstract class ObjetBasique extends ObjetGeometrique{
 
 	private Point2D ref;

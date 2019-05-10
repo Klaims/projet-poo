@@ -1,4 +1,4 @@
-package Autres;
+package General;
 import java.util.ArrayList;
 
 public class ObjetComposite extends ObjetGeometrique{

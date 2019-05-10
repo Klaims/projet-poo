@@ -1,6 +1,6 @@
 package ObjetsBasiques;
-import Autres.ObjetBasique;
-import Autres.Point2D;
+import General.ObjetBasique;
+import General.Point2D;
 import Interfaces.CalculsGeometriques;
 import Interfaces.Informations;
 

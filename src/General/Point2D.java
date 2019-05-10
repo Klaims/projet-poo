@@ -1,4 +1,4 @@
-package Autres;
+package General;
 
 public class Point2D {
 
