@@ -29,7 +29,12 @@ public class BoutonOutil extends JButton implements ActionListener{
 		
 		((BoutonOutil) e.getSource()).setEnabled(false); // Disable le bouton utilisé
 		
-		( (PanelSelection)this.getParent().getParent() ).setStatut(nouvStatut); // Changement de la variable statut
 		label.setText("Statut : " + nouvStatut ); // Changement du label statut 
+		
+		// Met à jour le panel dessin
+		
+		((PanelDessin) this	.getParent()
+							.getParent()
+							.getParent().getComponent(2)).checkStatut(nouvStatut);
 	}
 }

@@ -9,8 +9,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 public class PanelSelection extends JPanel {
-	
-	private String statut; // Indique le mode dans lequel on se trouve
 
 	public PanelSelection() {
 		
@@ -18,7 +16,6 @@ public class PanelSelection extends JPanel {
 		this.setPreferredSize( new Dimension(1200,70) );
 		this.setBackground( Color.DARK_GRAY );
 		this.setLayout( new BorderLayout() );
-		this.setStatut("Aucun");
 		
 		// Contenu
 		
@@ -64,13 +61,5 @@ public class PanelSelection extends JPanel {
 		lblStatut.setBorder( new EmptyBorder(2, 2, 2, 40) );
 		
 		this.add(lblStatut, BorderLayout.EAST);
-	}
-
-	public String getStatut() {
-		return statut;
-	}
-
-	public void setStatut(String statut) {
-		this.statut = statut;
 	}
 }
