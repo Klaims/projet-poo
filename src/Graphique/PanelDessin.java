@@ -1,87 +1,126 @@
 package Graphique;
 
 import java.awt.Color;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 
-public class PanelDessin extends JPanel {
+public class PanelDessin extends JPanel implements MouseListener {
+	
+	private String statut;
 
 	public PanelDessin() {
 		
 		// Settings panel
 		this.setBackground( new Color(230,230,230) );
+		this.addMouseListener(this);
 	}
 	
 	// Met à jour le mode de l'utilisateur
-	public void checkStatut(String nouvStatut) { 
+	public void refreshStatut(String nouvStatut) { 
 		
-		if ( nouvStatut == "Segment" ) {
-			
-			this.setModeSegment();
-		}
-		
-		if ( nouvStatut == "Rectangle" ) {
-			
-			this.setModeRectangle();
-		}
-		
-		if ( nouvStatut == "Cercle" ) {
-			
-			this.setModeCercle();
-		}
-		
-		if ( nouvStatut == "Triangle" ) {
-			
-			this.setModeTriangle();
-		}
-		
-		if ( nouvStatut == "Losange" ) {
-			
-			this.setModeLosange();
-		}
-		
-		if ( nouvStatut == "Quadrangle" ) {
-			
-			this.setModeQuadrangle();
-		}
-		
-		if ( nouvStatut == "Aucun" ) {
-			
-			this.setModeAucun();
-		}
+		this.statut = nouvStatut;
 	}
+	
+	////////////////////////////////////		MouseListener		///////////////////////////////////////////
 
-	private void setModeAucun() {
+	@Override
+	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	private void setModeQuadrangle() {
+	@Override
+	public void mousePressed(MouseEvent e) {
+		
+		System.out.println( "Pressed" );
+		
+		if ( this.statut == "Segment" ) {
+			
+			// TODO
+		}
+		
+		if ( this.statut == "Rectangle" ) {
+			
+			// TODO
+		}
+		
+		if ( this.statut == "Cercle" ) {
+			
+			// TODO
+		}
+		
+		if ( this.statut == "Triangle" ) {
+			
+			// TODO
+		}
+		
+		if ( this.statut == "Losange" ) {
+			
+			// TODO
+		}
+		
+		if ( this.statut == "Quadrangle" ) {
+			
+			// TODO;
+		}
+		
+		if ( this.statut == "Aucun" ) {
+			
+			// TODO
+		}
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		
+		System.out.println( "Released" );
+		
+		if ( this.statut == "Segment" ) {
+			
+			// TODO
+		}
+		
+		if ( this.statut == "Rectangle" ) {
+			
+			// TODO
+		}
+		
+		if ( this.statut == "Cercle" ) {
+			
+			// TODO
+		}
+		
+		if ( this.statut == "Triangle" ) {
+			
+			// TODO
+		}
+		
+		if ( this.statut == "Losange" ) {
+			
+			// TODO
+		}
+		
+		if ( this.statut == "Quadrangle" ) {
+			
+			// TODO;
+		}
+		
+		if ( this.statut == "Aucun" ) {
+			
+			// TODO
+		}
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	private void setModeLosange() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private void setModeTriangle() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private void setModeCercle() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private void setModeRectangle() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private void setModeSegment() {
+	@Override
+	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}

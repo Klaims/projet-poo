@@ -35,6 +35,6 @@ public class BoutonOutil extends JButton implements ActionListener{
 		
 		((PanelDessin) this	.getParent()
 							.getParent()
-							.getParent().getComponent(2)).checkStatut(nouvStatut);
+							.getParent().getComponent(2)).refreshStatut(nouvStatut);
 	}
 }
