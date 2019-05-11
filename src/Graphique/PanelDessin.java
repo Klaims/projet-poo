@@ -3,10 +3,24 @@ package Graphique;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import General.ObjetGeometrique;
+import General.Point2D;
+import ObjetsBasiques.Segment;
+
 public class PanelDessin extends JPanel implements MouseListener {
+	
+	// Arguments temporaires pour la création des formes
+	private Point2D p1;
+	private Point2D p2;
+	private Point2D p3;
+	private Point2D p4;
+	
+	// Array List qui contient les formes
+	private ArrayList<ObjetGeometrique> objets;
 	
 	private String statut;
 
@@ -15,6 +29,7 @@ public class PanelDessin extends JPanel implements MouseListener {
 		// Settings panel
 		this.setBackground( new Color(230,230,230) );
 		this.addMouseListener(this);
+		objets = new ArrayList<ObjetGeometrique>();
 	}
 	
 	// Met à jour le mode de l'utilisateur
@@ -38,7 +53,7 @@ public class PanelDessin extends JPanel implements MouseListener {
 		
 		if ( this.statut == "Segment" ) {
 			
-			// TODO
+			p1 = new Point2D( e.getX(), e.getY());
 		}
 		
 		if ( this.statut == "Rectangle" ) {
@@ -79,7 +94,13 @@ public class PanelDessin extends JPanel implements MouseListener {
 		
 		if ( this.statut == "Segment" ) {
 			
-			// TODO
+			p2 = new Point2D( e.getX(), e.getY() );
+			
+			// Ajout dans la liste
+			objets.add( new Segment(p1, p2) );
+			
+			// Ajout graphique
+			
 		}
 		
 		if ( this.statut == "Rectangle" ) {
