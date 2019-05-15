@@ -6,9 +6,12 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import General.ObjetGeometrique;
 
 public class PanelInfos extends JPanel implements ActionListener {
 
@@ -28,6 +31,11 @@ public class PanelInfos extends JPanel implements ActionListener {
 		btnClear.setFont( new Font("Arial", Font.BOLD, 18) );
 		btnClear.addActionListener(this);
 		this.add(btnClear, BorderLayout.SOUTH);
+	}
+	
+	public void refreshInfos(ArrayList<ObjetGeometrique> T) {
+		
+		// TODO
 	}
 
 	@Override

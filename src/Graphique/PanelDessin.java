@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import General.ObjetGeometrique;
 import General.Point2D;
 import ObjetsBasiques.Segment;
+import Graphique.PanelInfos;
 
 public class PanelDessin extends JPanel implements MouseListener {
 	
@@ -86,12 +87,14 @@ public class PanelDessin extends JPanel implements MouseListener {
 					break;		
 			}
 		}
+		
+		// Rafraichissement zone infos
+		
+		((PanelInfos) this.getParent().getComponent(1)).refreshInfos(this.objets);
 	}
 
 	
 	public void mousePressed(MouseEvent e) {
-		
-		System.out.println( "Pressed" );
 		
 		if ( this.statut == "Segment" ) {
 			
@@ -127,12 +130,14 @@ public class PanelDessin extends JPanel implements MouseListener {
 			
 			// TODO
 		}
+		
+		// Rafraichissement zone infos
+		
+		((PanelInfos) this.getParent().getComponent(1)).refreshInfos(this.objets);
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		
-		System.out.println( "Released" );
 		
 		if ( this.statut == "Segment" ) {
 			
@@ -185,6 +190,10 @@ public class PanelDessin extends JPanel implements MouseListener {
 			
 			// TODO
 		}
+		
+		// Rafraichissement zone infos
+		
+		((PanelInfos) this.getParent().getComponent(1)).refreshInfos(this.objets);
 	}
 
 	@Override
