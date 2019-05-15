@@ -1,5 +1,6 @@
 package Graphique;
 
+import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -97,7 +98,10 @@ public class PanelDessin extends JPanel implements MouseListener {
 			p2 = new Point2D( e.getX(), e.getY() );
 			
 			// Ajout dans la liste
+			
 			objets.add( new Segment(p1, p2) );
+			drawLine( this.getGraphics() );
+			
 			
 			// Ajout graphique
 			
@@ -105,7 +109,7 @@ public class PanelDessin extends JPanel implements MouseListener {
 		
 		if ( this.statut == "Rectangle" ) {
 			
-			// TODO
+			
 		}
 		
 		if ( this.statut == "Cercle" ) {
@@ -144,5 +148,9 @@ public class PanelDessin extends JPanel implements MouseListener {
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void drawLine(Graphics g) {
+		g.drawLine(  (int) p1.getPosX(), (int) p1.getPosY(),(int) p2.getPosX() , (int)p2.getPosY( ));
 	}
 }
