@@ -10,7 +10,9 @@ import javax.swing.JPanel;
 
 import General.ObjetGeometrique;
 import General.Point2D;
+import ObjetsBasiques.Rectangle;
 import ObjetsBasiques.Segment;
+import Graphique.PanelInfos;
 
 public class PanelDessin extends JPanel implements MouseListener {
 	
@@ -26,7 +28,7 @@ public class PanelDessin extends JPanel implements MouseListener {
 	
 	// Array List qui contient les formes
 	private ArrayList<ObjetGeometrique> objets;
-	
+
 	private String statut;
 
 	public PanelDessin() {
@@ -43,13 +45,20 @@ public class PanelDessin extends JPanel implements MouseListener {
 		this.statut = nouvStatut;
 	}
 	
+	public ArrayList<ObjetGeometrique> getObjets() {
+		return objets;
+	}
+
+	public void setObjets(ArrayList<ObjetGeometrique> objets) {
+		this.objets = objets;
+	}
+	
 	////////////////////////////////////		MouseListener		///////////////////////////////////////////
 
 
 	public void mouseClicked(MouseEvent e) {
 	
 		if(this.statut=="Triangle") {
-			
 			
 			switch (compteurPoint) {
 			
@@ -76,20 +85,17 @@ public class PanelDessin extends JPanel implements MouseListener {
 					
 					drawPoly(this.getGraphics());
 					compteurPoint=0;
-					
-					
 					break;		
-			
 			}
-			
-			
 		}
+		
+		// Rafraichissement zone infos
+		
+		((PanelInfos) this.getParent().getComponent(1)).refreshInfos(this.objets);
 	}
 
 	
 	public void mousePressed(MouseEvent e) {
-		
-		System.out.println( "Pressed" );
 		
 		if ( this.statut == "Segment" ) {
 			
@@ -122,12 +128,14 @@ public class PanelDessin extends JPanel implements MouseListener {
 			
 			// TODO
 		}
+		
+		// Rafraichissement zone infos
+		
+		((PanelInfos) this.getParent().getComponent(1)).refreshInfos(this.objets);
 	}
 
 	
 	public void mouseReleased(MouseEvent e) {
-		
-		System.out.println( "Released" );
 		
 		if ( this.statut == "Segment" ) {
 			
@@ -151,9 +159,8 @@ public class PanelDessin extends JPanel implements MouseListener {
 			p2= new Point2D(p3.getPosX(),p1.getPosY());
 			p4= new Point2D(p1.getPosX(),p3.getPosY());
 			
+			objets.add( new Rectangle(p1, p2, p3, p4) );
 			drawRectangle(this.getGraphics());
-			
-			
 		}
 		
 		if ( this.statut == "Cercle" ) {
@@ -192,6 +199,10 @@ public class PanelDessin extends JPanel implements MouseListener {
 			
 			// TODO
 		}
+		
+		// Rafraichissement zone infos
+		
+		((PanelInfos) this.getParent().getComponent(1)).refreshInfos(this.objets);
 	}
 
 	public void mouseEntered(MouseEvent e) {
