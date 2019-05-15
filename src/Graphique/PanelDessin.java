@@ -21,8 +21,8 @@ public class PanelDessin extends JPanel implements MouseListener {
 	private Point2D p4;
 	
 	private int compteurPoint=0;
-	private int[] x = new int[3];
-	private int[] y = new int[3];
+	private int[] x = new int[4];
+	private int[] y = new int[4];
 	
 	// Array List qui contient les formes
 	private ArrayList<ObjetGeometrique> objets;
@@ -105,15 +105,12 @@ public class PanelDessin extends JPanel implements MouseListener {
 			
 			// TODO
 		}
-		
-		if ( this.statut == "Triangle" ) {
-			
-			// TODO
-		}
-		
+
 		if ( this.statut == "Losange" ) {
 			
-			// TODO
+			p1 = new Point2D( e.getX(), e.getY());
+			x[0]= (int)p1.getPosX();
+			y[0]= (int)p1.getPosY();
 		}
 		
 		if ( this.statut == "Quadrangle" ) {
@@ -127,7 +124,7 @@ public class PanelDessin extends JPanel implements MouseListener {
 		}
 	}
 
-	@Override
+	
 	public void mouseReleased(MouseEvent e) {
 		
 		System.out.println( "Released" );
@@ -163,15 +160,27 @@ public class PanelDessin extends JPanel implements MouseListener {
 			
 			// TODO
 		}
-		
-		if ( this.statut == "Triangle" ) {
-			
-			// TODO
-		}
+
 		
 		if ( this.statut == "Losange" ) {
 			
-			// TODO
+			p3 = new Point2D( e.getX(), e.getY());
+			
+			x[2]= (int)p3.getPosX();
+			y[2]= (int)p3.getPosY();
+			
+			p2 = new Point2D( (p1.getPosY()+p3.getPosY())/2, p1.getPosX()+10);
+			
+			x[1]= (int)p2.getPosX();
+			y[1]= (int)p2.getPosY();
+			
+			p4 = new Point2D( (p1.getPosY()+p3.getPosY())/2, p1.getPosX()+10);
+			
+			x[3]= (int)p4.getPosX();
+			y[3]= (int)p4.getPosY();
+			compteurPoint=3;
+			drawPoly(this.getGraphics());
+			
 		}
 		
 		if ( this.statut == "Quadrangle" ) {
@@ -185,13 +194,12 @@ public class PanelDessin extends JPanel implements MouseListener {
 		}
 	}
 
-	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
@@ -208,16 +216,20 @@ public class PanelDessin extends JPanel implements MouseListener {
 	
 	public void drawPoly(Graphics g) {
 		
-		for(int i=0;i<3;i++) {
+		/*for(int i=0;i<3;i++) {
 			
 			System.out.println(x[i]);
 			System.out.println(y[i]);
 			
-		}
+		}*/
 		
 		System.out.println(compteurPoint);
+		
 		compteurPoint++;
+		
 		g.drawPolygon(x, y, compteurPoint);
 		
 	}
+	
+	
 }
