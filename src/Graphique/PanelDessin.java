@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 import General.ObjetGeometrique;
 import General.Point2D;
+import ObjetsBasiques.Rectangle;
 import ObjetsBasiques.Segment;
 import Graphique.PanelInfos;
 
@@ -161,9 +162,8 @@ public class PanelDessin extends JPanel implements MouseListener {
 			p2= new Point2D(p3.getPosX(),p1.getPosY());
 			p4= new Point2D(p1.getPosX(),p3.getPosY());
 			
+			objets.add( new Rectangle(p1, p2, p3, p4) );
 			drawRectangle(this.getGraphics());
-			
-			
 		}
 		
 		if ( this.statut == "Cercle" ) {
