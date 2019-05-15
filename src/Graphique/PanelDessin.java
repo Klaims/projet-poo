@@ -26,7 +26,7 @@ public class PanelDessin extends JPanel implements MouseListener {
 	
 	// Array List qui contient les formes
 	private ArrayList<ObjetGeometrique> objets;
-	
+
 	private String statut;
 
 	public PanelDessin() {
@@ -41,6 +41,14 @@ public class PanelDessin extends JPanel implements MouseListener {
 	public void refreshStatut(String nouvStatut) { 
 		
 		this.statut = nouvStatut;
+	}
+	
+	public ArrayList<ObjetGeometrique> getObjets() {
+		return objets;
+	}
+
+	public void setObjets(ArrayList<ObjetGeometrique> objets) {
+		this.objets = objets;
 	}
 	
 	////////////////////////////////////		MouseListener		///////////////////////////////////////////
