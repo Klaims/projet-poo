@@ -41,13 +41,13 @@ public class PanelDessin extends JPanel implements MouseListener {
 	
 	////////////////////////////////////		MouseListener		///////////////////////////////////////////
 
-	@Override
+
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
+	
 		
 	}
 
-	@Override
+	
 	public void mousePressed(MouseEvent e) {
 		
 		System.out.println( "Pressed" );
@@ -59,7 +59,7 @@ public class PanelDessin extends JPanel implements MouseListener {
 		
 		if ( this.statut == "Rectangle" ) {
 			
-			// TODO
+			p1 = new Point2D( e.getX(), e.getY());
 		}
 		
 		if ( this.statut == "Cercle" ) {
@@ -109,6 +109,14 @@ public class PanelDessin extends JPanel implements MouseListener {
 		
 		if ( this.statut == "Rectangle" ) {
 			
+			p3 = new Point2D( e.getX(), e.getY());
+			
+			
+			p2= new Point2D(p3.getPosX(),p1.getPosY());
+			p4= new Point2D(p1.getPosX(),p3.getPosY());
+			
+			drawRectangle(this.getGraphics());
+			
 			
 		}
 		
@@ -152,5 +160,10 @@ public class PanelDessin extends JPanel implements MouseListener {
 	
 	public void drawLine(Graphics g) {
 		g.drawLine(  (int) p1.getPosX(), (int) p1.getPosY(),(int) p2.getPosX() , (int)p2.getPosY( ));
+	}
+	
+	public void drawRectangle(Graphics g) {
+		
+		g.drawRect( (int) p1.getPosX(), (int) p1.getPosY(), (int)  Math.abs( p2.getPosX()-p1.getPosX() ), (int)Math.abs( p4.getPosY()-p1.getPosY())) ;
 	}
 }
