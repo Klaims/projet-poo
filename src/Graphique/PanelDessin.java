@@ -58,7 +58,6 @@ public class PanelDessin extends JPanel implements MouseListener {
 	
 		if(this.statut=="Triangle") {
 			
-			
 			switch (compteurPoint) {
 			
 			case 0: p1 = new Point2D( e.getX(), e.getY());
@@ -84,13 +83,8 @@ public class PanelDessin extends JPanel implements MouseListener {
 					
 					drawPoly(this.getGraphics());
 					compteurPoint=0;
-					
-					
 					break;		
-			
 			}
-			
-			
 		}
 	}
 
