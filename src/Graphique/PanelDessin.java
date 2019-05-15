@@ -20,6 +20,10 @@ public class PanelDessin extends JPanel implements MouseListener {
 	private Point2D p3;
 	private Point2D p4;
 	
+	private int compteurPoint=0;
+	private int[] x = new int[3];
+	private int[] y = new int[3];
+	
 	// Array List qui contient les formes
 	private ArrayList<ObjetGeometrique> objets;
 	
@@ -44,7 +48,42 @@ public class PanelDessin extends JPanel implements MouseListener {
 
 	public void mouseClicked(MouseEvent e) {
 	
-		
+		if(this.statut=="Triangle") {
+			
+			
+			switch (compteurPoint) {
+			
+			case 0: p1 = new Point2D( e.getX(), e.getY());
+			
+					x[compteurPoint]=(int)e.getX();
+					y[compteurPoint]=(int)e.getY();
+					
+					compteurPoint++;
+					break;
+					
+			case 1 : p2 = new Point2D( e.getX(), e.getY());
+			
+					x[compteurPoint]=(int)e.getX();
+					y[compteurPoint]=(int)e.getY();
+					
+					compteurPoint++;
+					break;
+					
+			case 2 : p3 = new Point2D( e.getX(), e.getY());
+					
+					x[compteurPoint]=(int)e.getX();
+					y[compteurPoint]=(int)e.getY();
+					
+					drawPoly(this.getGraphics());
+					compteurPoint=0;
+					
+					
+					break;		
+			
+			}
+			
+			
+		}
 	}
 
 	
@@ -165,5 +204,20 @@ public class PanelDessin extends JPanel implements MouseListener {
 	public void drawRectangle(Graphics g) {
 		
 		g.drawRect( (int) p1.getPosX(), (int) p1.getPosY(), (int)  Math.abs( p2.getPosX()-p1.getPosX() ), (int)Math.abs( p4.getPosY()-p1.getPosY())) ;
+	}
+	
+	public void drawPoly(Graphics g) {
+		
+		for(int i=0;i<3;i++) {
+			
+			System.out.println(x[i]);
+			System.out.println(y[i]);
+			
+		}
+		
+		System.out.println(compteurPoint);
+		compteurPoint++;
+		g.drawPolygon(x, y, compteurPoint);
+		
 	}
 }
