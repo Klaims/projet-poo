@@ -21,7 +21,7 @@ public class BoutonOutil extends JButton implements ActionListener{
 		
 		if ( ((JButton) e.getSource()).getText() == "Plus" ) {
 			
-			
+			// TODO
 		}
 		else {
 			
@@ -43,5 +43,5 @@ public class BoutonOutil extends JButton implements ActionListener{
 								.getParent()
 								.getParent().getComponent(2)).refreshStatut(nouvStatut);
 		}
-		}
+	}
 }
