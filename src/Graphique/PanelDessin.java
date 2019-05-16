@@ -132,10 +132,6 @@ public class PanelDessin extends JPanel implements MouseListener {
 			
 			// TODO
 		}
-		
-		// Rafraichissement zone infos
-		
-		((PanelInfos) this.getParent().getComponent(1)).refreshInfos(this.objets);
 	}
 
 	
