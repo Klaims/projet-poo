@@ -10,8 +10,11 @@ import javax.swing.JPanel;
 
 import General.ObjetGeometrique;
 import General.Point2D;
+import ObjetsBasiques.Cercle;
+import ObjetsBasiques.Quadrangle;
 import ObjetsBasiques.Rectangle;
 import ObjetsBasiques.Segment;
+import ObjetsBasiques.Triangle;
 import Graphique.PanelInfos;
 
 public class PanelDessin extends JPanel implements MouseListener {
@@ -23,6 +26,7 @@ public class PanelDessin extends JPanel implements MouseListener {
 	private Point2D p4;
 	private boolean quad;
 	private double rayon;
+	private Point2D p5;
 	
 	private int compteurPoint=0;
 	private int[] x = new int[4];
@@ -94,6 +98,7 @@ public class PanelDessin extends JPanel implements MouseListener {
 					
 					compteurPoint++;
 					drawPoly(this.getGraphics());
+					this.objets.add( new Triangle(p1,p2,p3));
 					break;		
 			}
 		}
@@ -102,12 +107,14 @@ public class PanelDessin extends JPanel implements MouseListener {
 				
 				
 				if (this.quad==true) {
+					System.out.println(quad);
 					
-					
-					if ( rayon == Math.sqrt(  (Math.pow(e.getX()-p1.getPosX(), 2)) + (Math.pow(e.getY()- p1.getPosY(), 2)))){
+					if ( (rayon-5 < Math.sqrt(  (Math.pow(e.getX()-p5.getPosX(), 2)) + (Math.pow(e.getY()- p5.getPosY(), 2))))   &&   (rayon+5 > Math.sqrt(  (Math.pow(e.getX()-p5.getPosX(), 2)) + (Math.pow(e.getY()- p5.getPosY(), 2)))) ){
 						
-						System.out.println("ok");
+						System.out.println(compteurPoint);
+						
 						switch (compteurPoint) {
+						
 						
 						case 0: p1 = new Point2D( e.getX(), e.getY());
 						
@@ -121,7 +128,7 @@ public class PanelDessin extends JPanel implements MouseListener {
 						
 								x[compteurPoint]=(int)e.getX();
 								y[compteurPoint]=(int)e.getY();
-								
+								System.out.println(compteurPoint);
 								compteurPoint++;
 								break;
 								
@@ -135,12 +142,14 @@ public class PanelDessin extends JPanel implements MouseListener {
 								
 						case 3 : p4 = new Point2D( e.getX(), e.getY());
 						
-						x[compteurPoint]=(int)e.getX();
-						y[compteurPoint]=(int)e.getY();
+								x[compteurPoint]=(int)e.getX();
+								y[compteurPoint]=(int)e.getY();
 						
-						compteurPoint++;
-						drawPoly(this.getGraphics());
-						break;	
+								compteurPoint++;
+								this.objets.add(new Quadrangle( rayon, p1,p2,p3,p4));
+								drawPoly(this.getGraphics());
+								break;	
+						
 						}
 						
 					}
@@ -186,7 +195,7 @@ public class PanelDessin extends JPanel implements MouseListener {
 		
 		if ( this.statut == "Quadrangle" ) {
 			
-			if (quad==false) {p1 = new Point2D(e.getX(),e.getY());
+			if (quad==false) {p5 = new Point2D(e.getX(),e.getY());
 			}
 			
 		}
@@ -240,10 +249,11 @@ public class PanelDessin extends JPanel implements MouseListener {
 			
 			p2 = new Point2D(e.getX(),e.getY());
 			
-			double r = Math.sqrt(  (Math.pow(p2.getPosX()-p1.getPosX(), 2)) + (Math.pow(p2.getPosY()- p1.getPosY(), 2)));
-			p3 = new Point2D(p1.getPosX()-r,p1.getPosY()-r);
+			double rayon = Math.sqrt(  (Math.pow(p2.getPosX()-p1.getPosX(), 2)) + (Math.pow(p2.getPosY()- p1.getPosY(), 2)));
+			p3 = new Point2D(p1.getPosX()-rayon,p1.getPosY()-rayon);
 			
-			drawCercle(this.getGraphics(),r);
+			this.objets.add(new Cercle(p1,rayon));
+			drawCercle(this.getGraphics(),rayon);
 			
 		}
 
@@ -288,12 +298,13 @@ public class PanelDessin extends JPanel implements MouseListener {
 			if (quad==false) {
 			p2 = new Point2D( e.getX(), e.getY() );
 			
-			this.rayon = Math.sqrt(  (Math.pow(p2.getPosX()-p1.getPosX(), 2)) + (Math.pow(p2.getPosY()- p1.getPosY(), 2)));
-			p3 = new Point2D(p1.getPosX()-rayon,p1.getPosY()-rayon);
+			this.rayon = Math.sqrt(  (Math.pow(p2.getPosX()-p5.getPosX(), 2)) + (Math.pow(p2.getPosY()- p5.getPosY(), 2)));
+			p3 = new Point2D(p5.getPosX()-rayon,p5.getPosY()-rayon);
 			
-			
-			drawCercle(this.getGraphics(),rayon);
 			quad=true;
+			drawCercle(this.getGraphics(),rayon);
+			
+			
 			System.out.println(quad);
 			System.out.println(statut);
 			}
@@ -365,8 +376,11 @@ public class PanelDessin extends JPanel implements MouseListener {
 	
 	public void drawCercle(Graphics g, double rayon) {
 		
+		if (this.statut=="Quadrangle")
+		g.setColor(Color.green);
 		g.drawOval((int)p3.getPosX(), (int)p3.getPosY(), 2* (int)rayon, 2* (int)rayon);
 		
+		g.setColor(Color.black);
 	}
 	
 	public void drawEllipse(Graphics g, double demi_grand_axe, double rayon) {
