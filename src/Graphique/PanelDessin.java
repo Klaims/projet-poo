@@ -5,13 +5,18 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.JPanel;
 
 import General.ObjetGeometrique;
 import General.Point2D;
+import ObjetsBasiques.Cercle;
+import ObjetsBasiques.Losange;
+import ObjetsBasiques.Quadrangle;
 import ObjetsBasiques.Rectangle;
 import ObjetsBasiques.Segment;
+import ObjetsBasiques.Triangle;
 import Graphique.PanelInfos;
 
 public class PanelDessin extends JPanel implements MouseListener {
@@ -48,6 +53,60 @@ public class PanelDessin extends JPanel implements MouseListener {
 		this.statut = nouvStatut;
 	}
 	
+	// Met à jour le panel de dessin
+	private void refreshDessins() {
+		
+		this.getGraphics().clearRect(0, 0, 1000, 1000);
+
+		Iterator<ObjetGeometrique> iter = objets.iterator();
+		
+		while (iter.hasNext()) {
+			
+			ObjetGeometrique obj = iter.next();
+			
+			if ( obj instanceof Segment ) {
+				
+				p1 = obj.getPoint(0);
+				p2 = obj.getPoint(1);
+				
+				this.drawLine(this.getGraphics());
+			}
+			
+			if ( obj instanceof Rectangle ) {
+				
+				p1 = obj.getPoint(0);
+				p2 = obj.getPoint(1);
+				p3 = obj.getPoint(2);
+				p4 = obj.getPoint(3);
+				
+				this.drawRectangle(this.getGraphics());
+			}
+			
+			if ( obj instanceof Cercle ) {
+				
+				p1 = obj.getPoint(0);
+				rayon = ((Cercle) obj).getRayon();
+				
+				p3 = new Point2D(p1.getPosX()-rayon,p1.getPosY()-rayon); // Utile à drawCercle
+						
+				this.drawCercle(this.getGraphics(), rayon);
+			}
+			
+			if ( obj instanceof Triangle ) {
+				
+				p1 = obj.getPoint(0);
+				p2 = obj.getPoint(1);
+				p3 = obj.getPoint(2);
+				
+				// récupérer les points depuis x et y
+				
+				compteurPoint = 3;
+				
+				this.drawPoly(getGraphics());
+			}
+		}
+	}
+	
 	public String getStatut () {
 		
 		return this.statut;
@@ -66,7 +125,6 @@ public class PanelDessin extends JPanel implements MouseListener {
 
 	public void mouseClicked(MouseEvent e) {
 		
-	
 		if(this.statut=="Triangle") {
 			
 			switch (compteurPoint) {
@@ -93,20 +151,18 @@ public class PanelDessin extends JPanel implements MouseListener {
 					y[compteurPoint]=(int)e.getY();
 					
 					compteurPoint++;
-					drawPoly(this.getGraphics());
+					
+					objets.add( new Triangle(p1, p2, p3) );
 					break;		
 			}
 		}
 			
 			if(this.statut=="Quadrangle") {
 				
-				
 				if (this.quad==true) {
 					
-					
-					if ( rayon == Math.sqrt(  (Math.pow(e.getX()-p1.getPosX(), 2)) + (Math.pow(e.getY()- p1.getPosY(), 2)))){
+					if ( rayon == p1.distance(p2) ){
 						
-						System.out.println("ok");
 						switch (compteurPoint) {
 						
 						case 0: p1 = new Point2D( e.getX(), e.getY());
@@ -135,23 +191,23 @@ public class PanelDessin extends JPanel implements MouseListener {
 								
 						case 3 : p4 = new Point2D( e.getX(), e.getY());
 						
-						x[compteurPoint]=(int)e.getX();
-						y[compteurPoint]=(int)e.getY();
-						
-						compteurPoint++;
-						drawPoly(this.getGraphics());
-						break;	
+								x[compteurPoint]=(int)e.getX();
+								y[compteurPoint]=(int)e.getY();
+								
+								compteurPoint++;
+								
+								objets.add( new Quadrangle(rayon, p1, p2, p3, p4) );
+								break;	
 						}
-						
-					}
-					
+					}				
 				}
 			}
 		
 		
-		// Rafraichissement zone infos
+		// Rafraichissement zone infos et dessins
 		
 		((PanelInfos) this.getParent().getComponent(1)).refreshInfos(this.objets);
+		this.refreshDessins();
 	}
 
 	
@@ -186,9 +242,10 @@ public class PanelDessin extends JPanel implements MouseListener {
 		
 		if ( this.statut == "Quadrangle" ) {
 			
-			if (quad==false) {p1 = new Point2D(e.getX(),e.getY());
-			}
-			
+			if (quad==false) {
+				
+				p1 = new Point2D(e.getX(),e.getY());
+			}	
 		}
 		
 		if ( this.statut == "Aucun" ) {
@@ -200,7 +257,7 @@ public class PanelDessin extends JPanel implements MouseListener {
 					
 			p1 = new Point2D( e.getX(), e.getY());
 			
-			}
+		}
 		
 		// Rafraichissement zone infos
 		
@@ -215,36 +272,24 @@ public class PanelDessin extends JPanel implements MouseListener {
 			p2 = new Point2D( e.getX(), e.getY() );
 			
 			// Ajout dans la liste
-			
 			objets.add( new Segment(p1, p2) );
-			drawLine( this.getGraphics() );
-			
-			
-			// Ajout graphique
-			
 		}
 		
 		if ( this.statut == "Rectangle" ) {
 			
 			p3 = new Point2D( e.getX(), e.getY());
-			
-			
-			p2= new Point2D(p3.getPosX(),p1.getPosY());
-			p4= new Point2D(p1.getPosX(),p3.getPosY());
+			p2 = new Point2D(p3.getPosX(),p1.getPosY());
+			p4 = new Point2D(p1.getPosX(),p3.getPosY());
 			
 			objets.add( new Rectangle(p1, p2, p3, p4) );
-			drawRectangle(this.getGraphics());
 		}
 		
 		if ( this.statut == "Cercle" ) {
 			
 			p2 = new Point2D(e.getX(),e.getY());
+			rayon = p1.distance(p2);
 			
-			double r = Math.sqrt(  (Math.pow(p2.getPosX()-p1.getPosX(), 2)) + (Math.pow(p2.getPosY()- p1.getPosY(), 2)));
-			p3 = new Point2D(p1.getPosX()-r,p1.getPosY()-r);
-			
-			drawCercle(this.getGraphics(),r);
-			
+			objets.add( new Cercle(p1, rayon) );
 		}
 
 		
@@ -255,11 +300,6 @@ public class PanelDessin extends JPanel implements MouseListener {
 			x[2]= (int) p3.getPosX();
 			y[2]= (int) p3.getPosY();
 			compteurPoint++;
-			
-			System.out.println("P3 :" + x[2] + "," + y[2]);
-			System.out.println(compteurPoint);
-			
-			
 	
 			p2 = new Point2D(p1.getPosX()+20,(p3.getPosY()+p1.getPosY()) /2);
 			
@@ -267,60 +307,50 @@ public class PanelDessin extends JPanel implements MouseListener {
 			y[1]= (int) p2.getPosY();
 			compteurPoint++;
 			
-			System.out.println("P2 :" + x[1] + "," + y[1]);
-			System.out.println(compteurPoint);
-			
 			p4 = new Point2D(p1.getPosX()-20,(p3.getPosY()+p1.getPosY()) /2);
 			
 			x[3]= (int) p4.getPosX();
 			y[3]= (int) p4.getPosY();
 			compteurPoint++;
 			
-			System.out.println("P4 :" + x[3] + "," + y[3]);
-			System.out.println(compteurPoint);
-			
-			drawPoly(this.getGraphics());
+			objets.add( new Losange(p1, p2, p3, p4) );
 		}
 		
 		if ( this.statut == "Quadrangle" ) {
 			
-			
 			if (quad==false) {
-			p2 = new Point2D( e.getX(), e.getY() );
-			
-			this.rayon = Math.sqrt(  (Math.pow(p2.getPosX()-p1.getPosX(), 2)) + (Math.pow(p2.getPosY()- p1.getPosY(), 2)));
-			p3 = new Point2D(p1.getPosX()-rayon,p1.getPosY()-rayon);
-			
-			
-			drawCercle(this.getGraphics(),rayon);
-			quad=true;
-			System.out.println(quad);
-			System.out.println(statut);
+				
+				p2 = new Point2D( e.getX(), e.getY() );
+				
+				this.rayon = p1.distance(p2);
+				p3 = new Point2D(p1.getPosX()-rayon,p1.getPosY()-rayon);
+				
+				objets.add( new Cercle(p1, rayon) );
+				quad=true;
 			}
-			
 		}
 		
 		if ( this.statut == "Aucun" ) {
 			
-			// TODO
+			// ? Déplacer peut être
 		}
 				
 		if ( this.statut == "Ellipse" ) {
 					
-				p2 = new Point2D(e.getX(),e.getY());
+			p2 = new Point2D(e.getX(),e.getY());
 				
-				double dga = Math.sqrt(  (Math.pow(p2.getPosX()-p1.getPosX(), 2)) + (Math.pow(p2.getPosY()- p1.getPosY(), 2)));
+			double dga = p1.distance(p2);
+			double r = dga/2;
 				
-				double r = dga/2;
+			p3 = new Point2D(p1.getPosX()-dga,p1.getPosY()-r);
 				
-				p3 = new Point2D(p1.getPosX()-dga,p1.getPosY()-r);
-				
-				drawEllipse(this.getGraphics(),dga,r);
-			}
+			//drawEllipse(this.getGraphics(),dga,r);
+		}
 		
-		// Rafraichissement zone infos
+		// Rafraichissement zone dessin et infos
 		
 		((PanelInfos) this.getParent().getComponent(1)).refreshInfos(this.objets);
+		this.refreshDessins();
 	}
 
 	public void mouseEntered(MouseEvent e) {
@@ -345,33 +375,17 @@ public class PanelDessin extends JPanel implements MouseListener {
 	
 	public void drawPoly(Graphics g) {
 		
-		/*for(int i=0;i<3;i++) {
-			
-			System.out.println(x[i]);
-			System.out.println(y[i]);
-			
-		}*/
-		
-		
-		
-		
-		//compteurPoint++;
-		System.out.println(compteurPoint);
-		
 		g.drawPolygon(x, y, compteurPoint);
-		
 		compteurPoint=0;
 	}
 	
 	public void drawCercle(Graphics g, double rayon) {
 		
 		g.drawOval((int)p3.getPosX(), (int)p3.getPosY(), 2* (int)rayon, 2* (int)rayon);
-		
 	}
 	
 	public void drawEllipse(Graphics g, double demi_grand_axe, double rayon) {
 		
-		g.drawOval((int)p3.getPosX(), (int)p3.getPosY(), 2* (int)demi_grand_axe, 2* (int)rayon);
-		
+		g.drawOval((int)p3.getPosX(), (int)p3.getPosY(), 2* (int)demi_grand_axe, 2* (int)rayon);	
 	}
 }

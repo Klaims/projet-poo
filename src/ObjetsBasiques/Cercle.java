@@ -6,9 +6,9 @@ import Interfaces.Informations;
 
 public class Cercle extends ObjetBasique  implements CalculsGeometriques, Informations{
 	
-	private int rayon;
+	private double rayon;
 	
-	public Cercle(Point2D p, int r) {
+	public Cercle(Point2D p, double r) {
 		
 		this.addPoint(p);
 		this.setRef(p);
@@ -37,5 +37,10 @@ public class Cercle extends ObjetBasique  implements CalculsGeometriques, Inform
 				  + "Rayon = " + this.rayon + "\n"
 				  + "Centre = (" + ( this.getPoint(0).getPosX() + " , " + (this.getPoint(0).getPosY() +")" ) )
 				  );
+	}
+
+	public double getRayon() {
+		
+		return this.rayon;
 	}
 }
