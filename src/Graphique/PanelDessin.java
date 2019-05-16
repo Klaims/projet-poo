@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import General.ObjetGeometrique;
 import General.Point2D;
 import ObjetsBasiques.Cercle;
+import ObjetsBasiques.Losange;
 import ObjetsBasiques.Quadrangle;
 import ObjetsBasiques.Rectangle;
 import ObjetsBasiques.Segment;
@@ -20,15 +21,18 @@ import Graphique.PanelInfos;
 public class PanelDessin extends JPanel implements MouseListener {
 	
 	// Arguments temporaires pour la création des formes
+	
 	private Point2D p1;
 	private Point2D p2;
 	private Point2D p3;
 	private Point2D p4;
-	private boolean quad;
-	private double rayon;
 	private Point2D p5;
 	
+	private boolean quad;
+	private double rayon;
+	
 	private int compteurPoint=0;
+	
 	private int[] x = new int[4];
 	private int[] y = new int[4];
 	
@@ -47,6 +51,7 @@ public class PanelDessin extends JPanel implements MouseListener {
 	}
 	
 	// Met à jour le mode de l'utilisateur
+	
 	public void refreshStatut(String nouvStatut) { 
 		
 		this.statut = nouvStatut;
@@ -71,7 +76,7 @@ public class PanelDessin extends JPanel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		
 	
-		if(this.statut=="Triangle") {
+		if ( this.statut=="Triangle" ) {
 			
 			switch (compteurPoint) {
 			
@@ -97,8 +102,10 @@ public class PanelDessin extends JPanel implements MouseListener {
 					y[compteurPoint]=(int)e.getY();
 					
 					compteurPoint++;
+					
 					drawPoly(this.getGraphics());
 					this.objets.add( new Triangle(p1,p2,p3));
+					
 					break;		
 			}
 		}
@@ -290,6 +297,7 @@ public class PanelDessin extends JPanel implements MouseListener {
 			System.out.println(compteurPoint);
 			
 			drawPoly(this.getGraphics());
+			this.objets.add(new Losange(p1,p2,p3,p4));
 		}
 		
 		if ( this.statut == "Quadrangle" ) {
