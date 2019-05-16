@@ -48,6 +48,11 @@ public class PanelDessin extends JPanel implements MouseListener {
 		this.statut = nouvStatut;
 	}
 	
+	public String getStatut () {
+		
+		return this.statut;
+	}
+	
 	public ArrayList<ObjetGeometrique> getObjets() {
 		return objets;
 	}

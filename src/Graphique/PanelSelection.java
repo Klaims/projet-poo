@@ -52,6 +52,10 @@ public class PanelSelection extends JPanel {
 		btnAucun.setEnabled(false);
 		pnlBoutons.add(btnAucun);
 		
+		BoutonOutil btnPlus = new BoutonOutil();
+		btnPlus.setText("Plus");
+		pnlBoutons.add(btnPlus);
+		
 		this.add(pnlBoutons, BorderLayout.WEST);
 		
 		// Statut

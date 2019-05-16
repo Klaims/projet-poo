@@ -19,22 +19,29 @@ public class BoutonOutil extends JButton implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		JLabel label = ((JLabel) this.getParent().getParent().getComponent(1)); // Label statut
-		String nouvStatut = ((BoutonOutil) e.getSource()).getText(); // Nouveau statut
-		
-		for(int i=0; i<7; i++) {
+		if ( ((JButton) e.getSource()).getText() == "Plus" ) {
 			
-			 ( (BoutonOutil) this.getParent().getComponent(i) ).setEnabled(true);
-		} // Remet tous les boutons enabled
-		
-		((BoutonOutil) e.getSource()).setEnabled(false); // Disable le bouton utilisé
-		
-		label.setText("Statut : " + nouvStatut ); // Changement du label statut 
-		
-		// Met à jour le panel dessin
-		
-		((PanelDessin) this	.getParent()
-							.getParent()
-							.getParent().getComponent(2)).refreshStatut(nouvStatut);
-	}
+			
+		}
+		else {
+			
+			JLabel label = ((JLabel) this.getParent().getParent().getComponent(1)); // Label statut
+			String nouvStatut = ((BoutonOutil) e.getSource()).getText(); // Nouveau statut
+			
+			for(int i=0; i<7; i++) {
+				
+				 ( (BoutonOutil) this.getParent().getComponent(i) ).setEnabled(true);
+			} // Remet tous les boutons enabled
+			
+			((BoutonOutil) e.getSource()).setEnabled(false); // Disable le bouton utilisé
+			
+			label.setText("Statut : " + nouvStatut ); // Changement du label statut 
+			
+			// Met à jour le panel dessin
+			
+			((PanelDessin) this	.getParent()
+								.getParent()
+								.getParent().getComponent(2)).refreshStatut(nouvStatut);
+		}
+		}
 }
