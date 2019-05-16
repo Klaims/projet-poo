@@ -47,7 +47,7 @@ public class Point2D {
 
 	public String toString() {
 		
-		return ("Abscisse : " + posX + " Ordonnée : " + posY);
+		return ("X : " + posX + " Y : " + posY);
 		
 	}
 	

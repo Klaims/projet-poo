@@ -19,4 +19,9 @@ public abstract class ObjetGeometrique {
 		
 		// TODO
 	}
+	
+	public int getSize() {
+		
+		return this.points.size();
+	}
 }
