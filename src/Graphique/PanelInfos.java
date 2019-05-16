@@ -18,6 +18,7 @@ import javax.swing.border.EmptyBorder;
 
 import General.ObjetGeometrique;
 import General.Point2D;
+import ObjetsBasiques.Segment;
 
 public class PanelInfos extends JPanel implements ActionListener {
 
@@ -59,18 +60,11 @@ public class PanelInfos extends JPanel implements ActionListener {
 		
 		content="";
 		
-		for (int i=0; i<T.size(); i++) {
-			
-			ObjetGeometrique Obj = T.get(i);
-			
-			content+= 	"\n -----     " + 
-						((PanelDessin) this.getParent().getComponent(2)).getStatut() +
-						"     ----- \n";
+		Iterator<ObjetGeometrique> iter = T.iterator();
 		
-			for (int j=0; j<Obj.getSize(); j++) {
-				
-				content+= "Point " + (j+1) + "\t" + Obj.getPoint(j) + "\n";
-			}
+		while (iter.hasNext()) {
+			
+			content += iter.next().toString() + "\n";
 		}
 		
 		txtInfos.setText(content);
