@@ -55,7 +55,6 @@ public class PanelSelection extends JPanel {
 		BoutonOutil btnPlus = new BoutonOutil();
 		btnPlus.setText("Plus");
 		pnlBoutons.add(btnPlus);
-		
 		this.add(pnlBoutons, BorderLayout.WEST);
 		
 		// Statut
@@ -63,7 +62,6 @@ public class PanelSelection extends JPanel {
 		lblStatut.setForeground(Color.WHITE);
 		lblStatut.setFont(new Font("Arial", Font.BOLD, 32));
 		lblStatut.setBorder( new EmptyBorder(2, 2, 2, 40) );
-		
 		this.add(lblStatut, BorderLayout.EAST);
 	}
 }
