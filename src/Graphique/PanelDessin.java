@@ -83,8 +83,8 @@ public class PanelDessin extends JPanel implements MouseListener {
 					x[compteurPoint]=(int)e.getX();
 					y[compteurPoint]=(int)e.getY();
 					
+					compteurPoint++;
 					drawPoly(this.getGraphics());
-					compteurPoint=0;
 					break;		
 			}
 		}
@@ -109,14 +109,18 @@ public class PanelDessin extends JPanel implements MouseListener {
 		
 		if ( this.statut == "Cercle" ) {
 			
-			// TODO
+			
 		}
 
 		if ( this.statut == "Losange" ) {
 			
 			p1 = new Point2D( e.getX(), e.getY());
-			x[0]= (int)p1.getPosX();
-			y[0]= (int)p1.getPosY();
+			x[0]= (int) p1.getPosX();
+			y[0]= (int) p1.getPosY();
+			compteurPoint++;
+			
+			System.out.println("P1 :" + x[0] + "," + y[0]);
+			System.out.println(compteurPoint);
 		}
 		
 		if ( this.statut == "Quadrangle" ) {
@@ -171,23 +175,36 @@ public class PanelDessin extends JPanel implements MouseListener {
 		
 		if ( this.statut == "Losange" ) {
 			
-			p3 = new Point2D( e.getX(), e.getY());
+			p3 = new Point2D(e.getX(),e.getY());
 			
-			x[2]= (int)p3.getPosX();
-			y[2]= (int)p3.getPosY();
+			x[2]= (int) p3.getPosX();
+			y[2]= (int) p3.getPosY();
+			compteurPoint++;
 			
-			p2 = new Point2D( (p1.getPosY()+p3.getPosY())/2, p1.getPosX()+10);
+			System.out.println("P3 :" + x[2] + "," + y[2]);
+			System.out.println(compteurPoint);
 			
-			x[1]= (int)p2.getPosX();
-			y[1]= (int)p2.getPosY();
 			
-			p4 = new Point2D( (p1.getPosY()+p3.getPosY())/2, p1.getPosX()+10);
+	
+			p2 = new Point2D(p1.getPosX()+20,(p3.getPosY()+p1.getPosY()) /2);
 			
-			x[3]= (int)p4.getPosX();
-			y[3]= (int)p4.getPosY();
-			compteurPoint=3;
+			x[1]= (int) p2.getPosX();
+			y[1]= (int) p2.getPosY();
+			compteurPoint++;
+			
+			System.out.println("P2 :" + x[1] + "," + y[1]);
+			System.out.println(compteurPoint);
+			
+			p4 = new Point2D(p1.getPosX()-20,(p3.getPosY()+p1.getPosY()) /2);
+			
+			x[3]= (int) p4.getPosX();
+			y[3]= (int) p4.getPosY();
+			compteurPoint++;
+			
+			System.out.println("P4 :" + x[3] + "," + y[3]);
+			System.out.println(compteurPoint);
+			
 			drawPoly(this.getGraphics());
-			
 		}
 		
 		if ( this.statut == "Quadrangle" ) {
@@ -234,13 +251,21 @@ public class PanelDessin extends JPanel implements MouseListener {
 			
 		}*/
 		
-		System.out.println(compteurPoint);
 		
-		compteurPoint++;
+		
+		
+		//compteurPoint++;
+		System.out.println(compteurPoint);
 		
 		g.drawPolygon(x, y, compteurPoint);
 		
+		compteurPoint=0;
 	}
 	
+	public void drawCircle(Graphics g) {
+		
+		
+		
+	}
 	
 }
