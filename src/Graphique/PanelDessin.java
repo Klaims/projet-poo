@@ -21,6 +21,8 @@ public class PanelDessin extends JPanel implements MouseListener {
 	private Point2D p2;
 	private Point2D p3;
 	private Point2D p4;
+	private boolean quad;
+	private double rayon;
 	
 	private int compteurPoint=0;
 	private int[] x = new int[4];
@@ -37,6 +39,7 @@ public class PanelDessin extends JPanel implements MouseListener {
 		this.setBackground( new Color(230,230,230) );
 		this.addMouseListener(this);
 		objets = new ArrayList<ObjetGeometrique>();
+		this.quad=false;
 	}
 	
 	// Met à jour le mode de l'utilisateur
@@ -57,6 +60,7 @@ public class PanelDessin extends JPanel implements MouseListener {
 
 
 	public void mouseClicked(MouseEvent e) {
+		
 	
 		if(this.statut=="Triangle") {
 			
@@ -88,6 +92,57 @@ public class PanelDessin extends JPanel implements MouseListener {
 					break;		
 			}
 		}
+			
+			if(this.statut=="Quadrangle") {
+				
+				
+				if (this.quad==true) {
+					
+					
+					if ( rayon == Math.sqrt(  (Math.pow(e.getX()-p1.getPosX(), 2)) + (Math.pow(e.getY()- p1.getPosY(), 2)))){
+						
+						System.out.println("ok");
+						switch (compteurPoint) {
+						
+						case 0: p1 = new Point2D( e.getX(), e.getY());
+						
+								x[compteurPoint]=(int)e.getX();
+								y[compteurPoint]=(int)e.getY();
+								
+								compteurPoint++;
+								break;
+								
+						case 1 : p2 = new Point2D( e.getX(), e.getY());
+						
+								x[compteurPoint]=(int)e.getX();
+								y[compteurPoint]=(int)e.getY();
+								
+								compteurPoint++;
+								break;
+								
+						case 2 : p3 = new Point2D( e.getX(), e.getY());
+								
+								x[compteurPoint]=(int)e.getX();
+								y[compteurPoint]=(int)e.getY();
+								
+								compteurPoint++;
+								break;	
+								
+						case 3 : p4 = new Point2D( e.getX(), e.getY());
+						
+						x[compteurPoint]=(int)e.getX();
+						y[compteurPoint]=(int)e.getY();
+						
+						compteurPoint++;
+						drawPoly(this.getGraphics());
+						break;	
+						}
+						
+					}
+					
+				}
+			}
+		
 		
 		// Rafraichissement zone infos
 		
@@ -109,6 +164,7 @@ public class PanelDessin extends JPanel implements MouseListener {
 		
 		if ( this.statut == "Cercle" ) {
 			
+			p1 = new Point2D(e.getX(),e.getY());
 			
 		}
 
@@ -125,13 +181,21 @@ public class PanelDessin extends JPanel implements MouseListener {
 		
 		if ( this.statut == "Quadrangle" ) {
 			
-			// TODO;
+			if (quad==false) {p1 = new Point2D(e.getX(),e.getY());
+			}
+			
 		}
 		
 		if ( this.statut == "Aucun" ) {
 			
 			// TODO
 		}
+		
+		if ( this.statut == "Ellipse" ) {
+					
+			p1 = new Point2D( e.getX(), e.getY());
+			
+			}
 		
 		// Rafraichissement zone infos
 		
@@ -169,7 +233,13 @@ public class PanelDessin extends JPanel implements MouseListener {
 		
 		if ( this.statut == "Cercle" ) {
 			
-			// TODO
+			p2 = new Point2D(e.getX(),e.getY());
+			
+			double r = Math.sqrt(  (Math.pow(p2.getPosX()-p1.getPosX(), 2)) + (Math.pow(p2.getPosY()- p1.getPosY(), 2)));
+			p3 = new Point2D(p1.getPosX()-r,p1.getPosY()-r);
+			
+			drawCercle(this.getGraphics(),r);
+			
 		}
 
 		
@@ -209,13 +279,39 @@ public class PanelDessin extends JPanel implements MouseListener {
 		
 		if ( this.statut == "Quadrangle" ) {
 			
-			// TODO;
+			
+			if (quad==false) {
+			p2 = new Point2D( e.getX(), e.getY() );
+			
+			this.rayon = Math.sqrt(  (Math.pow(p2.getPosX()-p1.getPosX(), 2)) + (Math.pow(p2.getPosY()- p1.getPosY(), 2)));
+			p3 = new Point2D(p1.getPosX()-rayon,p1.getPosY()-rayon);
+			
+			
+			drawCercle(this.getGraphics(),rayon);
+			quad=true;
+			System.out.println(quad);
+			System.out.println(statut);
+			}
+			
 		}
 		
 		if ( this.statut == "Aucun" ) {
 			
 			// TODO
 		}
+				
+		if ( this.statut == "Ellipse" ) {
+					
+				p2 = new Point2D(e.getX(),e.getY());
+				
+				double dga = Math.sqrt(  (Math.pow(p2.getPosX()-p1.getPosX(), 2)) + (Math.pow(p2.getPosY()- p1.getPosY(), 2)));
+				
+				double r = dga/2;
+				
+				p3 = new Point2D(p1.getPosX()-dga,p1.getPosY()-r);
+				
+				drawEllipse(this.getGraphics(),dga,r);
+			}
 		
 		// Rafraichissement zone infos
 		
@@ -262,10 +358,15 @@ public class PanelDessin extends JPanel implements MouseListener {
 		compteurPoint=0;
 	}
 	
-	public void drawCircle(Graphics g) {
+	public void drawCercle(Graphics g, double rayon) {
 		
-		
+		g.drawOval((int)p3.getPosX(), (int)p3.getPosY(), 2* (int)rayon, 2* (int)rayon);
 		
 	}
 	
+	public void drawEllipse(Graphics g, double demi_grand_axe, double rayon) {
+		
+		g.drawOval((int)p3.getPosX(), (int)p3.getPosY(), 2* (int)demi_grand_axe, 2* (int)rayon);
+		
+	}
 }
