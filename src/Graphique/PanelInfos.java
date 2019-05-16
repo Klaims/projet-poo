@@ -12,6 +12,7 @@ import java.util.Iterator;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
@@ -22,7 +23,7 @@ public class PanelInfos extends JPanel implements ActionListener {
 
 	private JButton btnClear;
 	private JTextArea txtInfos;
-	private String content = "";
+	private String content;
 	
 	public PanelInfos() {
 		
@@ -50,20 +51,25 @@ public class PanelInfos extends JPanel implements ActionListener {
 		// Liste formes
 		txtInfos = new JTextArea();
 		txtInfos.setEditable(false);
-		this.add(txtInfos, BorderLayout.CENTER);
+		JScrollPane scroll = new JScrollPane(txtInfos);
+		this.add(scroll);
 	}
 	
 	public void refreshInfos(ArrayList<ObjetGeometrique> T) {
+		
+		content="";
 		
 		for (int i=0; i<T.size(); i++) {
 			
 			ObjetGeometrique Obj = T.get(i);
 			
-			content+= "\n Segment \n";
+			content+= 	"\n -----     " + 
+						((PanelDessin) this.getParent().getComponent(2)).getStatut() +
+						"     ----- \n";
 		
 			for (int j=0; j<Obj.getSize(); j++) {
 				
-				content+= Obj.getPoint(j) + "\n";
+				content+= "Point " + (j+1) + "\t" + Obj.getPoint(j) + "\n";
 			}
 		}
 		
@@ -82,6 +88,7 @@ public class PanelInfos extends JPanel implements ActionListener {
 			
 			pnl.setForeground(new Color(230,230,230));
 			pnl.repaint();
+			txtInfos.setText("");
 		}
 	}
 }
