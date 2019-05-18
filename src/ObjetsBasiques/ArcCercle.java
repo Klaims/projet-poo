@@ -10,7 +10,7 @@ public class ArcCercle extends Cercle implements Informations,CalculsGeometrique
 	private int angle_fin;
 	
 	public ArcCercle(Point2D p, double r, int angle_deb, int angle_fin) {
-		super(p, r);
+
 		this.angle_deb = angle_deb;
 		this.angle_fin = angle_fin;
 	}	
