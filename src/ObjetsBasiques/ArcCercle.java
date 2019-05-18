@@ -7,13 +7,9 @@ import Interfaces.Informations;
 public class ArcCercle extends Cercle implements Informations,CalculsGeometriques{
 
 		public ArcCercle(Point2D p, double r) {
-			
-			
+		super(p, r);
 		
 	}
 		private int angle_deb;
-		private int angle_fin;
-		
-		
-			
+		private int angle_fin;	
 }

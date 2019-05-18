@@ -80,7 +80,6 @@ public class PanelInfos extends JPanel implements ActionListener {
 			
 			pnl.getObjets().clear(); // Vide l'array list
 			
-			pnl.setForeground(new Color(230,230,230));
 			pnl.repaint();
 			txtInfos.setText("");
 		}

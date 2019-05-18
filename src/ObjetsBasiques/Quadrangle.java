@@ -66,4 +66,9 @@ public class Quadrangle extends ObjetBasique implements CalculsGeometriques, Inf
 				  + "p3 (" +  ( this.getPoint(2)).getPosX() + " , " +  this.getPoint(2).getPosY() + ")\n"  
 				  + "p4 (" +  ( this.getPoint(3)).getPosX()) + " , " +  this.getPoint(3).getPosY() + ")");
 	}
+
+	public double getRayon() {
+
+		return rayon;
+	}
 }
