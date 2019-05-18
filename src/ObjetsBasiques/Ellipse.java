@@ -7,7 +7,6 @@ import Interfaces.Informations;
 
 public class Ellipse extends ObjetBasique implements Informations,CalculsGeometriques {
 	
-	
 	private double dga;
 	
 	public Ellipse(Point2D point, double demi_grand_axe) {
@@ -16,15 +15,14 @@ public class Ellipse extends ObjetBasique implements Informations,CalculsGeometr
 		this.addPoint(point);
 		this.setRef(point);
 	}
+	
 	public double calculPerimetre() {
 		
 		return 0;
 	}
 
-
 	public double calculAire() {
 		
 		return 0;
 	}
-
 }
