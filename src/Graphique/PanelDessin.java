@@ -42,7 +42,6 @@ public class PanelDessin extends JPanel implements MouseListener {
 	public PanelDessin() {
 		
 		// Settings panel
-		//this.setBackground( new Color(230,230,230) );
 		this.addMouseListener(this);
 		
 		objets = new ArrayList<ObjetGeometrique>();
