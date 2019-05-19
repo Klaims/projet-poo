@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import General.ObjetGeometrique;
 import General.Point2D;
 import ObjetsBasiques.Cercle;
+import ObjetsBasiques.Ellipse;
 import ObjetsBasiques.Losange;
 import ObjetsBasiques.Quadrangle;
 import ObjetsBasiques.Rectangle;
@@ -28,6 +29,8 @@ public class PanelDessin extends JPanel implements MouseListener {
 	private Point2D p4;
 	private boolean quad;
 	private double rayon;
+	private double ga;
+	private double pa;
 	private Point2D[] tempPoints = new Point2D[4];
 	
 	private int compteurPoint;
@@ -135,6 +138,15 @@ public class PanelDessin extends JPanel implements MouseListener {
 				x[3] = (int) p4.getPosX();		y[3] = (int) p4.getPosY();
 				
 				this.drawPoly(getGraphics(), 4);
+			}
+			
+			if ( obj instanceof Ellipse ) {
+				
+				p1 = obj.getPoint(0);
+				ga = ((Ellipse) obj).getGa();
+				pa = ((Ellipse) obj).getPa();
+				
+				drawEllipse(getGraphics());
 			}
 		}
 	}
@@ -261,7 +273,6 @@ public class PanelDessin extends JPanel implements MouseListener {
 		if ( this.statut == "Ellipse" ) {
 					
 			p1 = new Point2D( e.getX(), e.getY());
-			
 		}
 		
 		// Rafraichissement zone infos
@@ -330,13 +341,13 @@ public class PanelDessin extends JPanel implements MouseListener {
 		if ( this.statut == "Ellipse" ) {
 					
 			p2 = new Point2D(e.getX(),e.getY());
+			p3 = new Point2D( p2.getPosX(), p1.getPosY() );
+			p4 = new Point2D( p1.getPosX(), p2.getPosY() );
+			
+			ga = p1.distance(p3);
+			pa = p1.distance(p4);
 				
-			double dga = p1.distance(p2);
-			double r = dga/2;
-				
-			p3 = new Point2D(p1.getPosX()-dga,p1.getPosY()-r);
-				
-			//drawEllipse(this.getGraphics(),dga,r);
+			objets.add( new Ellipse(p1, ga, pa) );
 		}
 		
 		// Rafraichissement zone dessin et infos
@@ -375,8 +386,8 @@ public class PanelDessin extends JPanel implements MouseListener {
 		g.drawOval((int)p3.getPosX(), (int)p3.getPosY(), 2* (int)rayon, 2* (int)rayon);
 	}
 	
-	public void drawEllipse(Graphics g, double demi_grand_axe, double rayon) {
+	public void drawEllipse(Graphics g) {
 		
-		g.drawOval((int)p3.getPosX(), (int)p3.getPosY(), 2* (int)demi_grand_axe, 2* (int)rayon);	
+		g.drawOval((int) p1.getPosX(), (int) p1.getPosY(), (int) ga, (int) pa );	
 	}
 }
