@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.border.EmptyBorder;
 
 public class BoutonOutil extends JButton implements ActionListener{
 
@@ -18,30 +19,23 @@ public class BoutonOutil extends JButton implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
-		if ( ((JButton) e.getSource()).getText() == "Plus" ) {
 			
-			// TODO
-		}
-		else {
+		JLabel label = ((JLabel) this.getParent().getParent().getComponent(1)); // Label statut
+		String nouvStatut = ((BoutonOutil) e.getSource()).getText(); // Nouveau statut
 			
-			JLabel label = ((JLabel) this.getParent().getParent().getComponent(1)); // Label statut
-			String nouvStatut = ((BoutonOutil) e.getSource()).getText(); // Nouveau statut
-			
-			for(int i=0; i<7; i++) {
+		for(int i=0; i<11 ; i++) {
 				
-				 ( (BoutonOutil) this.getParent().getComponent(i) ).setEnabled(true);
-			} // Remet tous les boutons enabled
+			 ( (BoutonOutil) this.getParent().getComponent(i) ).setEnabled(true);
+		} // Remet tous les boutons enabled
 			
-			((BoutonOutil) e.getSource()).setEnabled(false); // Disable le bouton utilisé
+		((BoutonOutil) e.getSource()).setEnabled(false); // Disable le bouton utilisé
 			
-			label.setText("Statut : " + nouvStatut ); // Changement du label statut 
+		label.setText("Statut : " + nouvStatut ); // Changement du label statut 
 			
-			// Met à jour le panel dessin
+		// Met à jour le panel dessin
 			
-			((PanelDessin) this	.getParent()
-								.getParent()
-								.getParent().getComponent(2)).refreshStatut(nouvStatut);
-		}
+		((PanelDessin) this	.getParent()
+							.getParent()
+							.getParent().getComponent(2)).refreshStatut(nouvStatut);
 	}
 }
