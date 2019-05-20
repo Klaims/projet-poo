@@ -39,12 +39,18 @@ public class Triangle extends ObjetBasique implements CalculsGeometriques, Infor
 	  }
 
 	  public String toString() {
-	  
-		  return    ( "\n"
+		  
+		  return "Triangle";
+	  }
+
+	@Override
+	public String infosObjet() {
+		
+		return    ( "\n"
 				  + "Type : Triangle \n"
 				  + "p1 (" + ( this.getPoint(0).getPosX() + " , " + (this.getPoint(0).getPosY() + ")\n"
 				  + "p2 (" +  ( this.getPoint(1)).getPosX()) + " , " +  this.getPoint(1).getPosY() + ")\n" 
 				  + "p3 (" +  ( this.getPoint(2)).getPosX() + " , " +  this.getPoint(2).getPosY() + ")") );
-  		}
+	}
 
 }

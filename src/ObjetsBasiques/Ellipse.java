@@ -42,4 +42,19 @@ public class Ellipse extends ObjetBasique implements Informations,CalculsGeometr
 	public void setPa(double pa) {
 		this.pa = pa;
 	}
+
+	public String infosObjet() {
+		
+		return    ( "\n"
+				  + "Type : Cercle \n"
+				  + "Grand axe = " + this.ga + "\n"
+				  + "Petit axe = " + this.pa + "\n"
+				  + "Centre = (" + ( this.getPoint(0).getPosX() + " , " + (this.getPoint(0).getPosY() +")" ) )
+				  );
+	}
+	
+	public String toString() {
+		
+		return "Ellipse";
+	}
 }

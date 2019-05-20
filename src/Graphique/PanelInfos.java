@@ -9,8 +9,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -23,8 +25,8 @@ import ObjetsBasiques.Segment;
 public class PanelInfos extends JPanel implements ActionListener {
 
 	private JButton btnClear;
-	private JTextArea txtInfos;
 	private String content;
+	private DefaultListModel<ObjetGeometrique> modelJList;
 	
 	public PanelInfos() {
 		
@@ -50,24 +52,22 @@ public class PanelInfos extends JPanel implements ActionListener {
 		this.add(lblListe, BorderLayout.NORTH);
 		
 		// Liste formes
-		txtInfos = new JTextArea();
-		txtInfos.setEditable(false);
-		JScrollPane scroll = new JScrollPane(txtInfos);
+		modelJList = new DefaultListModel();
+		JList listeObjets = new JList( modelJList );
+		JScrollPane scroll = new JScrollPane(listeObjets);
 		this.add(scroll);
 	}
 	
 	public void refreshInfos(ArrayList<ObjetGeometrique> T) {
 		
-		content="";
+		modelJList.clear();
 		
 		Iterator<ObjetGeometrique> iter = T.iterator();
 		
 		while (iter.hasNext()) {
 			
-			content += iter.next().toString() + "\n";
+			modelJList.addElement( iter.next() );
 		}
-		
-		txtInfos.setText(content);
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class PanelInfos extends JPanel implements ActionListener {
 			pnl.getObjets().clear(); // Vide l'array list
 			
 			pnl.repaint();
-			txtInfos.setText("");
+			modelJList.clear();
 		}
 	}
 }

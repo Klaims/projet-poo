@@ -19,9 +19,15 @@ public class Segment extends ObjetBasique implements Informations{
                 
   	public String toString() {
 	  
-  		return    ( "\n"
+  		return "Segment";
+  	}
+
+	@Override
+	public String infosObjet() {
+		
+		return    ( "\n"
 				  + "Type : Segment \n"
 				  + "p1 (" + ( this.getPoint(0).getPosX() + " , " + (this.getPoint(0).getPosY() + ")\n"
 				  + "p2 (" +  ( this.getPoint(1)).getPosX()) + " , " +  this.getPoint(1).getPosY() +")") );
-  	}
+	}
 }

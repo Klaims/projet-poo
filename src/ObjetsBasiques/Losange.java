@@ -19,12 +19,7 @@ public class Losange extends ObjetBasique implements Informations, CalculsGeomet
 	
 	public String toString() {
 		
-		return    ( "\n"
-				  + "Type : Losange \n"
-				  + "p1 (" + ( this.getPoint(0).getPosX() + " , " + (this.getPoint(0).getPosY() + ")\n"
-				  + "p2 (" +  ( this.getPoint(1)).getPosX()) + " , " +  this.getPoint(1).getPosY() + ")\n" 
-				  + "p3 (" +  ( this.getPoint(2)).getPosX() + " , " +  this.getPoint(2).getPosY() + ")\n"  
-				  + "p4 (" +  ( this.getPoint(3)).getPosX()) + " , " +  this.getPoint(3).getPosY() + ")");
+		return "Losange";
 	}
 
 	@Override
@@ -45,5 +40,16 @@ public class Losange extends ObjetBasique implements Informations, CalculsGeomet
 		double longueur2= this.getPoint(1).distance( this.getPoint(3) );
 		
 		return (longueur1 * longueur2) / 2; 
+	}
+
+	@Override
+	public String infosObjet() {
+
+		return    ( "\n"
+				  + "Type : Losange \n"
+				  + "p1 (" + ( this.getPoint(0).getPosX() + " , " + (this.getPoint(0).getPosY() + ")\n"
+				  + "p2 (" +  ( this.getPoint(1)).getPosX()) + " , " +  this.getPoint(1).getPosY() + ")\n" 
+				  + "p3 (" +  ( this.getPoint(2)).getPosX() + " , " +  this.getPoint(2).getPosY() + ")\n"  
+				  + "p4 (" +  ( this.getPoint(3)).getPosX()) + " , " +  this.getPoint(3).getPosY() + ")");
 	}
 }

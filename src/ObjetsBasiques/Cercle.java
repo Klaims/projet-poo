@@ -32,15 +32,20 @@ public class Cercle extends ObjetBasique  implements CalculsGeometriques, Inform
 	
 	public String toString() {
 		
-		return    ( "\n"
-				  + "Type : Cercle \n"
-				  + "Rayon = " + this.rayon + "\n"
-				  + "Centre = (" + ( this.getPoint(0).getPosX() + " , " + (this.getPoint(0).getPosY() +")" ) )
-				  );
+		return "Cerle";
 	}
 
 	public double getRayon() {
 		
 		return this.rayon;
+	}
+	
+	public String infosObjet() {
+		
+		return    ( "\n"
+				  + "Type : Cercle \n"
+				  + "Rayon = " + this.rayon + "\n"
+				  + "Centre = (" + ( this.getPoint(0).getPosX() + " , " + (this.getPoint(0).getPosY() +")" ) )
+				  );
 	}
 }
