@@ -196,7 +196,8 @@ public class PanelDessin extends JPanel implements MouseListener {
 					
 					p2 = new Point2D( e.getX(), e.getY());
 					
-					if ( (p1.distance(p2) > rayon-5) || (p1.distance(p2) < rayon+5) ){
+					if ( 	(p1.distance(p2) > rayon-5) &&
+							(p1.distance(p2) < rayon+5) ){
 						
 						switch (compteurPoint) {
 						
