@@ -67,6 +67,7 @@ public class PanelInfos extends JPanel implements ActionListener {
 		while (iter.hasNext()) {
 			
 			modelJList.addElement( iter.next() );
+			
 		}
 	}
 
