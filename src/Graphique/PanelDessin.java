@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import General.ObjetGeometrique;
 import General.Point2D;
+import ObjetsBasiques.ArcCercle;
 import ObjetsBasiques.Cercle;
 import ObjetsBasiques.Ellipse;
 import ObjetsBasiques.Losange;
@@ -223,10 +224,40 @@ public class PanelDessin extends JPanel implements MouseListener {
 								compteurPoint= 0;
 								quad= false;
 						}
-					}				
+					}
+				
+					
+					
 				}
 			}
 		
+			if (this.statut=="Arc") {
+				
+				if(this.quad==true) {
+					
+					p2 = new Point2D( e.getX(), e.getY());
+					
+					if ( (p1.distance(p2) > rayon-5) || (p1.distance(p2) < rayon+5) ){
+						
+						switch (compteurPoint) {
+						
+						case 0: tempPoints[0] = new Point2D( e.getX(), e.getY());
+						
+								compteurPoint++;
+								break;
+								
+						case 1 : tempPoints[1] = new Point2D( e.getX(), e.getY());
+						
+								compteurPoint++;
+								this.p3 = new Point2D(p1.getPosX()-rayon,p3.getPosY()-rayon);
+								this.objets.add( new ArcCercle(p1, rayon, calculAngle(tempPoints[0],p1),calculAngle(tempPoints[1],p1)));
+								
+								break;
+							}
+						
+					}
+				}
+			}
 		
 		// Rafraichissement zone infos et dessins
 		
@@ -274,6 +305,14 @@ public class PanelDessin extends JPanel implements MouseListener {
 		if ( this.statut == "Ellipse" ) {
 					
 			p1 = new Point2D( e.getX(), e.getY());
+		}
+		
+		if (this.statut == "Arc") {
+			
+			if (quad==false) {
+				
+				p1 = new Point2D(e.getX(),e.getY());
+			}	
 		}
 		
 		// Rafraichissement zone infos
@@ -351,6 +390,18 @@ public class PanelDessin extends JPanel implements MouseListener {
 			objets.add( new Ellipse(p1, ga, pa) );
 		}
 		
+		if (this.statut == "Arc") {
+			
+
+			if (quad==false) {
+				
+				p2 = new Point2D( e.getX(), e.getY() );
+				this.rayon = p1.distance(p2);
+				
+				objets.add( new Cercle(p1, rayon) );
+				quad=true;
+			}
+		}
 		// Rafraichissement zone dessin et infos
 		
 		((PanelInfos) this.getParent().getComponent(1)).refreshInfos(this.objets);
@@ -390,5 +441,20 @@ public class PanelDessin extends JPanel implements MouseListener {
 	public void drawEllipse(Graphics g) {
 		
 		g.drawOval((int) p1.getPosX(), (int) p1.getPosY(), (int) ga, (int) pa );	
+	}
+	
+	public double calculAngle(Point2D point , Point2D centre) {
+		
+		double cos =  (point.getPosX() - centre.getPosX());
+		double sin =(point.getPosY()-centre.getPosY());
+		
+		double angle = Math.toDegrees(Math.acos(cos));
+		
+		if ( sin < 0) {
+			
+			angle = 360-angle;
+			
+		}
+		return (angle);
 	}
 }
