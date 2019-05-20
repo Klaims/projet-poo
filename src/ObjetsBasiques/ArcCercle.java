@@ -6,10 +6,10 @@ import Interfaces.Informations;
 
 public class ArcCercle extends Cercle implements Informations,CalculsGeometriques{
 
-	private int angle_deb;
-	private int angle_fin;
+	private double angle_deb;
+	private double angle_fin;
 	
-	public ArcCercle(Point2D centre, double rayon, int angle_deb, int angle_fin) {
+	public ArcCercle(Point2D centre, double rayon, double angle_deb, double angle_fin) {
 		super(centre, rayon);
 		
 		this.angle_deb = angle_deb;
