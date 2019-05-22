@@ -47,8 +47,9 @@ public class PanelDessin extends JPanel implements MouseListener {
 		
 		// Settings panel
 		this.addMouseListener(this);
-		
 		objets = new ArrayList<ObjetGeometrique>();
+		
+		// Initialisation des attributs
 		this.quad=false;
 	}
 	
@@ -62,13 +63,14 @@ public class PanelDessin extends JPanel implements MouseListener {
 	private void refreshDessin() {
 		
 		this.getGraphics().clearRect(0, 0, 1000, 1000);
-
+		
 		Iterator<ObjetGeometrique> iter = objets.iterator();
 		
 		while (iter.hasNext()) {
-			
+
 			ObjetGeometrique obj = iter.next();
 			
+			// Dessine les objets
 			if ( obj instanceof Segment ) {
 				
 				p1 = obj.getPoint(0);
@@ -225,9 +227,6 @@ public class PanelDessin extends JPanel implements MouseListener {
 								quad= false;
 						}
 					}
-				
-					
-					
 				}
 			}
 		
@@ -420,6 +419,7 @@ public class PanelDessin extends JPanel implements MouseListener {
 	}
 	
 	public void drawLine(Graphics g) {
+		
 		g.drawLine(  (int) p1.getPosX(), (int) p1.getPosY(),(int) p2.getPosX() , (int)p2.getPosY( ));
 	}
 	
