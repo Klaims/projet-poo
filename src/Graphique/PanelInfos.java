@@ -17,16 +17,20 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import General.ObjetGeometrique;
 import General.Point2D;
 import ObjetsBasiques.Segment;
 
-public class PanelInfos extends JPanel implements ActionListener {
+public class PanelInfos extends JPanel implements ActionListener, ListSelectionListener {
 
 	private JButton btnClear;
 	private String content;
 	private DefaultListModel<ObjetGeometrique> modelJList;
+	private JTextArea txtObjet;
+	private JList listeObjets;
 	
 	public PanelInfos() {
 		
@@ -52,10 +56,23 @@ public class PanelInfos extends JPanel implements ActionListener {
 		this.add(lblListe, BorderLayout.NORTH);
 		
 		// Liste formes
+		JPanel pnlListe = new JPanel();
+		pnlListe.setLayout( new BorderLayout() );
+		
 		modelJList = new DefaultListModel();
-		JList listeObjets = new JList( modelJList );
-		JScrollPane scroll = new JScrollPane(listeObjets);
-		this.add(scroll);
+		listeObjets = new JList( modelJList );
+		listeObjets.addListSelectionListener(this);
+		JScrollPane scrollListe = new JScrollPane(listeObjets);
+		pnlListe.add(scrollListe, BorderLayout.CENTER);
+		
+		txtObjet = new JTextArea();
+		txtObjet.setPreferredSize(new Dimension(300,150));
+		txtObjet.setEditable(false);
+		txtObjet.setText( "Rien à afficher !  \nSélectionnez une figure dans la liste ci-dessus" );
+		txtObjet.setLineWrap(true);
+		pnlListe.add(txtObjet, BorderLayout.SOUTH);
+		
+		this.add(pnlListe, BorderLayout.CENTER);
 	}
 	
 	public void refreshInfos(ArrayList<ObjetGeometrique> T) {
@@ -67,7 +84,6 @@ public class PanelInfos extends JPanel implements ActionListener {
 		while (iter.hasNext()) {
 			
 			modelJList.addElement( iter.next() );
-			
 		}
 	}
 
@@ -82,6 +98,23 @@ public class PanelInfos extends JPanel implements ActionListener {
 			
 			pnl.repaint();
 			modelJList.clear();
+		}
+	}
+
+	@Override
+	public void valueChanged(ListSelectionEvent e) {
+		
+		if ( listeObjets.isSelectionEmpty() ) {
+			
+			txtObjet.setText( "Rien à afficher ! Sélectionnez une figure dans la liste ci-dessus" );
+		}
+		else {
+			
+			// Affichage des infos
+			String txt = ((ObjetGeometrique) listeObjets.getSelectedValue()).infosObjet();
+			txtObjet.setText(txt);
+			
+			// Coloration
 		}
 	}
 }

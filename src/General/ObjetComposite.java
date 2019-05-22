@@ -1,14 +1,13 @@
 package General;
 import java.util.ArrayList;
 
-public class ObjetComposite extends ObjetGeometrique{
+public abstract class ObjetComposite extends ObjetGeometrique{
 	
 	private ArrayList<ObjetBasique> objets;
 	
 	public ObjetComposite(ArrayList<ObjetBasique> a) {
 		
 		this.objets=a;
-		
 	}
 	
 	public ObjetBasique getObjet(int i) {

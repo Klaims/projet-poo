@@ -1,6 +1,8 @@
 package General;
 import java.util.ArrayList;
 
+import Interfaces.Informations;
+
 public abstract class ObjetGeometrique {
 
 	private ArrayList<Point2D> points = new ArrayList<Point2D>(); 
@@ -24,4 +26,6 @@ public abstract class ObjetGeometrique {
 		
 		return this.points.size();
 	}
+	
+	public abstract String infosObjet();
 }
