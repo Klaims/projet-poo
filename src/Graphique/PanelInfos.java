@@ -31,6 +31,8 @@ public class PanelInfos extends JPanel implements ActionListener, ListSelectionL
 	private DefaultListModel<ObjetGeometrique> modelJList;
 	private JTextArea txtObjet;
 	private JList listeObjets;
+	private Color oldColor;
+	private int oldIndex;
 	
 	public PanelInfos() {
 		
@@ -40,7 +42,9 @@ public class PanelInfos extends JPanel implements ActionListener, ListSelectionL
 		this.setLayout( new BorderLayout(10,10) );
 		this.setBorder( new EmptyBorder(10,10,10,10) );
 		
-		// Contenu
+		// Parametres
+		this.oldColor = null;
+		this.oldIndex = -1;
 		
 		// Bouton clear
 		btnClear = new JButton("Vider la zone de dessin");
@@ -104,6 +108,10 @@ public class PanelInfos extends JPanel implements ActionListener, ListSelectionL
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
 		
+		PanelDessin pnl = (PanelDessin) this.getParent().getComponent(2);
+		ArrayList<ObjetGeometrique> T = pnl.getObjets();
+		int i = listeObjets.getSelectedIndex();
+		
 		if ( listeObjets.isSelectionEmpty() ) {
 			
 			txtObjet.setText( "Rien à afficher ! Sélectionnez une figure dans la liste ci-dessus" );
@@ -111,10 +119,22 @@ public class PanelInfos extends JPanel implements ActionListener, ListSelectionL
 		else {
 			
 			// Affichage des infos
-			String txt = ((ObjetGeometrique) listeObjets.getSelectedValue()).infosObjet();
+			String txt = T.get( i ).infosObjet();
 			txtObjet.setText(txt);
 			
 			// Coloration
+			
+			if ( oldColor != null && oldIndex != -1 ) {
+				
+				T.get( oldIndex ).setCouleur( oldColor ); 
+				System.out.println("hehe");
+			}
+			
+			oldColor = T.get( i ).getCouleur();
+			oldIndex = i ;
+			
+			T.get( i ).setCouleur( Color.RED );
+			pnl.refreshDessin();
 		}
 	}
 }

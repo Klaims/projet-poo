@@ -33,6 +33,7 @@ public class PanelDessin extends JPanel implements MouseListener {
 	private double ga;
 	private double pa;
 	private Point2D[] tempPoints = new Point2D[4];
+	private Color couleur;
 	
 	private int compteurPoint;
 	private int[] x = new int[4];
@@ -60,7 +61,7 @@ public class PanelDessin extends JPanel implements MouseListener {
 	}
 	
 	// Met à jour le panel de dessin
-	private void refreshDessin() {
+	public void refreshDessin() {
 		
 		this.getGraphics().clearRect(0, 0, 1000, 1000);
 		
@@ -75,6 +76,7 @@ public class PanelDessin extends JPanel implements MouseListener {
 				
 				p1 = obj.getPoint(0);
 				p2 = obj.getPoint(1);
+				couleur = obj.getCouleur();
 				
 				this.drawLine(this.getGraphics());
 			}
@@ -420,6 +422,7 @@ public class PanelDessin extends JPanel implements MouseListener {
 	
 	public void drawLine(Graphics g) {
 		
+		g.setColor( couleur );
 		g.drawLine(  (int) p1.getPosX(), (int) p1.getPosY(),(int) p2.getPosX() , (int)p2.getPosY( ));
 	}
 	

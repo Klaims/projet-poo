@@ -1,4 +1,5 @@
 package General;
+import java.awt.Color;
 import java.util.ArrayList;
 
 import Interfaces.Informations;
@@ -6,6 +7,7 @@ import Interfaces.Informations;
 public abstract class ObjetGeometrique {
 
 	private ArrayList<Point2D> points = new ArrayList<Point2D>(); 
+	private Color couleur;
 	
 	public Point2D getPoint(int i) {
 		
@@ -28,4 +30,12 @@ public abstract class ObjetGeometrique {
 	}
 	
 	public abstract String infosObjet();
+
+	public Color getCouleur() {
+		return couleur;
+	}
+
+	public void setCouleur(Color couleur) {
+		this.couleur = couleur;
+	}
 }
