@@ -51,7 +51,8 @@ public class PanelDessin extends JPanel implements MouseListener {
 		objets = new ArrayList<ObjetGeometrique>();
 		
 		// Initialisation des attributs
-		this.quad=false;
+		this.quad = false;
+		this.couleur = Color.BLACK;
 	}
 	
 	// Met à jour le mode de l'utilisateur
@@ -71,12 +72,13 @@ public class PanelDessin extends JPanel implements MouseListener {
 
 			ObjetGeometrique obj = iter.next();
 			
+			couleur = obj.getCouleur();
+			
 			// Dessine les objets
 			if ( obj instanceof Segment ) {
 				
 				p1 = obj.getPoint(0);
 				p2 = obj.getPoint(1);
-				couleur = obj.getCouleur();
 				
 				this.drawLine(this.getGraphics());
 			}
@@ -428,21 +430,25 @@ public class PanelDessin extends JPanel implements MouseListener {
 	
 	public void drawRectangle(Graphics g) {
 		
+		g.setColor( couleur );
 		g.drawRect( (int) p1.getPosX(), (int) p1.getPosY(), (int)  Math.abs( p2.getPosX()-p1.getPosX() ), (int)Math.abs( p4.getPosY()-p1.getPosY())) ;
 	}
 	
 	public void drawPoly(Graphics g, int nbPoints) {
 		
+		g.setColor( couleur );
 		g.drawPolygon(x, y, nbPoints);
 	}
 	
 	public void drawCercle(Graphics g, double rayon) {
 		
+		g.setColor( couleur );
 		g.drawOval((int)p3.getPosX(), (int)p3.getPosY(), 2* (int)rayon, 2* (int)rayon);
 	}
 	
 	public void drawEllipse(Graphics g) {
 		
+		g.setColor( couleur );
 		g.drawOval((int) p1.getPosX(), (int) p1.getPosY(), (int) ga, (int) pa );	
 	}
 	

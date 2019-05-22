@@ -43,7 +43,7 @@ public class PanelInfos extends JPanel implements ActionListener, ListSelectionL
 		this.setBorder( new EmptyBorder(10,10,10,10) );
 		
 		// Parametres
-		this.oldColor = null;
+		this.oldColor = Color.BLACK;
 		this.oldIndex = -1;
 		
 		// Bouton clear
@@ -102,15 +102,22 @@ public class PanelInfos extends JPanel implements ActionListener, ListSelectionL
 			
 			pnl.repaint();
 			modelJList.clear();
+			oldColor = Color.BLACK;
+			oldIndex = -1;
 		}
 	}
 
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
 		
-		PanelDessin pnl = (PanelDessin) this.getParent().getComponent(2);
-		ArrayList<ObjetGeometrique> T = pnl.getObjets();
+		PanelDessin pnlD = (PanelDessin) this.getParent().getComponent(2);
+		ArrayList<ObjetGeometrique> T = pnlD.getObjets();
 		int i = listeObjets.getSelectedIndex();
+		
+		// Passage en mode selection
+		// TODO
+		
+		// Affichage texte
 		
 		if ( listeObjets.isSelectionEmpty() ) {
 			
@@ -124,17 +131,16 @@ public class PanelInfos extends JPanel implements ActionListener, ListSelectionL
 			
 			// Coloration
 			
-			if ( oldColor != null && oldIndex != -1 ) {
+			if ( oldIndex != -1 ) {
 				
 				T.get( oldIndex ).setCouleur( oldColor ); 
-				System.out.println("hehe");
 			}
 			
 			oldColor = T.get( i ).getCouleur();
 			oldIndex = i ;
 			
 			T.get( i ).setCouleur( Color.RED );
-			pnl.refreshDessin();
+			pnlD.refreshDessin();
 		}
 	}
 }
