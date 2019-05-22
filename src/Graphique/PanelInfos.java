@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -24,15 +26,24 @@ import General.ObjetGeometrique;
 import General.Point2D;
 import ObjetsBasiques.Segment;
 
-public class PanelInfos extends JPanel implements ActionListener, ListSelectionListener {
+public class PanelInfos extends JPanel implements MouseListener, ListSelectionListener {
 
+	// Attribut gestion des objets
 	private JButton btnClear;
-	private String content;
 	private DefaultListModel<ObjetGeometrique> modelJList;
 	private JTextArea txtObjet;
 	private JList listeObjets;
 	private Color oldColor;
 	private int oldIndex;
+	
+	// Attributs panel options
+	private JPanel pnlOptions; 
+	private JButton btnDelete;
+	private JButton btnMove;
+	
+	// Attributs des déplacements
+	private ObjetGeometrique obj;
+	private boolean canMove;
 	
 	public PanelInfos() {
 		
@@ -45,12 +56,13 @@ public class PanelInfos extends JPanel implements ActionListener, ListSelectionL
 		// Parametres
 		this.oldColor = Color.BLACK;
 		this.oldIndex = -1;
+		this.canMove = false;
 		
 		// Bouton clear
 		btnClear = new JButton("Vider la zone de dessin");
 		btnClear.setPreferredSize( new Dimension(300,100) );
 		btnClear.setFont( new Font("Arial", Font.BOLD, 18) );
-		btnClear.addActionListener(this);
+		btnClear.addMouseListener(this);
 		this.add(btnClear, BorderLayout.SOUTH);
 		
 		// Label liste
@@ -59,22 +71,44 @@ public class PanelInfos extends JPanel implements ActionListener, ListSelectionL
 		lblListe.setFont( new Font("Arial", Font.ITALIC, 16) );
 		this.add(lblListe, BorderLayout.NORTH);
 		
-		// Liste formes
+		// Information et options des formes
 		JPanel pnlListe = new JPanel();
 		pnlListe.setLayout( new BorderLayout() );
 		
+		// Liste
 		modelJList = new DefaultListModel();
 		listeObjets = new JList( modelJList );
 		listeObjets.addListSelectionListener(this);
 		JScrollPane scrollListe = new JScrollPane(listeObjets);
-		pnlListe.add(scrollListe, BorderLayout.CENTER);
+		scrollListe.setPreferredSize(new Dimension(300,300));
+		pnlListe.add(scrollListe, BorderLayout.NORTH);
 		
+		// Texte
 		txtObjet = new JTextArea();
 		txtObjet.setPreferredSize(new Dimension(300,150));
 		txtObjet.setEditable(false);
 		txtObjet.setText( "Rien à afficher !  \nSélectionnez une figure dans la liste ci-dessus" );
 		txtObjet.setLineWrap(true);
-		pnlListe.add(txtObjet, BorderLayout.SOUTH);
+		pnlListe.add(txtObjet, BorderLayout.CENTER);
+		
+		// Options
+		pnlOptions = new JPanel();
+		
+		btnDelete = new JButton("Supprimer");
+		btnDelete.setBackground( Color.RED );
+		btnDelete.setForeground( Color.WHITE );
+		btnDelete.setFocusable(false);
+		btnDelete.addMouseListener(this);
+		pnlOptions.add(btnDelete);
+		
+		btnMove = new JButton("Déplacer");
+		btnMove.setBackground( Color.BLUE );
+		btnMove.setForeground( Color.WHITE );
+		btnMove.setFocusable(false);
+		btnMove.addMouseListener(this);
+		pnlOptions.add(btnMove);
+		
+		pnlListe.add(pnlOptions, BorderLayout.SOUTH);
 		
 		this.add(pnlListe, BorderLayout.CENTER);
 	}
@@ -91,23 +125,6 @@ public class PanelInfos extends JPanel implements ActionListener, ListSelectionL
 		}
 	}
 
-	public void actionPerformed(ActionEvent e) {
-	
-		if (e.getSource() == this.btnClear) {
-			
-			// On récupère le panel de dessin
-			PanelDessin pnl = (PanelDessin) this.getParent().getComponent(2);
-			
-			pnl.getObjets().clear(); // Vide l'array list
-			
-			pnl.repaint();
-			modelJList.clear();
-			oldColor = Color.BLACK;
-			oldIndex = -1;
-		}
-	}
-
-	@Override
 	public void valueChanged(ListSelectionEvent e) {
 		
 		PanelDessin pnlD = (PanelDessin) this.getParent().getComponent(2);
@@ -130,9 +147,8 @@ public class PanelInfos extends JPanel implements ActionListener, ListSelectionL
 			txtObjet.setText(txt);
 			
 			// Coloration
-			
 			if ( oldIndex != -1 ) {
-				
+					
 				T.get( oldIndex ).setCouleur( oldColor ); 
 			}
 			
@@ -142,5 +158,69 @@ public class PanelInfos extends JPanel implements ActionListener, ListSelectionL
 			T.get( i ).setCouleur( Color.RED );
 			pnlD.refreshDessin();
 		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		
+		// Vider la zone de dessin
+		if (e.getSource() == this.btnClear) {
+			
+			// On récupère le panel de dessin
+			PanelDessin pnl = (PanelDessin) this.getParent().getComponent(2);
+			
+			pnl.getObjets().clear(); // Vide l'array list
+			
+			pnl.repaint();
+			modelJList.clear();
+			oldColor = Color.BLACK;
+			oldIndex = -1;
+		}
+		
+		// Supprimer un item
+		if (e.getSource() == this.btnDelete) {
+			
+			if (this.listeObjets.isSelectionEmpty() == false ) {
+				
+				PanelDessin pnlD = (PanelDessin) this.getParent().getComponent(2);
+				ArrayList<ObjetGeometrique> T = pnlD.getObjets();
+				
+				T.remove( this.listeObjets.getSelectedValue() );
+				
+				this.refreshInfos(T);
+				pnlD.refreshDessin();
+			}
+		}
+		
+		// Déplacer un item
+		if (e.getSource() == this.btnMove) {
+			
+			if (this.listeObjets.isSelectionEmpty() == false) {
+				
+				obj = (ObjetGeometrique) listeObjets.getSelectedValue();
+
+				// TODO J'arrive pas
+			}
+		}
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -14,6 +14,12 @@ public abstract class ObjetGeometrique {
 		return points.get(i);
 	}
 	
+	public void setPoint(int i, Point2D p) {
+		
+		this.points.remove(i);
+		this.points.add(i, p);
+	}
+	
 	public void addPoint(Point2D p) {
 		
 		this.points.add(p);
