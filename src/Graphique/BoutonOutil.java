@@ -23,9 +23,9 @@ public class BoutonOutil extends JButton implements ActionListener{
 		JLabel label = ((JLabel) this.getParent().getParent().getComponent(1)); // Label statut
 		String nouvStatut = ((BoutonOutil) e.getSource()).getText(); // Nouveau statut
 			
-		for(int i=0; i<11 ; i++) {
-				
-			 ( (BoutonOutil) this.getParent().getComponent(i) ).setEnabled(true);
+		for(int i=0; i<this.getParent().getComponentCount(); i++) {
+			
+			( (BoutonOutil) this.getParent().getComponent(i) ).setEnabled(true);
 		} // Remet tous les boutons enabled
 			
 		((BoutonOutil) e.getSource()).setEnabled(false); // Disable le bouton utilisé
