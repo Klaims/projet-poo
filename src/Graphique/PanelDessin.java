@@ -267,6 +267,7 @@ public class PanelDessin extends JPanel implements MouseListener {
 						case 0: tempPoints[0] = new Point2D( e.getX(), e.getY());
 						System.out.println("oui1");	
 								compteurPoint++;
+								
 								break;
 								
 						case 1 : tempPoints[1] = new Point2D( e.getX(), e.getY());
