@@ -265,7 +265,8 @@ public class PanelDessin extends JPanel implements MouseListener {
 								this.objets.remove(0);
 								this.objets.add(new ArcCercle(p1, rayon, calculAngle(tempPoints[0],p1),calculAngle(tempPoints[1],p1)));
 								
-								System.out.println("oui3");	
+								System.out.println("oui3");
+								quad=false;
 								compteurPoint=0;
 								break;
 							}
