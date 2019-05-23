@@ -563,6 +563,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 			// TODO Il faut que l'autre point reste stable
 			
 			refreshDessin();
+			
 		}
 	}
 
