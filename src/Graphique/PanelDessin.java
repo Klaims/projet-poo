@@ -90,7 +90,12 @@ public class PanelDessin extends JPanel implements MouseListener {
 				p3 = obj.getPoint(2);
 				p4 = obj.getPoint(3);
 				
-				this.drawRectangle(this.getGraphics());
+				x[0] = (int) p1.getPosX();		y[0] = (int) p1.getPosY();
+				x[1] = (int) p2.getPosX();		y[1] = (int) p2.getPosY();
+				x[2] = (int) p3.getPosX();		y[2] = (int) p3.getPosY();
+				x[3] = (int) p4.getPosX();		y[3] = (int) p4.getPosY();
+				
+				this.drawPoly(getGraphics(), 4);
 			}
 			
 			if ( obj instanceof Cercle ) {

@@ -185,6 +185,11 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 				PanelDessin pnlD = (PanelDessin) this.getParent().getComponent(2);
 				ArrayList<ObjetGeometrique> T = pnlD.getObjets();
 				
+				if ( this.listeObjets.getSelectedIndex() == oldIndex ) {
+					
+					oldIndex--;
+				}
+				
 				T.remove( this.listeObjets.getSelectedValue() );
 				
 				this.refreshInfos(T);
@@ -215,12 +220,10 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 }
