@@ -461,7 +461,7 @@ public class PanelDessin extends JPanel implements MouseListener {
 	
 	public void drawEllipse(Graphics g) {
 		
-		g.setColor( couleur );
+		g.setColor( couleur ); 
 		g.drawOval((int) p1.getPosX(), (int) p1.getPosY(), (int) ga, (int) pa );	
 	}
 	
