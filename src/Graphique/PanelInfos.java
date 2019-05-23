@@ -2,6 +2,7 @@ package Graphique;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -131,8 +132,8 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 		ArrayList<ObjetGeometrique> T = pnlD.getObjets();
 		int i = listeObjets.getSelectedIndex();
 		
-		// Passage en mode selection
-		// TODO
+		// Retour au statut "Aucun"
+		this.resetSelection();
 		
 		// Affichage texte
 		
@@ -166,6 +167,9 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 		// Vider la zone de dessin
 		if (e.getSource() == this.btnClear) {
 			
+			// Retour au statut "Aucun"
+			this.resetSelection();
+			
 			// On récupère le panel de dessin
 			PanelDessin pnl = (PanelDessin) this.getParent().getComponent(2);
 			
@@ -180,10 +184,18 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 		// Supprimer un item
 		if (e.getSource() == this.btnDelete) {
 			
+			// Retour au statut "Aucun"
+			this.resetSelection();
+			
 			if (this.listeObjets.isSelectionEmpty() == false ) {
 				
 				PanelDessin pnlD = (PanelDessin) this.getParent().getComponent(2);
 				ArrayList<ObjetGeometrique> T = pnlD.getObjets();
+				
+				if ( this.listeObjets.getSelectedIndex() == oldIndex ) {
+					
+					oldIndex--;
+				}
 				
 				T.remove( this.listeObjets.getSelectedValue() );
 				
@@ -198,10 +210,20 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 			if (this.listeObjets.isSelectionEmpty() == false) {
 				
 				obj = (ObjetGeometrique) listeObjets.getSelectedValue();
-
-				// TODO J'arrive pas
 			}
 		}
+	}
+
+	public void resetSelection() {
+		
+		JPanel pnlBoutons = ((JPanel) ((PanelSelection) this.getParent()	
+				.getComponent(0))
+				.getComponent(0));
+
+		BoutonOutil btn = (BoutonOutil) pnlBoutons
+						.getComponent( pnlBoutons.getComponentCount()-1 );
+		
+		btn.actionPerformed( new ActionEvent(btn, 0, null) );
 	}
 
 	@Override
@@ -215,12 +237,10 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 }

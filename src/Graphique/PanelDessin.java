@@ -102,6 +102,14 @@ public class PanelDessin extends JPanel implements MouseListener {
 			if ( obj instanceof Cercle ) {
 				
 				if( obj instanceof ArcCercle) {
+					
+					p1 =((Cercle) obj).getCentre();
+					p3.setPosX(p1.getPosX()-((Cercle) obj).getRayon());
+					p3.setPosY(p1.getPosY()-((Cercle) obj).getRayon());
+					pa = ((ArcCercle) obj).getAngleDeb();
+					ga = ((ArcCercle) obj).getAngleLongueur();
+					rayon = ((Cercle) obj).getRayon();
+					
 					this.drawArcCercle(this.getGraphics());
 				}
 				
@@ -260,6 +268,7 @@ public class PanelDessin extends JPanel implements MouseListener {
 						case 0: tempPoints[0] = new Point2D( e.getX(), e.getY());
 						System.out.println("oui1");	
 								compteurPoint++;
+								
 								break;
 								
 						case 1 : tempPoints[1] = new Point2D( e.getX(), e.getY());
@@ -268,8 +277,8 @@ public class PanelDessin extends JPanel implements MouseListener {
 								this.p3 = new Point2D(p1.getPosX()-rayon,p1.getPosY()-rayon);
 								
 								System.out.println(objets.size());	
-								this.objets.remove(0);
-								this.objets.add(new ArcCercle(p1, rayon, calculAngle(tempPoints[0],p1),calculAngle(tempPoints[1],p1)));
+								this.objets.remove(objets.size()-1);
+								this.objets.add(new ArcCercle(p1, rayon, calculAngle(tempPoints[0],p1),(calculAngle(tempPoints[1],p1)-calculAngle(tempPoints[0],p1))));
 								
 								System.out.println("oui3");
 								quad=false;
@@ -493,12 +502,12 @@ public class PanelDessin extends JPanel implements MouseListener {
 	
 	public void drawEllipse(Graphics g) {
 		
-		g.setColor( couleur );
+		g.setColor( couleur ); 
 		g.drawOval((int) p1.getPosX(), (int) p1.getPosY(), (int) ga, (int) pa );	
 	}
 	
 	public void drawArcCercle(Graphics g) {
-		g.drawArc( (int) (p3.getPosX()),(int)  (p3.getPosY()) , (int)  (2*rayon), (int)  (2*rayon),  (int) calculAngle(tempPoints[0],p1), (int) calculAngle(tempPoints[1],p1));
+		g.drawArc( (int) (p3.getPosX()),(int)  (p3.getPosY()) , (int)  (2*rayon), (int)  (2*rayon),  (int) pa, (int)ga);
 	}
 	
 	public double calculAngle(Point2D point , Point2D centre) {
