@@ -48,4 +48,9 @@ public class Cercle extends ObjetBasique  implements CalculsGeometriques, Inform
 				  + "Centre = (" + ( this.getPoint(0).getPosX() + " , " + (this.getPoint(0).getPosY() +")" ) )
 				  );
 	}
+	
+
+	public Point2D getCentre(){
+		return this.getPoint(0);
+	}
 }

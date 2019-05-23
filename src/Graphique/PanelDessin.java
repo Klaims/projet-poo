@@ -29,6 +29,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 	private Point2D p2;
 	private Point2D p3;
 	private Point2D p4;
+	private Point2D tempo;
 	private boolean quad;
 	private double rayon;
 	private double ga;
@@ -106,6 +107,14 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 			if ( obj instanceof Cercle ) {
 				
 				if( obj instanceof ArcCercle) {
+					
+					p1 =((Cercle) obj).getCentre();
+					p3.setPosX(p1.getPosX()-((Cercle) obj).getRayon());
+					p3.setPosY(p1.getPosY()-((Cercle) obj).getRayon());
+					pa = ((ArcCercle) obj).getAngleDeb();
+					ga = ((ArcCercle) obj).getAngleLongueur();
+					rayon = ((Cercle) obj).getRayon();
+					
 					this.drawArcCercle(this.getGraphics());
 				}
 				
@@ -279,6 +288,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 						case 0: tempPoints[0] = new Point2D( e.getX(), e.getY());
 						System.out.println("oui1");	
 								compteurPoint++;
+								
 								break;
 								
 						case 1 : tempPoints[1] = new Point2D( e.getX(), e.getY());
@@ -287,8 +297,8 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 								this.p3 = new Point2D(p1.getPosX()-rayon,p1.getPosY()-rayon);
 								
 								System.out.println(objets.size());	
-								this.objets.remove(0);
-								this.objets.add(new ArcCercle(p1, rayon, calculAngle(tempPoints[0],p1),calculAngle(tempPoints[1],p1)));
+								this.objets.remove(objets.size()-1);
+								this.objets.add(new ArcCercle(p1, rayon, calculAngle(tempPoints[0],p1),(calculAngle(tempPoints[1],p1)-calculAngle(tempPoints[0],p1))));
 								
 								System.out.println("oui3");
 								quad=false;
@@ -428,7 +438,34 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 			
 			ga = p1.distance(p3);
 			pa = p1.distance(p4);
+			
+			if (p1.getPosY() >p2.getPosY() ) {
 				
+				tempo=p1;
+				p1=p2;
+				p2=tempo;
+				
+				tempo=p3;
+				p3=p4;
+				p4=tempo;
+				
+	
+}
+			if (p1.getPosX() >p3.getPosX() ) {
+				
+				tempo=p1;
+				p1=p3;
+				p3=tempo;
+				
+				tempo=p4;
+				p4=p2;
+				p2=tempo;
+				
+			}
+			
+			
+			
+			
 			objets.add( new Ellipse(p1, ga, pa) );
 		}
 		
@@ -491,7 +528,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 	}
 	
 	public void drawArcCercle(Graphics g) {
-		g.drawArc( (int) (p3.getPosX()),(int)  (p3.getPosY()) , (int)  (2*rayon), (int)  (2*rayon),  (int) calculAngle(tempPoints[0],p1), (int) (calculAngle(tempPoints[1],p1)-calculAngle(tempPoints[0],p1)));
+		g.drawArc( (int) (p3.getPosX()),(int)  (p3.getPosY()) , (int)  (2*rayon), (int)  (2*rayon),  (int) pa, (int)ga);
 	}
 	
 	public double calculAngle(Point2D point , Point2D centre) {
