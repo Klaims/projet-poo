@@ -28,6 +28,7 @@ public class PanelDessin extends JPanel implements MouseListener {
 	private Point2D p2;
 	private Point2D p3;
 	private Point2D p4;
+	private Point2D tempo;
 	private boolean quad;
 	private double rayon;
 	private double ga;
@@ -407,7 +408,33 @@ public class PanelDessin extends JPanel implements MouseListener {
 			
 			ga = p1.distance(p3);
 			pa = p1.distance(p4);
+			
+			if (p1.getPosY() >p2.getPosY() ) {
 				
+				tempo=p1;
+				p1=p2;
+				p2=tempo;
+				
+				tempo=p3;
+				p3=p4;
+				p4=tempo;
+	
+}
+			if (p1.getPosX() >p3.getPosX() ) {
+				
+				tempo=p1;
+				p1=p3;
+				p3=tempo;
+				
+				tempo=p4;
+				p4=p2;
+				p2=tempo;
+				
+			}
+			
+			
+			
+			
 			objets.add( new Ellipse(p1, ga, pa) );
 		}
 		
