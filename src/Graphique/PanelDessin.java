@@ -466,7 +466,7 @@ public class PanelDessin extends JPanel implements MouseListener {
 	}
 	
 	public void drawArcCercle(Graphics g) {
-		g.drawArc( (int) (p3.getPosX()),(int)  (p3.getPosY()) , (int)  (2*rayon), (int)  (2*rayon),  (int) calculAngle(tempPoints[0],p1), (int) calculAngle(tempPoints[1],p1));
+		g.drawArc( (int) (p3.getPosX()),(int)  (p3.getPosY()) , (int)  (2*rayon), (int)  (2*rayon),  (int) calculAngle(tempPoints[0],p1), (int) (calculAngle(tempPoints[1],p1)-calculAngle(tempPoints[0],p1)));
 	}
 	
 	public double calculAngle(Point2D point , Point2D centre) {
