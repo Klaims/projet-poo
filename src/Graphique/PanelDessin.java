@@ -427,6 +427,7 @@ public class PanelDessin extends JPanel implements MouseListener {
 				tempo=p3;
 				p3=p4;
 				p4=tempo;
+				
 	
 }
 			if (p1.getPosX() >p3.getPosX() ) {
