@@ -33,6 +33,7 @@ public class PanelDessin extends JPanel implements MouseListener {
 	private double ga;
 	private double pa;
 	private Point2D[] tempPoints = new Point2D[4];
+	private Color couleur;
 	
 	private int compteurPoint;
 	private int[] x = new int[4];
@@ -47,9 +48,11 @@ public class PanelDessin extends JPanel implements MouseListener {
 		
 		// Settings panel
 		this.addMouseListener(this);
-		
 		objets = new ArrayList<ObjetGeometrique>();
-		this.quad=false;
+		
+		// Initialisation des attributs
+		this.quad = false;
+		this.couleur = Color.BLACK;
 	}
 	
 	// Met à jour le mode de l'utilisateur
@@ -59,16 +62,19 @@ public class PanelDessin extends JPanel implements MouseListener {
 	}
 	
 	// Met à jour le panel de dessin
-	private void refreshDessin() {
+	public void refreshDessin() {
 		
 		this.getGraphics().clearRect(0, 0, 1000, 1000);
-
+		
 		Iterator<ObjetGeometrique> iter = objets.iterator();
 		
 		while (iter.hasNext()) {
-			
+
 			ObjetGeometrique obj = iter.next();
 			
+			couleur = obj.getCouleur();
+			
+			// Dessine les objets
 			if ( obj instanceof Segment ) {
 				
 				p1 = obj.getPoint(0);
@@ -232,9 +238,6 @@ public class PanelDessin extends JPanel implements MouseListener {
 								quad= false;
 						}
 					}
-				
-					
-					
 				}
 			}
 		
@@ -432,26 +435,32 @@ public class PanelDessin extends JPanel implements MouseListener {
 	}
 	
 	public void drawLine(Graphics g) {
+		
+		g.setColor( couleur );
 		g.drawLine(  (int) p1.getPosX(), (int) p1.getPosY(),(int) p2.getPosX() , (int)p2.getPosY( ));
 	}
 	
 	public void drawRectangle(Graphics g) {
 		
+		g.setColor( couleur );
 		g.drawRect( (int) p1.getPosX(), (int) p1.getPosY(), (int)  Math.abs( p2.getPosX()-p1.getPosX() ), (int)Math.abs( p4.getPosY()-p1.getPosY())) ;
 	}
 	
 	public void drawPoly(Graphics g, int nbPoints) {
 		
+		g.setColor( couleur );
 		g.drawPolygon(x, y, nbPoints);
 	}
 	
 	public void drawCercle(Graphics g, double rayon) {
 		
+		g.setColor( couleur );
 		g.drawOval((int)p3.getPosX(), (int)p3.getPosY(), 2* (int)rayon, 2* (int)rayon);
 	}
 	
 	public void drawEllipse(Graphics g) {
 		
+		g.setColor( couleur );
 		g.drawOval((int) p1.getPosX(), (int) p1.getPosY(), (int) ga, (int) pa );	
 	}
 	
