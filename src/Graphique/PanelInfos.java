@@ -132,9 +132,6 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 		ArrayList<ObjetGeometrique> T = pnlD.getObjets();
 		int i = listeObjets.getSelectedIndex();
 		
-		// Retour au statut "Aucun"
-		this.resetSelection();
-		
 		// Affichage texte
 		
 		if ( listeObjets.isSelectionEmpty() ) {
@@ -142,6 +139,9 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 			txtObjet.setText( "Rien à afficher ! Sélectionnez une figure dans la liste ci-dessus" );
 		}
 		else {
+			
+			// Retour au statut "Aucun"
+			this.resetSelection();
 			
 			// Affichage des infos
 			String txt = T.get( i ).infosObjet();
@@ -164,6 +164,8 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		
+		PanelDessin pnlD = (PanelDessin) this.getParent().getComponent(2);
+		
 		// Vider la zone de dessin
 		if (e.getSource() == this.btnClear) {
 			
@@ -171,11 +173,10 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 			this.resetSelection();
 			
 			// On récupère le panel de dessin
-			PanelDessin pnl = (PanelDessin) this.getParent().getComponent(2);
 			
-			pnl.getObjets().clear(); // Vide l'array list
+			pnlD.getObjets().clear(); // Vide l'array list
 			
-			pnl.repaint();
+			pnlD.repaint();
 			modelJList.clear();
 			oldColor = Color.BLACK;
 			oldIndex = -1;
@@ -189,7 +190,6 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 			
 			if (this.listeObjets.isSelectionEmpty() == false ) {
 				
-				PanelDessin pnlD = (PanelDessin) this.getParent().getComponent(2);
 				ArrayList<ObjetGeometrique> T = pnlD.getObjets();
 				
 				if ( this.listeObjets.getSelectedIndex() == oldIndex ) {
@@ -210,6 +210,9 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 			if (this.listeObjets.isSelectionEmpty() == false) {
 				
 				obj = (ObjetGeometrique) listeObjets.getSelectedValue();
+				
+				pnlD.setDeplacement( true );
+				pnlD.setObj(obj);
 			}
 		}
 	}

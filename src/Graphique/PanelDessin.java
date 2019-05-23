@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -21,7 +22,7 @@ import ObjetsBasiques.Segment;
 import ObjetsBasiques.Triangle;
 import Graphique.PanelInfos;
 
-public class PanelDessin extends JPanel implements MouseListener {
+public class PanelDessin extends JPanel implements MouseListener, MouseMotionListener {
 	
 	// Arguments temporaires pour la création des formes
 	private Point2D p1;
@@ -39,20 +40,24 @@ public class PanelDessin extends JPanel implements MouseListener {
 	private int[] x = new int[4];
 	private int[] y = new int[4];
 	
-	// Array List qui contient les formes
+	// Attributs du panel
 	private ArrayList<ObjetGeometrique> objets;
-
 	private String statut;
+	private boolean deplacement;
+	private ObjetGeometrique obj; // Objet à déplacer
+	private Point2D posSouris; // Repère pour le déplacement
 
 	public PanelDessin() {
 		
 		// Settings panel
+		this.addMouseMotionListener(this);
 		this.addMouseListener(this);
 		objets = new ArrayList<ObjetGeometrique>();
 		
 		// Initialisation des attributs
 		this.quad = false;
 		this.couleur = Color.BLACK;
+		this.deplacement = false;
 	}
 	
 	// Met à jour le mode de l'utilisateur
@@ -181,6 +186,21 @@ public class PanelDessin extends JPanel implements MouseListener {
 
 	public void setObjets(ArrayList<ObjetGeometrique> objets) {
 		this.objets = objets;
+	}
+	
+	public boolean getDeplacement() {
+		
+		return this.deplacement;
+	}
+	
+	public void setDeplacement(boolean deplacement) {
+		
+		this.deplacement = deplacement;
+	}
+	
+	public void setObj (ObjetGeometrique obj) {
+		
+		this.obj = obj;
 	}
 	
 	////////////////////////////////////		MouseListener		///////////////////////////////////////////
@@ -339,6 +359,7 @@ public class PanelDessin extends JPanel implements MouseListener {
 		// Rafraichissement zone infos
 		
 		((PanelInfos) this.getParent().getComponent(1)).refreshInfos(this.objets);
+		posSouris = new Point2D (e.getX(), e.getY());
 	}
 
 	
@@ -430,14 +451,13 @@ public class PanelDessin extends JPanel implements MouseListener {
 	}
 
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		// Rien du tout
 	}
 
 	
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
+		this.deplacement = false;
 	}
 	
 	public void drawLine(Graphics g) {
@@ -493,5 +513,25 @@ public class PanelDessin extends JPanel implements MouseListener {
 		
 		System.out.println("angle :" + angle);	
 		return (angle);
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		
+		if ( deplacement ) {
+			
+			obj.getPoint(0).setPosX(e.getX());
+			obj.getPoint(0).setPosY(e.getY());
+			
+			// TODO Il faut que l'autre point reste stable
+			
+			refreshDessin();
+		}
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
