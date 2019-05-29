@@ -24,7 +24,7 @@ import Graphique.PanelInfos;
 
 public class PanelDessin extends JPanel implements MouseListener, MouseMotionListener {
 	
-	// Arguments temporaires pour la création des formes
+	// Arguments temporaires pour la crï¿½ation des formes
 	private Point2D p1;
 	private Point2D p2;
 	private Point2D p3;
@@ -45,8 +45,8 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 	private ArrayList<ObjetGeometrique> objets;
 	private String statut;
 	private boolean deplacement;
-	private ObjetGeometrique obj; // Objet à déplacer
-	private Point2D posSouris; // Repère pour le déplacement
+	private ObjetGeometrique obj; // Objet ï¿½ dï¿½placer
+	private Point2D posSouris; // Repï¿½re pour le dï¿½placement
 
 	public PanelDessin() {
 		
@@ -61,13 +61,13 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 		this.deplacement = false;
 	}
 	
-	// Met à jour le mode de l'utilisateur
+	// Met ï¿½ jour le mode de l'utilisateur
 	public void refreshStatut(String nouvStatut) { 
 		
 		this.statut = nouvStatut;
 	}
 	
-	// Met à jour le panel de dessin
+	// Met ï¿½ jour le panel de dessin
 	public void refreshDessin() {
 		
 		this.getGraphics().clearRect(0, 0, 1000, 1000);
@@ -122,7 +122,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 				p1 = obj.getPoint(0);
 				rayon = ((Cercle) obj).getRayon();
 				
-				p3 = new Point2D(p1.getPosX()-rayon,p1.getPosY()-rayon); // Utile à drawCercle
+				p3 = new Point2D(p1.getPosX()-rayon,p1.getPosY()-rayon); // Utile ï¿½ drawCercle
 						
 				this.drawCercle(this.getGraphics(), rayon);}
 			}
@@ -427,7 +427,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 		
 		if ( this.statut == "Aucun" ) {
 			
-			// ? Déplacer peut être
+			// ? Dï¿½placer peut ï¿½tre
 		}
 				
 		if ( this.statut == "Ellipse" ) {
@@ -555,15 +555,31 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		
+		// TEMPORAIRE 
+		// A changer dÃ¨s qu'une meilleure idÃ©e se prÃ©sente (dÃ©placer avec les points ?)
+		
 		if ( deplacement ) {
 			
-			obj.getPoint(0).setPosX(e.getX());
-			obj.getPoint(0).setPosY(e.getY());
+			int distX= (int) (e.getX() - posSouris.getPosX())/100;
+			int distY= (int) (e.getY() - posSouris.getPosY())/100;
 			
-			// TODO Il faut que l'autre point reste stable
+			System.out.println( "##################\t Nouveau dÃ©placement \t#####################" );
+		
+			for ( int i=0 ; i<obj.getSize() ; i++ ) {
+				
+				System.out.println( "X: " + distX + " Y: " + distY );
+				System.out.println( "Point [" + i + "], X: " + obj.getPoint(i).getPosX() + " Y: " + obj.getPoint(i).getPosY() );
+				
+				Point2D nouvPoint = new Point2D( 	( obj.getPoint(i).getPosX() + distX ),
+													( obj.getPoint(i).getPosY() + distY ) 
+													);
+				
+				System.out.println("Nouveau, X: " + nouvPoint.getPosX() + " Y: " + nouvPoint.getPosY() );
+				
+				obj.setPoint(i, nouvPoint);
+			}
 			
 			refreshDessin();
-			
 		}
 	}
 
