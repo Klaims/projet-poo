@@ -555,27 +555,15 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		
-		// TEMPORAIRE 
-		// A changer des qu'une meilleure idee se presente (deplacer avec les points ?)
-		
 		if ( deplacement ) {
-			
-			System.out.println( "################## Nouveau deplacement #####################" );
 		
 			for ( int i=0 ; i<obj.getSize() ; i++ ) {
 				
-				System.out.println( "Point [" + i + "], X: " + obj.getPoint(i).getPosX() + " Y: " + obj.getPoint(i).getPosY() );
-				
 				int resX = (int) (e.getX() - posSouris.getPosX());
 				int resY = (int) (e.getY() - posSouris.getPosY());
-				Point2D nouvPoint = null;
 				
-				System.out.println("ELSE =\nX: " + resX + "\nY:" + resY );
-				
-				nouvPoint = new Point2D( 	( obj.getPoint(i).getPosX() + resX  ),
-											( obj.getPoint(i).getPosY() + resY  ));
-				
-				System.out.println("Nouveau, X: " + nouvPoint.getPosX() + " Y: " + nouvPoint.getPosY() );
+				Point2D nouvPoint = new Point2D( 	( obj.getPoint(i).getPosX() + resX  ),
+													( obj.getPoint(i).getPosY() + resY  ));
 				
 				obj.setPoint(i, nouvPoint);
 			}
