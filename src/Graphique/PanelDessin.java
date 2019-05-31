@@ -427,7 +427,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 		
 		if ( this.statut == "Aucun" ) {
 			
-			// ? D�placer peut �tre
+			// ???
 		}
 				
 		if ( this.statut == "Ellipse" ) {
@@ -556,23 +556,24 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 	public void mouseDragged(MouseEvent e) {
 		
 		// TEMPORAIRE 
-		// A changer dès qu'une meilleure idée se présente (déplacer avec les points ?)
+		// A changer des qu'une meilleure idee se presente (deplacer avec les points ?)
 		
 		if ( deplacement ) {
 			
-			int distX= (int) (e.getX() - posSouris.getPosX())/100;
-			int distY= (int) (e.getY() - posSouris.getPosY())/100;
-			
-			System.out.println( "##################\t Nouveau déplacement \t#####################" );
+			System.out.println( "################## Nouveau deplacement #####################" );
 		
 			for ( int i=0 ; i<obj.getSize() ; i++ ) {
 				
-				System.out.println( "X: " + distX + " Y: " + distY );
 				System.out.println( "Point [" + i + "], X: " + obj.getPoint(i).getPosX() + " Y: " + obj.getPoint(i).getPosY() );
 				
-				Point2D nouvPoint = new Point2D( 	( obj.getPoint(i).getPosX() + distX ),
-													( obj.getPoint(i).getPosY() + distY ) 
-													);
+				int resX = (int) (e.getX() - posSouris.getPosX());
+				int resY = (int) (e.getY() - posSouris.getPosY());
+				Point2D nouvPoint = null;
+				
+				System.out.println("ELSE =\nX: " + resX + "\nY:" + resY );
+				
+				nouvPoint = new Point2D( 	( obj.getPoint(i).getPosX() + resX  ),
+											( obj.getPoint(i).getPosY() + resY  ));
 				
 				System.out.println("Nouveau, X: " + nouvPoint.getPosX() + " Y: " + nouvPoint.getPosY() );
 				
@@ -580,6 +581,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 			}
 			
 			refreshDessin();
+			posSouris = new Point2D (e.getX(), e.getY());
 		}
 	}
 
