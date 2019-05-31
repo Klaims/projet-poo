@@ -523,6 +523,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 	
 	public void drawArcCercle(Graphics g) {
 		
+		g.setColor( couleur ); 
 		g.drawArc( (int) (p3.getPosX()),(int)  (p3.getPosY()) , (int)  (2*rayon), (int)  (2*rayon),  (int) pa, (int)ga);
 	}
 	
