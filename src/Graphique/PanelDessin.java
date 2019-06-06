@@ -202,6 +202,9 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 				
 				for(int i=0; i< (((ObjetComposite) obj).getTaille())-1;i++) {
 					
+					p1=((Segment) (( (MultiSegment)obj).getObjet(i))).getPoint(0);
+					p2=((Segment) (( (MultiSegment)obj).getObjet(i))).getPoint(1);
+					drawLine(this.getGraphics());
 				}
 			}
 			
@@ -331,32 +334,37 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 				}
 			}
 		
-			if(this.statut=="Multiseg") {
+			if(this.statut=="Multi-segments") {
 				
 				if(compteurPoint==0) {
-					p1 = new Point2D(e.getX(),e.getY());
+					tempPoints[0] = new Point2D(e.getX(),e.getY());
 					compteurPoint++;
+					System.out.println(tempPoints[0].toString());
 				}
 				
 				else if (compteurPoint==1) {
 					
 					
-						p2= new Point2D(e.getX(),e.getY());
+						tempPoints[1]= new Point2D(e.getX(),e.getY());
 						
 						
 						this.objets.add(new MultiSegment());
-						((MultiSegment) this.objets.get(this.objets.size()-1)).addObjet(new Segment(p1,p2));
+						((MultiSegment) this.objets.get(this.objets.size()-1)).addObjet(new Segment(tempPoints[0],tempPoints[1]));
 						compteurPoint++;
-						p1=p2;
+						System.out.println(tempPoints[1].toString());
+						tempPoints[0]=tempPoints[1];
+						
 					}
 				
 				
 				else {
-					p2=new Point2D(e.getX(),e.getY());
-					((MultiSegment) this.objets.get(this.objets.size()-1)).addObjet(new Segment(p1,p2));
+					tempPoints[1]=new Point2D(e.getX(),e.getY());
+					((MultiSegment) this.objets.get(this.objets.size()-1)).addObjet(new Segment(tempPoints[0],tempPoints[1]));
 					compteurPoint++;
-					p1=p2;
-					
+					//System.out.println(p1.toString());
+					//System.out.println(p2.toString());
+					tempPoints[0]=tempPoints[1];
+				
 				}
 			}
 		// Rafraichissement zone infos et dessins
