@@ -20,6 +20,7 @@ import ObjetsBasiques.Quadrangle;
 import ObjetsBasiques.Rectangle;
 import ObjetsBasiques.Segment;
 import ObjetsBasiques.Triangle;
+import ObjetsComposites.MultiRectangle;
 import Graphique.PanelInfos;
 
 public class PanelDessin extends JPanel implements MouseListener, MouseMotionListener {
@@ -372,6 +373,14 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 				
 				p1 = new Point2D(e.getX(),e.getY());
 			}	
+		}
+		
+		if ( statut == "Multi-rectangle" ) {
+			
+			if ( compteurPoint == 0 ) {
+				
+				//objets.add( new MultiRectangle() );
+			}
 		}
 		
 		// Rafraichissement zone infos
