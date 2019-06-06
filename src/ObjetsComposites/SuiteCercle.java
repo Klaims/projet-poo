@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import General.ObjetBasique;
 
-public class SuiteSegmentCercle extends MultiSegment {
+public class SuiteCercle extends MultiSegment {
 
-	public SuiteSegmentCercle(ArrayList<ObjetBasique> a) {
+	public SuiteCercle(ArrayList<ObjetBasique> a) {
 		super(a);
 
 	}

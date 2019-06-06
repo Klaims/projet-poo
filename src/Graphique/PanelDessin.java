@@ -32,7 +32,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 	private Point2D p3;
 	private Point2D p4;
 	private Point2D tempo;
-	private boolean quad;
+	private boolean construction;
 	private double rayon;
 	private double ga;
 	private double pa;
@@ -47,8 +47,24 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 	private ArrayList<ObjetGeometrique> objets;
 	private String statut;
 	private boolean deplacement;
-	private ObjetGeometrique obj; // Objet � d�placer
-	private Point2D posSouris; // Rep�re pour le d�placement
+	private ObjetGeometrique obj; // Objet a deplacer
+	private Point2D posSouris; // Repaire pour le deplacement
+
+	public Point2D getP2() {
+		return p2;
+	}
+
+	public void setP2(Point2D p2) {
+		this.p2 = p2;
+	}
+
+	public boolean isConstruction() {
+		return construction;
+	}
+
+	public void setConstruction(boolean construction) {
+		this.construction = construction;
+	}
 
 	public PanelDessin() {
 		
@@ -58,18 +74,18 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 		objets = new ArrayList<ObjetGeometrique>();
 		
 		// Initialisation des attributs
-		this.quad = false;
+		this.construction = false;
 		this.couleur = Color.BLACK;
 		this.deplacement = false;
 	}
 	
-	// Met � jour le mode de l'utilisateur
+	// Met a jour le mode de l'utilisateur
 	public void refreshStatut(String nouvStatut) { 
 		
 		this.statut = nouvStatut;
 	}
 	
-	// Met � jour le panel de dessin
+	// Met a jour le panel de dessin
 	public void refreshDessin() {
 		
 		this.getGraphics().clearRect(0, 0, 1000, 1000);
@@ -180,6 +196,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 				
 				drawEllipse(getGraphics());
 			}
+<<<<<<< HEAD
 			
 			if(obj instanceof MultiSegment) {
 				
@@ -189,6 +206,8 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 			}
 			
 			
+=======
+>>>>>>> refs/remotes/origin/master
 		}
 	}
 	
@@ -248,7 +267,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 			
 			if(this.statut=="Quadrangle") {
 				
-				if (this.quad==true) {
+				if (this.construction==true) {
 					
 					p2 = new Point2D( e.getX(), e.getY());
 					
@@ -277,7 +296,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 								objets.remove(objets.size()-1);
 								objets.add( new Quadrangle(rayon, tempPoints[0], tempPoints[1], tempPoints[2], tempPoints[3]) );
 								compteurPoint= 0;
-								quad= false;
+								construction= false;
 						}
 					}
 				}
@@ -285,7 +304,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 		
 			if (this.statut=="Arc") {
 				
-				if(this.quad==true) {
+				if(this.construction==true) {
 					
 					p2 = new Point2D( e.getX(), e.getY());
 					
@@ -304,7 +323,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 								this.objets.remove(objets.size()-1);
 								this.objets.add(new ArcCercle(p1, rayon, calculAngle(tempPoints[0],p1),(calculAngle(tempPoints[1],p1)-calculAngle(tempPoints[0],p1))));
 								
-								quad=false;
+								construction=false;
 								compteurPoint=0;
 								break;
 							}
@@ -373,7 +392,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 		
 		if ( this.statut == "Quadrangle" ) {
 			
-			if (quad==false) {
+			if (construction==false) {
 				
 				p1 = new Point2D(e.getX(),e.getY());
 			}	
@@ -391,7 +410,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 		
 		if (this.statut == "Arc") {
 			
-			if (quad==false) {
+			if (construction==false) {
 				
 				p1 = new Point2D(e.getX(),e.getY());
 			}	
@@ -446,13 +465,14 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 		
 		if ( this.statut == "Quadrangle" ) {
 			
-			if (quad==false) {
+			if (construction==false) {
 				
 				p2 = new Point2D( e.getX(), e.getY() );
 				this.rayon = p1.distance(p2);
 				
 				objets.add( new Cercle(p1, rayon) );
-				quad=true;
+				objets.get(objets.size()-1).setCouleur(Color.GREEN);
+				construction=true;
 			}
 		}
 		
@@ -479,8 +499,6 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 				tempo=p3;
 				p3=p4;
 				p4=tempo;
-				
-	
 }
 			if (p1.getPosX() >p3.getPosX() ) {
 				
@@ -494,22 +512,19 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 				
 			}
 			
-			
-			
-			
 			objets.add( new Ellipse(p1, ga, pa) );
 		}
 		
 		if (this.statut == "Arc") {
-			
 
-			if (quad==false) {
+			if (construction==false) {
 				
 				p2 = new Point2D( e.getX(), e.getY() );
 				this.rayon = p1.distance(p2);
 				
 				this.objets.add( new Cercle(p1, rayon) );
-				quad=true;
+				objets.get(objets.size()-1).setCouleur(Color.GREEN);
+				construction=true;
 			}
 		}
 		// Rafraichissement zone dessin et infos
@@ -601,5 +616,14 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public void refreshAttributs() {
+		
+		p1 = p2 = p3 = p4 = null;
+		compteurPoint = 0;
+		deplacement = false;
+		construction = false;
+		couleur = Color.BLACK;
 	}
 }
