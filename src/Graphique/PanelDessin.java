@@ -21,6 +21,7 @@ import ObjetsBasiques.Rectangle;
 import ObjetsBasiques.Segment;
 import ObjetsBasiques.Triangle;
 import ObjetsComposites.MultiRectangle;
+import ObjetsComposites.MultiSegment;
 import Graphique.PanelInfos;
 
 public class PanelDessin extends JPanel implements MouseListener, MouseMotionListener {

@@ -7,9 +7,9 @@ import Interfaces.Informations;
 
 public class SuiteEllipse extends MultiSegment implements Informations{
 
-	public SuiteEllipse(ArrayList<ObjetBasique> a) {
-		super(a);
-		// TODO Auto-generated constructor stub
+	public SuiteEllipse() {
+		super();
+		
 	}
 
 	public String infosObjet() {
