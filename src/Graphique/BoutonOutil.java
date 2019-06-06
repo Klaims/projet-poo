@@ -1,12 +1,12 @@
 package Graphique;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.border.EmptyBorder;
 
 public class BoutonOutil extends JButton implements ActionListener{
 
@@ -15,6 +15,7 @@ public class BoutonOutil extends JButton implements ActionListener{
 		// Settings bouton
 		this.setPreferredSize(new Dimension(100,60));
 		this.addActionListener(this);
+		this.setFont( new Font("Arial", Font.PLAIN, 16) );
 	}
 
 	@Override
