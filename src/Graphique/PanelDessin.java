@@ -10,10 +10,7 @@ import java.util.Iterator;
 
 import javax.swing.JPanel;
 
-<<<<<<< HEAD
 import General.ObjetBasique;
-=======
->>>>>>> refs/remotes/origin/master
 import General.ObjetComposite;
 import General.ObjetGeometrique;
 import General.Point2D;
@@ -201,7 +198,6 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 				
 				drawEllipse(getGraphics());
 			}
-<<<<<<< HEAD
 			
 			if ( obj instanceof MultiRectangle ) {
 				
@@ -220,9 +216,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 					this.drawPoly(getGraphics(), 4);
 				}
 			}
-=======
 
-			
 			if(obj instanceof MultiSegment) {
 				
 				for(int i=0; i< (((ObjetComposite) obj).getTaille());i++) {
@@ -233,10 +227,6 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 					System.out.println("draw");
 				}
 			}
-			
-			
-
->>>>>>> refs/remotes/origin/master
 		}
 	}
 	
