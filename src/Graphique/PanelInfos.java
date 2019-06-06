@@ -258,8 +258,8 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 			try {
 				
 				PrintWriter writer = new PrintWriter("objet.txt","UTF-8");
-				writer.println("enculé");
-				System.out.println("oui");
+				writer.println("Premiere ligne");
+				writer.close();
 				
 			} catch (FileNotFoundException e1) {
 				
