@@ -10,7 +10,10 @@ import java.util.Iterator;
 
 import javax.swing.JPanel;
 
+<<<<<<< HEAD
 import General.ObjetBasique;
+=======
+>>>>>>> refs/remotes/origin/master
 import General.ObjetComposite;
 import General.ObjetGeometrique;
 import General.Point2D;
@@ -198,6 +201,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 				
 				drawEllipse(getGraphics());
 			}
+<<<<<<< HEAD
 			
 			if ( obj instanceof MultiRectangle ) {
 				
@@ -216,6 +220,23 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 					this.drawPoly(getGraphics(), 4);
 				}
 			}
+=======
+
+			
+			if(obj instanceof MultiSegment) {
+				
+				for(int i=0; i< (((ObjetComposite) obj).getTaille());i++) {
+					
+					p1=((Segment) (( (MultiSegment)obj).getObjet(i))).getPoint(0);
+					p2=((Segment) (( (MultiSegment)obj).getObjet(i))).getPoint(1);
+					drawLine(this.getGraphics());
+					System.out.println("draw");
+				}
+			}
+			
+			
+
+>>>>>>> refs/remotes/origin/master
 		}
 	}
 	
@@ -340,10 +361,47 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 				}
 			}
 		
+
+			if(this.statut=="Multi-segments") {
+				
+				if(compteurPoint==0) {
+					tempPoints[0] = new Point2D(e.getX(),e.getY());
+					compteurPoint++;
+					System.out.println(tempPoints[0].toString());
+				}
+				
+				else if (compteurPoint==1) {
+					
+					
+						tempPoints[1]= new Point2D(e.getX(),e.getY());
+						
+						
+						this.objets.add(new MultiSegment());
+						((MultiSegment) this.objets.get(this.objets.size()-1)).addObjet(new Segment(tempPoints[0],tempPoints[1]));
+						compteurPoint++;
+						System.out.println(tempPoints[1].toString());
+						tempPoints[0]=tempPoints[1];
+						
+					}
+				
+				
+				else {
+					tempPoints[1]=new Point2D(e.getX(),e.getY());
+					((MultiSegment) this.objets.get(this.objets.size()-1)).addObjet(new Segment(tempPoints[0],tempPoints[1]));
+					compteurPoint++;
+					//System.out.println(p1.toString());
+					//System.out.println(p2.toString());
+					tempPoints[0]=tempPoints[1];
+				
+				}
+			}
+
+
 		// Rafraichissement zone infos et dessins
 		
 		((PanelInfos) this.getParent().getComponent(1)).refreshInfos(this.objets);
 		this.refreshDessin();
+		
 	}
 
 	
