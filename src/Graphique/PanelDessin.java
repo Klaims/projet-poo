@@ -380,7 +380,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 			
 			if ( compteurPoint == 0 ) {
 				
-				//objets.add( new MultiRectangle() );
+				objets.add( new MultiRectangle() );
 			}
 		}
 		
