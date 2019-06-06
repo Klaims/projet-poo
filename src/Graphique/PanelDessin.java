@@ -10,6 +10,8 @@ import java.util.Iterator;
 
 import javax.swing.JPanel;
 
+import General.ObjetBasique;
+import General.ObjetComposite;
 import General.ObjetGeometrique;
 import General.Point2D;
 import ObjetsBasiques.ArcCercle;
@@ -195,6 +197,24 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 				pa = ((Ellipse) obj).getPa();
 				
 				drawEllipse(getGraphics());
+			}
+			
+			if ( obj instanceof MultiRectangle ) {
+				
+				for (int i=0; i< ((MultiRectangle) obj).getTaille() ; i++ ) {
+					
+					p1 = ((MultiRectangle) obj).getObjet(i).getPoint(0);
+					p2 = ((MultiRectangle) obj).getObjet(i).getPoint(1);
+					p3 = ((MultiRectangle) obj).getObjet(i).getPoint(2);
+					p4 = ((MultiRectangle) obj).getObjet(i).getPoint(3);
+					
+					x[0] = (int) p1.getPosX();		y[0] = (int) p1.getPosY();
+					x[1] = (int) p2.getPosX();		y[1] = (int) p2.getPosY();
+					x[2] = (int) p3.getPosX();		y[2] = (int) p3.getPosY();
+					x[3] = (int) p4.getPosX();		y[3] = (int) p4.getPosY();
+					
+					this.drawPoly(getGraphics(), 4);
+				}
 			}
 		}
 	}
@@ -581,15 +601,38 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 		
 		if ( deplacement ) {
 		
-			for ( int i=0 ; i<obj.getSize() ; i++ ) {
+			if ( obj instanceof ObjetBasique ) {
 				
-				int resX = (int) (e.getX() - posSouris.getPosX());
-				int resY = (int) (e.getY() - posSouris.getPosY());
+				for ( int i=0 ; i<obj.getSize() ; i++ ) {
+					
+					int resX = (int) (e.getX() - posSouris.getPosX());
+					int resY = (int) (e.getY() - posSouris.getPosY());
+					
+					Point2D nouvPoint = new Point2D( 	( obj.getPoint(i).getPosX() + resX  ),
+														( obj.getPoint(i).getPosY() + resY  ));
+					
+					obj.setPoint(i, nouvPoint);
+				}
+			}
+			
+			else if ( obj instanceof ObjetComposite ) {
 				
-				Point2D nouvPoint = new Point2D( 	( obj.getPoint(i).getPosX() + resX  ),
-													( obj.getPoint(i).getPosY() + resY  ));
+				System.out.println("oui");
 				
-				obj.setPoint(i, nouvPoint);
+				for ( int i=0 ; i< ((ObjetComposite) obj).getTaille() ; i++ ) {
+					
+					for ( int j=0 ; j<((ObjetComposite) obj).getObjet(i).getSize(); j++ ) {
+						
+						int resX = (int) (e.getX() - posSouris.getPosX());
+						int resY = (int) (e.getY() - posSouris.getPosY());
+						
+						Point2D nouvPoint = new Point2D( 	
+								( (ObjetComposite) obj).getObjet(i).getPoint(j).getPosX() + resX,
+								( (ObjetComposite) obj).getObjet(i).getPoint(j).getPosY() + resY  );
+						
+						((ObjetComposite) obj).getObjet(i).setPoint(j, nouvPoint);
+					}
+				}
 			}
 			
 			refreshDessin();
