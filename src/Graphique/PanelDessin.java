@@ -201,11 +201,12 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 			
 			if(obj instanceof MultiSegment) {
 				
-				for(int i=0; i< (((ObjetComposite) obj).getTaille())-1;i++) {
+				for(int i=0; i< (((ObjetComposite) obj).getTaille());i++) {
 					
 					p1=((Segment) (( (MultiSegment)obj).getObjet(i))).getPoint(0);
 					p2=((Segment) (( (MultiSegment)obj).getObjet(i))).getPoint(1);
 					drawLine(this.getGraphics());
+					System.out.println("draw");
 				}
 			}
 			
@@ -375,6 +376,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 		
 		((PanelInfos) this.getParent().getComponent(1)).refreshInfos(this.objets);
 		this.refreshDessin();
+		
 	}
 
 	
