@@ -196,7 +196,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 				
 				drawEllipse(getGraphics());
 			}
-<<<<<<< HEAD
+
 			
 			if(obj instanceof MultiSegment) {
 				
@@ -206,8 +206,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 			}
 			
 			
-=======
->>>>>>> refs/remotes/origin/master
+
 		}
 	}
 	

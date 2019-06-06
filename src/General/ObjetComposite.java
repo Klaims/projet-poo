@@ -24,7 +24,7 @@ public abstract class ObjetComposite extends ObjetGeometrique{
 	
 	public ObjetComposite() {
 			
-		this.objets= new ArrayList<ObjetBasique>;
+		this.objets= new ArrayList<ObjetBasique>();
 		}
 	
 	public int getTaille() {
