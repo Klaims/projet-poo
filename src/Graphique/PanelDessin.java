@@ -10,6 +10,7 @@ import java.util.Iterator;
 
 import javax.swing.JPanel;
 
+import General.ObjetComposite;
 import General.ObjetGeometrique;
 import General.Point2D;
 import ObjetsBasiques.ArcCercle;
@@ -20,6 +21,7 @@ import ObjetsBasiques.Quadrangle;
 import ObjetsBasiques.Rectangle;
 import ObjetsBasiques.Segment;
 import ObjetsBasiques.Triangle;
+import ObjetsComposites.MultiSegment;
 import Graphique.PanelInfos;
 
 public class PanelDessin extends JPanel implements MouseListener, MouseMotionListener {
@@ -179,6 +181,13 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 				drawEllipse(getGraphics());
 			}
 			
+			if(obj instanceof MultiSegment) {
+				
+				for(int i=0; i< (((ObjetComposite) obj).getTaille())-1;i++) {
+					
+				}
+			}
+			
 			
 		}
 	}
@@ -304,6 +313,34 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 				}
 			}
 		
+			if(this.statut=="Multiseg") {
+				
+				if(compteurPoint==0) {
+					p1 = new Point2D(e.getX(),e.getY());
+					compteurPoint++;
+				}
+				
+				else if (compteurPoint==1) {
+					
+					
+						p2= new Point2D(e.getX(),e.getY());
+						
+						
+						this.objets.add(new MultiSegment());
+						((MultiSegment) this.objets.get(this.objets.size()-1)).addObjet(new Segment(p1,p2));
+						compteurPoint++;
+						p1=p2;
+					}
+				
+				
+				else {
+					p2=new Point2D(e.getX(),e.getY());
+					((MultiSegment) this.objets.get(this.objets.size()-1)).addObjet(new Segment(p1,p2));
+					compteurPoint++;
+					p1=p2;
+					
+				}
+			}
 		// Rafraichissement zone infos et dessins
 		
 		((PanelInfos) this.getParent().getComponent(1)).refreshInfos(this.objets);
