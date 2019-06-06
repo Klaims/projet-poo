@@ -21,6 +21,7 @@ import ObjetsBasiques.Quadrangle;
 import ObjetsBasiques.Rectangle;
 import ObjetsBasiques.Segment;
 import ObjetsBasiques.Triangle;
+import ObjetsComposites.MultiRectangle;
 import ObjetsComposites.MultiSegment;
 import Graphique.PanelInfos;
 
@@ -334,6 +335,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 				}
 			}
 		
+
 			if(this.statut=="Multi-segments") {
 				
 				if(compteurPoint==0) {
@@ -367,6 +369,8 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 				
 				}
 			}
+
+
 		// Rafraichissement zone infos et dessins
 		
 		((PanelInfos) this.getParent().getComponent(1)).refreshInfos(this.objets);
@@ -421,6 +425,17 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 				
 				p1 = new Point2D(e.getX(),e.getY());
 			}	
+		}
+		
+		if ( statut == "Multi-rectangles" ) {
+			
+			if ( compteurPoint == 0 ) {
+				
+				objets.add( new MultiRectangle() );
+				compteurPoint++;
+			}
+			
+			p1 = new Point2D( e.getX(), e.getY());
 		}
 		
 		// Rafraichissement zone infos
@@ -533,6 +548,20 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 				objets.get(objets.size()-1).setCouleur(Color.GREEN);
 				construction=true;
 			}
+		}
+		
+		if ( statut == "Multi-rectangles") {
+			
+			if ( compteurPoint != 0 ) {
+			
+				p3 = new Point2D( e.getX(), e.getY());
+				p2 = new Point2D(p3.getPosX(),p1.getPosY());
+				p4 = new Point2D(p1.getPosX(),p3.getPosY());
+				
+				( (MultiRectangle) this.objets.get(this.objets.size()-1) ).addObjet( new Rectangle(p1, p2, p3, p4) );
+			}
+			
+			System.out.println( this.objets.get(this.objets.size()-1) );
 		}
 		// Rafraichissement zone dessin et infos
 		

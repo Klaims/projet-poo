@@ -7,12 +7,17 @@ import General.ObjetComposite;
 
 public class MultiRectangle extends ObjetComposite{
 	
-	public MultiRectangle(ArrayList<ObjetBasique> a) {
-		super(a);
+	public MultiRectangle() {
+		super();
 	}
 
 	public String infosObjet() {
-		return "à faire plus tard";
+		
+		return "Multi-rectangles \nTaille : " + this.getTaille();
 	}
-
+	
+	public String toString() {
+		
+		return "Multi-rectangles";
+	}
 }

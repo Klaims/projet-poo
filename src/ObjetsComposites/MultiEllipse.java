@@ -7,10 +7,9 @@ import General.ObjetComposite;
 
 public class MultiEllipse extends ObjetComposite{
 
-	public MultiEllipse(ArrayList<ObjetBasique> a) {
+	public MultiEllipse() {
 		
-		super(a);
-	
+		super();
 	}
 
 

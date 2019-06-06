@@ -7,9 +7,9 @@ import General.ObjetComposite;
 
 public class MultiCercle extends ObjetComposite{
 
-	public MultiCercle(ArrayList<ObjetBasique> a) {
-		super(a);
-
+	public MultiCercle() {
+		
+		super();
 	}
 
 	public String infosObjet() {
