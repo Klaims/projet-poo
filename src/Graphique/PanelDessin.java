@@ -194,8 +194,6 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 				
 				drawEllipse(getGraphics());
 			}
-			
-			
 		}
 	}
 	
@@ -253,7 +251,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 			}
 		}
 			
-			if(this.statut=="constructionrangle") {
+			if(this.statut=="Quadrangle") {
 				
 				if (this.construction==true) {
 					
@@ -431,6 +429,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 				this.rayon = p1.distance(p2);
 				
 				objets.add( new Cercle(p1, rayon) );
+				objets.get(objets.size()-1).setCouleur(Color.GREEN);
 				construction=true;
 			}
 		}
@@ -482,6 +481,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 				this.rayon = p1.distance(p2);
 				
 				this.objets.add( new Cercle(p1, rayon) );
+				objets.get(objets.size()-1).setCouleur(Color.GREEN);
 				construction=true;
 			}
 		}
@@ -582,5 +582,6 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 		compteurPoint = 0;
 		deplacement = false;
 		construction = false;
+		couleur = Color.BLACK;
 	}
 }

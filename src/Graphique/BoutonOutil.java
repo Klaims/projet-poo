@@ -25,6 +25,9 @@ public class BoutonOutil extends JButton implements ActionListener{
 		PanelDessin pnlD = ((PanelDessin) this	.getParent()
 												.getParent()
 												.getParent().getComponent(2));
+		PanelInfos pnlInfos = ((PanelInfos) this	.getParent()
+													.getParent()
+													.getParent().getComponent(1));
 			
 		for(int i=0; i<this.getParent().getComponentCount(); i++) {
 			
@@ -44,6 +47,7 @@ public class BoutonOutil extends JButton implements ActionListener{
 		if ( pnlD.isConstruction() == true ) {
 			
 			pnlD.getObjets().remove( pnlD.getObjets().size()-1 );
+			pnlInfos.getModelJList().remove( pnlInfos.getModelJList().size()-1 );
 		}
 		
 		pnlD.refreshAttributs();

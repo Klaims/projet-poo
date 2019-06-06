@@ -114,6 +114,14 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 		this.add(pnlListe, BorderLayout.CENTER);
 	}
 	
+	public DefaultListModel<ObjetGeometrique> getModelJList() {
+		return modelJList;
+	}
+
+	public void setModelJList(DefaultListModel<ObjetGeometrique> modelJList) {
+		this.modelJList = modelJList;
+	}
+
 	public void refreshInfos(ArrayList<ObjetGeometrique> T) {
 		
 		modelJList.clear();
