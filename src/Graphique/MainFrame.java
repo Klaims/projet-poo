@@ -14,6 +14,7 @@ public class MainFrame extends JFrame {
 		this.setSize( new Dimension(1200,800) );
 		this.setResizable(false);
 		this.setLocationRelativeTo(null); // Permet de centrer
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		// Content pane
 		JPanel pnlMain = new JPanel();

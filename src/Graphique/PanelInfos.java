@@ -5,15 +5,21 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -31,6 +37,8 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 
 	// Attribut gestion des objets
 	private JButton btnClear;
+	private JButton btnSave;
+	private JButton btnLoad;
 	private DefaultListModel<ObjetGeometrique> modelJList;
 	private JTextArea txtObjet;
 	private JList listeObjets;
@@ -59,12 +67,29 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 		this.oldIndex = -1;
 		this.canMove = false;
 		
-		// Bouton clear
+		// Gestion du plan de travail
+		JPanel pnlGestion = new JPanel();
+		pnlGestion.setLayout( new BorderLayout() );
+		
 		btnClear = new JButton("Vider la zone de dessin");
 		btnClear.setPreferredSize( new Dimension(300,100) );
 		btnClear.setFont( new Font("Arial", Font.BOLD, 18) );
 		btnClear.addMouseListener(this);
-		this.add(btnClear, BorderLayout.SOUTH);
+		pnlGestion.add(btnClear, BorderLayout.CENTER);
+		
+		JPanel pnlEnreg = new JPanel();
+		pnlEnreg.setLayout( new GridLayout(1,2) );
+		
+		btnSave = new JButton("Sauvegarder");
+		btnSave.addMouseListener(this);
+		pnlEnreg.add(btnSave);
+	
+		btnLoad = new JButton("Charger");
+		pnlEnreg.add(btnLoad);
+		
+		pnlGestion.add(pnlEnreg, BorderLayout.SOUTH);
+		
+		this.add(pnlGestion, BorderLayout.SOUTH);
 		
 		// Label liste
 		JLabel lblListe = new JLabel("Liste des formes géométriques");
@@ -221,6 +246,28 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 				
 				pnlD.setDeplacement( true );
 				pnlD.setObj(obj);
+			}
+		}
+		
+		// Sauvegarder un dessin
+		
+		if (e.getSource() == this.btnSave) {
+			
+			// Init du writer 
+			
+			try {
+				
+				PrintWriter writer = new PrintWriter("objet.txt","UTF-8");
+				writer.println("enculé");
+				System.out.println("oui");
+				
+			} catch (FileNotFoundException e1) {
+				
+				System.out.println("Fichier introuvable");
+				
+			} catch (UnsupportedEncodingException e1) {
+				
+				System.out.println("Encodage non supporté");
 			}
 		}
 	}
