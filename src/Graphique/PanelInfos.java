@@ -29,6 +29,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import General.ObjetBasique;
 import General.ObjetGeometrique;
 import General.Point2D;
 import ObjetsBasiques.Segment;
@@ -258,7 +259,19 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 			try {
 				
 				PrintWriter writer = new PrintWriter("objet.txt","UTF-8");
-				writer.println("Premiere ligne");
+
+				Iterator<ObjetGeometrique> iterG = pnlD.getObjets().iterator();
+				
+				while (iterG.hasNext()) {
+					
+					ObjetGeometrique obj = iterG.next();
+					
+					if (obj instanceof ObjetBasique) {
+						
+						
+					}
+				}
+				
 				writer.close();
 				
 			} catch (FileNotFoundException e1) {

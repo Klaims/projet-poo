@@ -577,9 +577,8 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 				
 				( (MultiRectangle) this.objets.get(this.objets.size()-1) ).addObjet( new Rectangle(p1, p2, p3, p4) );
 			}
-			
-			System.out.println( this.objets.get(this.objets.size()-1) );
 		}
+		
 		// Rafraichissement zone dessin et infos
 		
 		((PanelInfos) this.getParent().getComponent(1)).refreshInfos(this.objets);
@@ -664,9 +663,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 			}
 			
 			else if ( obj instanceof ObjetComposite ) {
-				
-				System.out.println("oui");
-				
+
 				for ( int i=0 ; i< ((ObjetComposite) obj).getTaille() ; i++ ) {
 					
 					for ( int j=0 ; j<((ObjetComposite) obj).getObjet(i).getSize(); j++ ) {
