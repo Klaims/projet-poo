@@ -11,9 +11,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -30,6 +33,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import General.ObjetBasique;
+import General.ObjetComposite;
 import General.ObjetGeometrique;
 import General.Point2D;
 import ObjetsBasiques.Segment;
@@ -86,6 +90,7 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 		pnlEnreg.add(btnSave);
 	
 		btnLoad = new JButton("Charger");
+		btnLoad.addMouseListener(this);
 		pnlEnreg.add(btnLoad);
 		
 		pnlGestion.add(pnlEnreg, BorderLayout.SOUTH);
@@ -265,10 +270,26 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 				while (iterG.hasNext()) {
 					
 					ObjetGeometrique obj = iterG.next();
+					writer.println("#" + obj.toString());
 					
 					if (obj instanceof ObjetBasique) {
 						
+						for (int i=0; i<obj.getSize(); i++) {
+							
+							writer.println(obj.getPoint(i));
+						}
+					}
+					else if (obj instanceof ObjetComposite) {
 						
+						for (int i=0; i<((ObjetComposite) obj).getTaille(); i++) {
+							
+							writer.println("--");
+							
+							for (int j=0; j<((ObjetComposite) obj).getObjet(i).getSize(); j++ ) {
+								
+								writer.println( ((ObjetComposite) obj).getObjet(i).getPoint(j).toString() );
+							}
+						}
 					}
 				}
 				
@@ -281,6 +302,23 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 			} catch (UnsupportedEncodingException e1) {
 				
 				System.out.println("Encodage non supporté");
+			}
+		}
+		
+		// Charger un fichier
+		
+		if (e.getSource() == btnLoad) {
+			
+			try {
+				
+				String ch = new String(Files.readAllBytes( Paths.get("objet.txt") ));	
+				String[] tabObj = ch.split("#");
+				
+				System.out.println( tabObj[1].toString().split("\n")[1] );
+			} 
+			catch (IOException e1) {
+				
+				e1.printStackTrace();
 			}
 		}
 	}

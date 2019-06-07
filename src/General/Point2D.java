@@ -47,7 +47,7 @@ public class Point2D {
 
 	public String toString() {
 		
-		return ("X : " + posX + " Y : " + posY);
+		return (posX + " " + posY);
 		
 	}
 	
