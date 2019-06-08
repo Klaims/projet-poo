@@ -9,7 +9,8 @@ public class Quadrangle extends ObjetBasique implements CalculsGeometriques, Inf
 	private double rayon;
 	
 	public Quadrangle(double r, Point2D p0, Point2D p1, Point2D p2, Point2D p3) {
-		
+	
+		// Ajout rayon
 		this.rayon = r;
 		
 		// Ajout à l'arraylist
@@ -20,6 +21,25 @@ public class Quadrangle extends ObjetBasique implements CalculsGeometriques, Inf
 		
 		// Point de ref
 		this.setRef(null);
+	}
+
+	public Quadrangle(String[] objet) {
+		
+		Point2D p1 = new Point2D( new Double( objet[1].split(" ")[0]), new Double( objet[1].split(" ")[1]) );
+		Point2D p2 = new Point2D( new Double( objet[2].split(" ")[0]), new Double( objet[2].split(" ")[1]) );
+		Point2D p3 = new Point2D( new Double( objet[3].split(" ")[0]), new Double( objet[3].split(" ")[1]) );
+		Point2D p4 = new Point2D( new Double( objet[4].split(" ")[0]), new Double( objet[4].split(" ")[1]) );
+		
+		Double r = new Double( objet[5] );
+		
+		// Ajout rayon
+		this.rayon = r;
+		
+		// Ajout à l'arraylist
+		this.addPoint(p1);
+		this.addPoint(p2);
+		this.addPoint(p3);
+		this.addPoint(p4);
 	}
 
 	@Override

@@ -370,6 +370,20 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 						pnlD.getObjets().add( new Cercle(objet) ); 
 					}
 					
+					if ( nomObj.equals("Quadrangle") ) {
+						
+						pnlD.getObjets().add( new Quadrangle(objet) ); 
+					}
+					
+					if ( nomObj.equals("Arc") ) {
+						
+						pnlD.getObjets().add( new ArcCercle(objet) ); 
+					}
+					
+					if ( nomObj.equals("Ellipse") ) {
+						
+						pnlD.getObjets().add( new Ellipse(objet) ); 
+					}
 				}
 				
 				pnlD.refreshDessin();

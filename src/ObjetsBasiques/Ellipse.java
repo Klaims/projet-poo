@@ -17,6 +17,17 @@ public class Ellipse extends ObjetBasique implements Informations,CalculsGeometr
 		this.setPa(pa);
 	}
 	
+	public Ellipse(String[] objet) {
+		
+		Point2D p = new Point2D( new Double( objet[1].split(" ")[0]), new Double( objet[1].split(" ")[1]) );
+		Double ga = new Double ( objet[2] );
+		Double pa = new Double ( objet[3] );
+		
+		this.addPoint(p);
+		this.setGa(ga);
+		this.setPa(pa);
+	}
+
 	public double calculPerimetre() {
 		
 		return 0;

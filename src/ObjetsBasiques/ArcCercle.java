@@ -16,6 +16,17 @@ public class ArcCercle extends Cercle implements Informations,CalculsGeometrique
 		this.angle_longueur = angle_l;
 	}	
 
+	public ArcCercle(String[] objet) {
+		
+		super(objet);
+		
+		Double angle_deb = new Double( objet[3] );
+		Double angle_l = new Double( objet[4] );
+		
+		this.angle_deb = angle_deb;
+		this.angle_longueur = angle_l;
+	}
+
 	public double getAngleDeb(){
 		return angle_deb;
 	}
