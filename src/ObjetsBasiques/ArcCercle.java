@@ -23,4 +23,9 @@ public class ArcCercle extends Cercle implements Informations,CalculsGeometrique
 	public double getAngleLongueur(){
 		return angle_longueur;
 	}
+	
+	public String toString() {
+		
+		return "Arc";
+	}
 }

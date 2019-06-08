@@ -20,7 +20,24 @@ public class Triangle extends ObjetBasique implements CalculsGeometriques, Infor
 		 
 	  }
   
-	  public double calculPerimetre() {
+	  public Triangle(String[] objet) {
+		
+		  Point2D p1 = new Point2D( new Double( objet[1].split(" ")[0]), new Double( objet[1].split(" ")[1]) );
+		  Point2D p2 = new Point2D( new Double( objet[2].split(" ")[0]), new Double( objet[2].split(" ")[1]) );
+		  Point2D p3 = new Point2D( new Double( objet[3].split(" ")[0]), new Double( objet[3].split(" ")[1]) );
+		  
+		  // Ajout à l'arraylist
+		  this.addPoint(p1);
+		  this.addPoint(p2);
+		  this.addPoint(p3);
+		      
+		  // Point de ref
+		  double x = (p1.getPosX() + p2.getPosX() + p3.getPosX())/3;
+		  double y = (p1.getPosY() + p2.getPosY() + p3.getPosY())/3;
+		  this.setRef(new Point2D(x, y));
+	}
+
+	public double calculPerimetre() {
 		  
 		    double perimetre = 0;
 		    

@@ -17,6 +17,20 @@ public class Losange extends ObjetBasique implements Informations, CalculsGeomet
 		// Point de ref
 	}
 	
+	public Losange(String[] objet) {
+		
+		Point2D p1 = new Point2D( new Double( objet[1].split(" ")[0]), new Double( objet[1].split(" ")[1]) );
+		Point2D p2 = new Point2D( new Double( objet[2].split(" ")[0]), new Double( objet[2].split(" ")[1]) );
+		Point2D p3 = new Point2D( new Double( objet[3].split(" ")[0]), new Double( objet[3].split(" ")[1]) );
+		Point2D p4 = new Point2D( new Double( objet[4].split(" ")[0]), new Double( objet[4].split(" ")[1]) );
+		
+		// Ajout à l'arraylist
+		this.addPoint(p1);
+		this.addPoint(p2);
+		this.addPoint(p3);
+		this.addPoint(p4);
+	}
+
 	public String toString() {
 		
 		return "Losange";

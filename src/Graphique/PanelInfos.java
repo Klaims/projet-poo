@@ -36,7 +36,14 @@ import General.ObjetBasique;
 import General.ObjetComposite;
 import General.ObjetGeometrique;
 import General.Point2D;
+import ObjetsBasiques.ArcCercle;
+import ObjetsBasiques.Cercle;
+import ObjetsBasiques.Ellipse;
+import ObjetsBasiques.Losange;
+import ObjetsBasiques.Quadrangle;
+import ObjetsBasiques.Rectangle;
 import ObjetsBasiques.Segment;
+import ObjetsBasiques.Triangle;
 
 public class PanelInfos extends JPanel implements MouseListener, ListSelectionListener {
 
@@ -278,6 +285,22 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 							
 							writer.println(obj.getPoint(i));
 						}
+						
+						if ( obj instanceof Cercle ) writer.println( ((Cercle) obj).getRayon() );
+						
+						if ( obj instanceof Quadrangle ) writer.println( ((Quadrangle) obj).getRayon() );
+						
+						if ( obj instanceof Ellipse ) {
+							
+							writer.println( ((Ellipse) obj).getGa() );
+							writer.println( ((Ellipse) obj).getPa() );
+						}
+						
+						if ( obj instanceof ArcCercle  ) {
+							
+							writer.println( ((ArcCercle) obj).getAngleDeb() );
+							writer.println( ((ArcCercle) obj).getAngleLongueur() );
+						}
 					}
 					else if (obj instanceof ObjetComposite) {
 						
@@ -318,17 +341,38 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 				for (int i=1; i<tabObj.length; i++) {
 					
 					// Decomposition de l'objet
-					String[] objet = tabObj[1].toString().split("\n");
+					String[] objet = tabObj[i].toString().split("\n");
 					
-					objet[0] = objet[0].substring(0, objet[0].length()-1); // On retire le \n
+					String nomObj = objet[0].substring(0, objet[0].length()-1); // On recupere le nom de l'objet
 					
-					if ( objet[0].equals("Segment") ) {
+					if ( nomObj.equals("Segment") ) {
 						
 						pnlD.getObjets().add( new Segment(objet) ); 
 					}
+					
+					if ( nomObj.equals("Rectangle") ) {
+						
+						pnlD.getObjets().add( new Rectangle(objet) ); 
+					}
+					
+					if ( nomObj.equals("Triangle") ) {
+						
+						pnlD.getObjets().add( new Triangle(objet) ); 
+					}
+					
+					if ( nomObj.equals("Losange") ) {
+						
+						pnlD.getObjets().add( new Losange(objet) ); 
+					}
+					
+					if ( nomObj.equals("Cercle") ) {
+						
+						pnlD.getObjets().add( new Cercle(objet) ); 
+					}
+					
 				}
 				
-				//System.out.println( tabObj[1].toString().split("\n")[1].split(" ")[0] );
+				pnlD.refreshDessin();
 			} 
 			catch (IOException e1) {
 				
