@@ -384,6 +384,7 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 						
 						pnlD.getObjets().add( new Ellipse(objet) ); 
 					}
+					
 				}
 				
 				pnlD.refreshDessin();
