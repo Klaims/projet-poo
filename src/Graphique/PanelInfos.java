@@ -283,7 +283,7 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 						
 						for (int i=0; i<((ObjetComposite) obj).getTaille(); i++) {
 							
-							writer.println("--");
+							writer.println("-");
 							
 							for (int j=0; j<((ObjetComposite) obj).getObjet(i).getSize(); j++ ) {
 								
@@ -311,10 +311,24 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 			
 			try {
 				
+				// Decomposition du fichier
 				String ch = new String(Files.readAllBytes( Paths.get("objet.txt") ));	
 				String[] tabObj = ch.split("#");
 				
-				System.out.println( tabObj[1].toString().split("\n")[1] );
+				for (int i=1; i<tabObj.length; i++) {
+					
+					// Decomposition de l'objet
+					String[] objet = tabObj[1].toString().split("\n");
+					
+					objet[0] = objet[0].substring(0, objet[0].length()-1); // On retire le \n
+					
+					if ( objet[0].equals("Segment") ) {
+						
+						pnlD.getObjets().add( new Segment(objet) ); 
+					}
+				}
+				
+				//System.out.println( tabObj[1].toString().split("\n")[1].split(" ")[0] );
 			} 
 			catch (IOException e1) {
 				

@@ -17,7 +17,14 @@ public class Segment extends ObjetBasique implements Informations{
     	this.setRef(new Point2D(x, y));
   	}
                 
-  	public String toString() {
+  	public Segment(String[] objet) {
+		
+  		Point2D p1 = new Point2D( new Double( objet[1].split(" ")[0]), new Double( objet[1].split(" ")[1]) );
+  		
+  		System.out.println( p1 );
+	}
+
+	public String toString() {
 	  
   		return "Segment";
   	}
