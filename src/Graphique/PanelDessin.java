@@ -221,7 +221,6 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 						this.rayon = p1.distance(p2)/4;
 						drawLine(this.getGraphics());
 						drawCercle(this.getGraphics(),this.rayon);
-						System.out.println("draw");
 					}
 				}
 				
@@ -249,7 +248,6 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 						p1=((Segment) (( (MultiSegment)obj).getObjet(i))).getPoint(0);
 						p2=((Segment) (( (MultiSegment)obj).getObjet(i))).getPoint(1);
 						drawLine(this.getGraphics());
-						System.out.println("draw");
 					}
 				}
 			}
@@ -259,7 +257,6 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 				for(int i=0; i< (((ObjetComposite) obj).getTaille());i++) {
 									
 					p4=((Cercle) (( (MultiCercle)obj).getObjet(i))).getCentre();
-					System.out.println(p4.toString());
 					this.rayon = ((Cercle)((MultiCercle)obj).getObjet(i)).getRayon();
 					p3 = new Point2D(0,0);
 					p3.setPosX(p4.getPosX()-this.rayon);
@@ -399,7 +396,6 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 				if(compteurPoint==0) {
 					tempPoints[0] = new Point2D(e.getX(),e.getY());
 					compteurPoint++;
-					System.out.println(tempPoints[0].toString());
 				}
 				
 				else if (compteurPoint==1) {
@@ -411,7 +407,6 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 						this.objets.add(new MultiSegment());
 						((MultiSegment) this.objets.get(this.objets.size()-1)).addObjet(new Segment(tempPoints[0],tempPoints[1]));
 						compteurPoint++;
-						System.out.println(tempPoints[1].toString());
 						tempPoints[0]=tempPoints[1];
 						
 					}
@@ -421,8 +416,6 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 					tempPoints[1]=new Point2D(e.getX(),e.getY());
 					((MultiSegment) this.objets.get(this.objets.size()-1)).addObjet(new Segment(tempPoints[0],tempPoints[1]));
 					compteurPoint++;
-					//System.out.println(p1.toString());
-					//System.out.println(p2.toString());
 					tempPoints[0]=tempPoints[1];
 				
 				}
@@ -433,7 +426,6 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 							if(compteurPoint==0) {
 								tempPoints[0] = new Point2D(e.getX(),e.getY());
 								compteurPoint++;
-								System.out.println(tempPoints[0].toString());
 							}
 							
 							else if (compteurPoint==1) {
@@ -445,7 +437,6 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 									this.objets.add(new SuiteCercle());
 									((SuiteCercle) this.objets.get(this.objets.size()-1)).addObjet(new Segment(tempPoints[0],tempPoints[1]));
 									compteurPoint++;
-									System.out.println(tempPoints[1].toString());
 									tempPoints[0]=tempPoints[1];
 									
 								}
@@ -703,7 +694,6 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 				tempPoints[1] = new Point2D (e.getX(),e.getY());
 				( (MultiCercle) this.objets.get(this.objets.size()-1) ).addObjet( new Cercle(tempPoints[0],tempPoints[0].distance(tempPoints[1])));
 				compteurPoint++;
-				System.out.println("un cercle est pris en compte");
 				
 			}
 		}
