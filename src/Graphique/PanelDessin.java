@@ -234,7 +234,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 						
 						p3 = new Point2D( p1.getPosX(), p1.getPosY()-p1.distance(p2)/3);
 						this.ga = p1.distance(p2);
-						this.pa=ga/3;
+						this.pa=p1.distance(p2)/3;
 						drawLine(this.getGraphics());
 						p1=p3;
 						drawEllipse(this.getGraphics());
