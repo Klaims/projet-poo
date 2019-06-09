@@ -394,6 +394,7 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 				// Verification extension
 				
 				// TODO
+				
 			}
 			
 			try {
