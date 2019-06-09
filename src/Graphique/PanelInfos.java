@@ -375,7 +375,9 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 				
 				if ( extension != "iut") {
 					
-					choix.cancelSelection();
+					// TODO Message d'erreur
+					
+					return;
 				}
 			}
 			
