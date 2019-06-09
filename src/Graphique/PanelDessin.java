@@ -219,6 +219,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 						p2=((Segment) (( (MultiSegment)obj).getObjet(i))).getPoint(1);
 						p3 = new Point2D( p1.getPosX()-p1.distance(p2)/4, p1.getPosY()-p1.distance(p2)/4);
 						this.rayon = p1.distance(p2)/4;
+						
 						drawLine(this.getGraphics());
 						drawCercle(this.getGraphics(),this.rayon);
 					}
@@ -264,8 +265,6 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 					drawCercle(this.getGraphics(),this.rayon);
 				}
 			}
-			
-			
 		}
 	}
 	

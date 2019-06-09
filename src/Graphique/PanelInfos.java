@@ -44,8 +44,10 @@ import ObjetsBasiques.Quadrangle;
 import ObjetsBasiques.Rectangle;
 import ObjetsBasiques.Segment;
 import ObjetsBasiques.Triangle;
+import ObjetsComposites.MultiCercle;
 import ObjetsComposites.MultiRectangle;
 import ObjetsComposites.MultiSegment;
+import ObjetsComposites.SuiteCercle;
 
 public class PanelInfos extends JPanel implements MouseListener, ListSelectionListener {
 
@@ -312,6 +314,8 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 								
 								writer.println( ((ObjetComposite) obj).getObjet(i).getPoint(j).toString() );
 							}
+							
+							if ( obj instanceof MultiCercle ) writer.println( ((Cercle) ((ObjetComposite) obj).getObjet(i)).getRayon() );
 						}
 					}
 				}
@@ -393,6 +397,16 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 					if ( nomObj.equals("Multi-rectangles") ) {
 						
 						pnlD.getObjets().add( new MultiRectangle(objet) );
+					}
+					
+					if ( nomObj.equals("Multi-cercles") ) {
+						
+						pnlD.getObjets().add( new MultiCercle(objet) );
+					}
+					
+					if ( nomObj.equals("Suite de Cercles") ) {
+						
+						pnlD.getObjets().add( new SuiteCercle(objet) );
 					}
 				}
 				
