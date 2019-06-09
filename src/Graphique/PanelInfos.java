@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -69,6 +70,9 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 	// Attributs des déplacements
 	private ObjetGeometrique obj;
 	private boolean canMove;
+	
+	// Fichier de sauvegarde
+	private String nomFichier;
 	
 	public PanelInfos() {
 		
@@ -270,11 +274,29 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 		
 		if (e.getSource() == this.btnSave) {
 			
+			// Choix de sauvegarde du fichier
+			
+			JFileChooser choix = new JFileChooser();
+			int reponse = choix.showSaveDialog( this.getParent() );
+			
+			if ( reponse == JFileChooser.APPROVE_OPTION ) {
+				
+				nomFichier = choix.getSelectedFile().getAbsolutePath() + ".iut";
+
+				File save = new File( nomFichier );
+				
+				try {
+					save.createNewFile();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+			
 			// Init du writer 
 			
 			try {
 				
-				PrintWriter writer = new PrintWriter("objet.txt","UTF-8");
+				PrintWriter writer = new PrintWriter(nomFichier,"UTF-8");
 
 				Iterator<ObjetGeometrique> iterG = pnlD.getObjets().iterator();
 				
@@ -336,10 +358,31 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 		
 		if (e.getSource() == btnLoad) {
 			
+			// Choix du fichier
+			
+			JFileChooser choix = new JFileChooser();
+			int reponse = choix.showOpenDialog( this.getParent() );
+			
+			if ( reponse == JFileChooser.APPROVE_OPTION ) {
+				
+				nomFichier = choix.getSelectedFile().getAbsolutePath();
+				
+				// Verification extension
+				
+				String extension = "";
+				int i = nomFichier.lastIndexOf(".");
+				if (i>0) extension = nomFichier.substring(i+1);
+				
+				if ( extension != "iut") {
+					
+					choix.cancelSelection();
+				}
+			}
+			
 			try {
 				
 				// Decomposition du fichier
-				String ch = new String(Files.readAllBytes( Paths.get("objet.txt") ));	
+				String ch = new String(Files.readAllBytes( Paths.get(nomFichier) ));	
 				String[] tabObj = ch.split("#");
 				
 				for (int i=1; i<tabObj.length; i++) {
