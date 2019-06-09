@@ -281,7 +281,31 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 			
 			if ( reponse == JFileChooser.APPROVE_OPTION ) {
 				
-				nomFichier = choix.getSelectedFile().getAbsolutePath() + ".iut";
+				nomFichier = choix.getSelectedFile().getAbsolutePath();
+				
+				// Verification vide ou existant 
+				
+				if (nomFichier == null) {
+					
+					// TODO Erreur vide
+					
+					return;
+				}
+				
+				String extension = "";
+				int i = nomFichier.lastIndexOf(".");
+				if (i>0) extension = nomFichier.substring(i+1);
+				
+				if ( extension == "iut") {
+					
+					// TODO Erreur existant
+					
+					return;
+				}
+				
+				// Creation du fichier 
+				
+				nomFichier += ".iut";
 
 				File save = new File( nomFichier );
 				
@@ -369,16 +393,7 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 				
 				// Verification extension
 				
-				String extension = "";
-				int i = nomFichier.lastIndexOf(".");
-				if (i>0) extension = nomFichier.substring(i+1);
-				
-				if ( extension != "iut") {
-					
-					// TODO Message d'erreur
-					
-					return;
-				}
+				// TODO
 			}
 			
 			try {
