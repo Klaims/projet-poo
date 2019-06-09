@@ -441,7 +441,6 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 									
 								}
 							
-							
 							else {
 								tempPoints[1]=new Point2D(e.getX(),e.getY());
 								((SuiteCercle) this.objets.get(this.objets.size()-1)).addObjet(new Segment(tempPoints[0],tempPoints[1]));
@@ -451,7 +450,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 							}
 						}
 			
-			if(this.statut=="Suite d'Ellipses") {
+			if(this.statut=="Multi-ellipses") {
 				
 				if(compteurPoint==0) {
 					tempPoints[0] = new Point2D(e.getX(),e.getY());

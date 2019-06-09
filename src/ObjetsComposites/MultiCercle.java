@@ -16,5 +16,10 @@ public class MultiCercle extends ObjetComposite{
 		
 		return null;
 	}
+	
+	public String toString() {
+		
+		return "Multi-cercles";
+	}
 
 }

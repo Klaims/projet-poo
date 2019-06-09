@@ -12,10 +12,13 @@ public class MultiEllipse extends ObjetComposite{
 		super();
 	}
 
-
 	public String infosObjet() {
 
 		return null;
 	}
-
+	
+	public String toString() {
+		
+		return "Multi-ellipses";
+	}
 }

@@ -44,6 +44,8 @@ import ObjetsBasiques.Quadrangle;
 import ObjetsBasiques.Rectangle;
 import ObjetsBasiques.Segment;
 import ObjetsBasiques.Triangle;
+import ObjetsComposites.MultiRectangle;
+import ObjetsComposites.MultiSegment;
 
 public class PanelInfos extends JPanel implements MouseListener, ListSelectionListener {
 
@@ -306,8 +308,6 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 						
 						for (int i=0; i<((ObjetComposite) obj).getTaille(); i++) {
 							
-							writer.println("-");
-							
 							for (int j=0; j<((ObjetComposite) obj).getObjet(i).getSize(); j++ ) {
 								
 								writer.println( ((ObjetComposite) obj).getObjet(i).getPoint(j).toString() );
@@ -383,6 +383,16 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 					if ( nomObj.equals("Ellipse") ) {
 						
 						pnlD.getObjets().add( new Ellipse(objet) ); 
+					}
+					
+					if ( nomObj.equals("Multi-segments") ) {
+						
+						pnlD.getObjets().add( new MultiSegment(objet) );
+					}
+					
+					if ( nomObj.equals("Multi-rectangles") ) {
+						
+						pnlD.getObjets().add( new MultiRectangle(objet) );
 					}
 				}
 				

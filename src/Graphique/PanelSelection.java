@@ -72,9 +72,9 @@ public class PanelSelection extends JPanel {
 		btnMultCercle.setText("Multi-cercles");
 		pnlBoutons.add(btnMultCercle);
 		
-		BoutonOutil btnSuiteEllipse = new BoutonOutil();
-		btnSuiteEllipse.setText("Suite d'Ellipses");
-		pnlBoutons.add(btnSuiteEllipse);
+		BoutonOutil btnMultEllipse = new BoutonOutil();
+		btnMultEllipse.setText("Multi-ellipses");
+		pnlBoutons.add(btnMultEllipse);
 		
 		BoutonOutil btnSuiteCercle= new BoutonOutil();
 		btnSuiteCercle.setText("Suite de Cercles");
