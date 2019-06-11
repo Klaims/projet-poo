@@ -19,11 +19,14 @@ import Graphique.PanelInfos;
 
 public class PanelDessin extends JPanel implements MouseListener, MouseMotionListener {
 	
-	// Arguments temporaires pour la crï¿½ation des formes
+	////////////////////////////////////////// Attributs du PanelDessin //////////////////////////////////////////
+	
+	// Points Temporaires pour aider à la création des figures
 	private Point2D p1;
 	private Point2D p2;
 	private Point2D p3;
 	private Point2D p4;
+	
 	private Point2D tempo;
 	private boolean construction;
 	private double rayon;
@@ -32,17 +35,21 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 	private Point2D[] tempPoints = new Point2D[4];
 	private Color couleur;
 	
+	// Compteur de points / Tableaux contenant les coordonnées des points afin d'éviter les conflits lors de la création de figures 
 	private int compteurPoint;
 	private int[] x = new int[4];
 	private int[] y = new int[4];
 	
-	// Attributs du panel
-	private ArrayList<ObjetGeometrique> objets;
-	private String statut;
-	private boolean deplacement;
+	private ArrayList<ObjetGeometrique> objets;  // ArrayList contenant tous les objets dessinés
+	private String statut;        // Chaine permettant de savoir la figure que l'utilisateur souhaite tracer
+	private boolean deplacement;  // Booleen indiquant si nous sommes en mode déplacement
 	private ObjetGeometrique obj; // Objet a deplacer
-	private Point2D posSouris; // Repaire pour le deplacement
+	private Point2D posSouris;    // Repaire pour le deplacement
 
+	
+    ////////////////////////////////////////// Méthodes de la classe PanelDessin //////////////////////////////////////////
+	
+	
 	public Point2D getP2() {
 		return p2;
 	}
@@ -61,24 +68,28 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 
 	public PanelDessin() {
 		
-		// Settings panel
+		// Implémentation des Listener et initialisation de l'ArrayList
+		
 		this.addMouseMotionListener(this);
 		this.addMouseListener(this);
 		objets = new ArrayList<ObjetGeometrique>();
 		
 		// Initialisation des attributs
+		
 		this.construction = false;
 		this.couleur = Color.BLACK;
 		this.deplacement = false;
 	}
 	
-	// Met a jour le mode de l'utilisateur
+	// Met a jour le mode dans lequel se trouve l'utilisateur
+	
 	public void refreshStatut(String nouvStatut) { 
 		
 		this.statut = nouvStatut;
 	}
 	
 	// Met a jour le panel de dessin
+	
 	public void refreshDessin() {
 		
 		this.getGraphics().clearRect(0, 0, 1000, 1000);
@@ -91,7 +102,8 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 			
 			couleur = obj.getCouleur();
 			
-			// Dessine les objets
+			// La fonction dessine les  différents objets en fonction de leur classe
+			
 			if ( obj instanceof Segment ) {
 				
 				p1 = obj.getPoint(0);
@@ -208,16 +220,16 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 				}
 			}
 
-			if(obj instanceof MultiSegment) {
+			if ( obj instanceof MultiSegment ) {
 				
-				if (obj instanceof SuiteCercle){
-					
+				if ( obj instanceof SuiteCercle ) {	
 
-					for(int i=0; i< (((ObjetComposite) obj).getTaille());i++) {
+					for ( int i=0; i< (((ObjetComposite) obj).getTaille());i++ ) {
 						
 						p1=((Segment) (( (MultiSegment)obj).getObjet(i))).getPoint(0);
 						p2=((Segment) (( (MultiSegment)obj).getObjet(i))).getPoint(1);
 						p3 = new Point2D( p1.getPosX()-p1.distance(p2)/4, p1.getPosY()-p1.distance(p2)/4);
+						
 						this.rayon = p1.distance(p2)/4;
 						
 						drawLine(this.getGraphics());
@@ -225,43 +237,44 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 					}
 				}
 				
-				else if( obj instanceof SuiteEllipse) {
-					
-					for(int i=0; i< (((ObjetComposite) obj).getTaille());i++) {
-										
-						p1=((Segment) (( (MultiSegment)obj).getObjet(i))).getPoint(0);
-						p2=((Segment) (( (MultiSegment)obj).getObjet(i))).getPoint(1);
+				else if ( obj instanceof SuiteEllipse ) {
 						
+					for ( int i=0; i< (((ObjetComposite) obj).getTaille());i++ ) {
+											
+						p1=((Segment) (( (MultiSegment)obj).getObjet(i))).getPoint(0);
+						p2=((Segment) (( (MultiSegment)obj).getObjet(i))).getPoint(1);		
 						p3 = new Point2D( p1.getPosX(), p1.getPosY()-p1.distance(p2)/3);
+						
 						this.ga = p1.distance(p2);
 						this.pa=p1.distance(p2)/3;
+						
 						drawLine(this.getGraphics());
 						p1=p3;
-						drawEllipse(this.getGraphics());
-										
+						drawEllipse(this.getGraphics());						
 					}
 				}
 				
 				else {
-					
-					for(int i=0; i< (((ObjetComposite) obj).getTaille());i++) {
 						
+					for ( int i=0; i< (((ObjetComposite) obj).getTaille());i++ ) {
+							
 						p1=((Segment) (( (MultiSegment)obj).getObjet(i))).getPoint(0);
 						p2=((Segment) (( (MultiSegment)obj).getObjet(i))).getPoint(1);
 						drawLine(this.getGraphics());
-					}
-				}
+					 }
+			    }
 			}
 			
-			if (obj instanceof MultiCercle) {
+			if ( obj instanceof MultiCercle ) {
 				
-				for(int i=0; i< (((ObjetComposite) obj).getTaille());i++) {
+				for ( int i=0; i< (((ObjetComposite) obj).getTaille());i++ ) {
 									
 					p4=((Cercle) (( (MultiCercle)obj).getObjet(i))).getCentre();
 					this.rayon = ((Cercle)((MultiCercle)obj).getObjet(i)).getRayon();
 					p3 = new Point2D(0,0);
 					p3.setPosX(p4.getPosX()-this.rayon);
 					p3.setPosY(p4.getPosY()-this.rayon);
+					
 					drawCercle(this.getGraphics(),this.rayon);
 				}
 			}
@@ -296,191 +309,190 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 		this.obj = obj;
 	}
 	
+	
+	
 	////////////////////////////////////		MouseListener		///////////////////////////////////////////
 
 
 	public void mouseClicked(MouseEvent e) {
+	
 		
-		if(this.statut=="Triangle") {
+		// Un clic de souris engendre différentes actions en fonction de la figure que l'on souhaite tracer
+		
+		
+		if ( this.statut == "Triangle" ) {
 			
-			switch (compteurPoint) {
+			switch ( compteurPoint ) {
 			
 			case 0: tempPoints[0] = new Point2D( e.getX(), e.getY());
-			
 					compteurPoint++;
+					
 					break;
 					
 			case 1 : tempPoints[1] = new Point2D( e.getX(), e.getY());
-			
 					compteurPoint++;
+					
 					break;
 					
 			case 2 : tempPoints[2] = new Point2D( e.getX(), e.getY());
-					
 					objets.add( new Triangle(tempPoints[0], tempPoints[1], tempPoints[2]) );
 					compteurPoint= 0;
+					
+					break;
+			}
+		}
+		
+		
+		if ( this.statut == "Quadrangle" ) {
+				
+			if ( this.construction==true ) {
+					
+				p2 = new Point2D( e.getX(), e.getY());
+					
+				if ( (p1.distance(p2) > rayon-5) && (p1.distance(p2) < rayon+5 ) ) {
+						
+					switch (compteurPoint) {
+						
+					case 0: tempPoints[0] = new Point2D( e.getX(), e.getY());
+						    compteurPoint++;
+						    
+							break;
+								
+					case 1 : tempPoints[1] = new Point2D( e.getX(), e.getY());
+							 compteurPoint++;
+								
+							 break;
+								
+					case 2 : tempPoints[2] = new Point2D( e.getX(), e.getY());
+							 compteurPoint++;
+							 
+							 break;
+								
+					case 3 : tempPoints[3] = new Point2D( e.getX(), e.getY());
+						     objets.remove(objets.size()-1);
+						     objets.add( new Quadrangle(rayon, tempPoints[0], tempPoints[1], tempPoints[2], tempPoints[3]) );
+							 compteurPoint= 0;
+							 construction= false;
+							 
+							 break;
+					}
+				}
+			}
+		}
+		
+		
+		if ( this.statut== "Arc" ) {
+				
+			if ( this.construction==true ) {
+					
+				p2 = new Point2D( e.getX(), e.getY());
+					
+				if ( (p1.distance(p2) > rayon-5) && (p1.distance(p2) < rayon+5) ) {
+						
+					switch (compteurPoint) {
+						
+					case 0: tempPoints[0] = new Point2D( e.getX(), e.getY());
+							compteurPoint++;
+							
+							break;
+								
+					case 1: tempPoints[1] = new Point2D( e.getX(), e.getY());
+							tempPoints[3] = new Point2D(p1.getPosX()-rayon,p1.getPosY()-rayon);
+							compteurPoint++;
+								
+							this.objets.remove(objets.size()-1);
+							this.objets.add(new ArcCercle(p1, rayon, calculAngle(tempPoints[0],p1),(calculAngle(tempPoints[1],p1)-calculAngle(tempPoints[0],p1))));
+								
+							construction=false;
+							compteurPoint=0;
+							break;
+					}
+					
+				}
+			}
+		}
+		
+
+		if ( this.statut == "Multi-segments" ) {
+				
+			if ( compteurPoint==0 ) {
+				tempPoints[0] = new Point2D(e.getX(),e.getY());
+				compteurPoint++;
+			}
+				
+			else if ( compteurPoint == 1 ) {
+					
+				tempPoints[1]= new Point2D(e.getX(),e.getY());
+				this.objets.add(new MultiSegment());
+				((MultiSegment) this.objets.get(this.objets.size()-1)).addObjet(new Segment(tempPoints[0],tempPoints[1]));
+				compteurPoint++;
+				tempPoints[0]=tempPoints[1];	
+			}
+				
+				
+		    else {
+		    	
+				tempPoints[1]=new Point2D(e.getX(),e.getY());
+				((MultiSegment) this.objets.get(this.objets.size()-1)).addObjet(new Segment(tempPoints[0],tempPoints[1]));
+				compteurPoint++;
+				tempPoints[0]=tempPoints[1];
 			}
 		}
 			
-			if(this.statut=="Quadrangle") {
-				
-				if (this.construction==true) {
-					
-					p2 = new Point2D( e.getX(), e.getY());
-					
-					if ( 	(p1.distance(p2) > rayon-5) &&
-							(p1.distance(p2) < rayon+5) ){
-						
-						switch (compteurPoint) {
-						
-						case 0: tempPoints[0] = new Point2D( e.getX(), e.getY());
-						
-								compteurPoint++;
-								break;
-								
-						case 1 : tempPoints[1] = new Point2D( e.getX(), e.getY());
-						
-								compteurPoint++;
-								break;
-								
-						case 2 : tempPoints[2] = new Point2D( e.getX(), e.getY());
+		
+		if ( this.statut == "Suite de Cercles" ) {
 							
-								compteurPoint++;
-								break;
-								
-						case 3 : tempPoints[3] = new Point2D( e.getX(), e.getY());
-						
-								objets.remove(objets.size()-1);
-								objets.add( new Quadrangle(rayon, tempPoints[0], tempPoints[1], tempPoints[2], tempPoints[3]) );
-								compteurPoint= 0;
-								construction= false;
-						}
-					}
-				}
-			}
-		
-			if (this.statut=="Arc") {
+			if ( compteurPoint == 0 ) {
 				
-				if(this.construction==true) {
-					
-					p2 = new Point2D( e.getX(), e.getY());
-					
-					if ( (p1.distance(p2) > rayon-5) && (p1.distance(p2) < rayon+5) ){
-						
-						switch (compteurPoint) {
-						
-						case 0: tempPoints[0] = new Point2D( e.getX(), e.getY());
-								compteurPoint++;
-								break;
-								
-						case 1: tempPoints[1] = new Point2D( e.getX(), e.getY());
-								tempPoints[3] = new Point2D(p1.getPosX()-rayon,p1.getPosY()-rayon);
-								compteurPoint++;
-								
-								this.objets.remove(objets.size()-1);
-								this.objets.add(new ArcCercle(p1, rayon, calculAngle(tempPoints[0],p1),(calculAngle(tempPoints[1],p1)-calculAngle(tempPoints[0],p1))));
-								
-								construction=false;
-								compteurPoint=0;
-								break;
-							}
-					
-					}
-				}
+				tempPoints[0] = new Point2D(e.getX(),e.getY());
+				compteurPoint++;
 			}
+							
+			else if ( compteurPoint == 1 ) {
+									
+				tempPoints[1]= new Point2D(e.getX(),e.getY());
+				this.objets.add(new SuiteCercle());
+				((SuiteCercle) this.objets.get(this.objets.size()-1)).addObjet(new Segment(tempPoints[0],tempPoints[1]));
+				compteurPoint++;
+				tempPoints[0]=tempPoints[1];								
+			}
+							
+			else {
+				
+				 tempPoints[1]=new Point2D(e.getX(),e.getY());
+				 ((SuiteCercle) this.objets.get(this.objets.size()-1)).addObjet(new Segment(tempPoints[0],tempPoints[1]));
+				 compteurPoint++;
+				 tempPoints[0]=tempPoints[1];
+			}
+		}
+			
 		
+		if ( this.statut == "Multi-ellipses" ) {
+				
+			if ( compteurPoint == 0) {
+				 tempPoints[0] = new Point2D(e.getX(),e.getY());
+				 compteurPoint++;
+			}
+				
+			else if ( compteurPoint == 1 ) {
 
-			if(this.statut=="Multi-segments") {
-				
-				if(compteurPoint==0) {
-					tempPoints[0] = new Point2D(e.getX(),e.getY());
-					compteurPoint++;
-				}
-				
-				else if (compteurPoint==1) {
-					
-					
-						tempPoints[1]= new Point2D(e.getX(),e.getY());
-						
-						
-						this.objets.add(new MultiSegment());
-						((MultiSegment) this.objets.get(this.objets.size()-1)).addObjet(new Segment(tempPoints[0],tempPoints[1]));
-						compteurPoint++;
-						tempPoints[0]=tempPoints[1];
-						
-					}
-				
-				
-				else {
-					tempPoints[1]=new Point2D(e.getX(),e.getY());
-					((MultiSegment) this.objets.get(this.objets.size()-1)).addObjet(new Segment(tempPoints[0],tempPoints[1]));
-					compteurPoint++;
-					tempPoints[0]=tempPoints[1];
-				
-				}
+				 tempPoints[1]= new Point2D(e.getX(),e.getY());
+				 this.objets.add(new SuiteEllipse());
+				 ((SuiteEllipse) this.objets.get(this.objets.size()-1)).addObjet(new Segment(tempPoints[0],tempPoints[1]));
+			     compteurPoint++;
+				 tempPoints[0]=tempPoints[1];			
 			}
-			
-			if(this.statut=="Suite de Cercles") {
-							
-							if(compteurPoint==0) {
-								tempPoints[0] = new Point2D(e.getX(),e.getY());
-								compteurPoint++;
-							}
-							
-							else if (compteurPoint==1) {
-								
-								
-									tempPoints[1]= new Point2D(e.getX(),e.getY());
-									
-									
-									this.objets.add(new SuiteCercle());
-									((SuiteCercle) this.objets.get(this.objets.size()-1)).addObjet(new Segment(tempPoints[0],tempPoints[1]));
-									compteurPoint++;
-									tempPoints[0]=tempPoints[1];
-									
-								}
-							
-							else {
-								tempPoints[1]=new Point2D(e.getX(),e.getY());
-								((SuiteCercle) this.objets.get(this.objets.size()-1)).addObjet(new Segment(tempPoints[0],tempPoints[1]));
-								compteurPoint++;
-								tempPoints[0]=tempPoints[1];
-							
-							}
-						}
-			
-			if(this.statut=="Multi-ellipses") {
 				
-				if(compteurPoint==0) {
-					tempPoints[0] = new Point2D(e.getX(),e.getY());
-					compteurPoint++;
-					System.out.println(tempPoints[0].toString());
-				}
+			else {
 				
-				else if (compteurPoint==1) {
-					
-					
-						tempPoints[1]= new Point2D(e.getX(),e.getY());
-						
-						
-						this.objets.add(new SuiteEllipse());
-						((SuiteEllipse) this.objets.get(this.objets.size()-1)).addObjet(new Segment(tempPoints[0],tempPoints[1]));
-						compteurPoint++;
-						System.out.println(tempPoints[1].toString());
-						tempPoints[0]=tempPoints[1];
-						
-					}
-				
-				
-				else {
-					tempPoints[1]=new Point2D(e.getX(),e.getY());
-					((SuiteEllipse) this.objets.get(this.objets.size()-1)).addObjet(new Segment(tempPoints[0],tempPoints[1]));
-					compteurPoint++;
-					tempPoints[0]=tempPoints[1];
-				
-				}
+				  tempPoints[1]=new Point2D(e.getX(),e.getY());
+				  ((SuiteEllipse) this.objets.get(this.objets.size()-1)).addObjet(new Segment(tempPoints[0],tempPoints[1]));
+				  compteurPoint++;
+				  tempPoints[0]=tempPoints[1];
 			}
-		// Rafraichissement zone infos et dessins
+		}
+			
+		// On actualise la zone de dessin et les informations à chaque clic
 		
 		((PanelInfos) this.getParent().getComponent(1)).refreshInfos(this.objets);
 		this.refreshDessin();
@@ -490,48 +502,44 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 	
 	public void mousePressed(MouseEvent e) {
 		
+		// Lorsque l'on garde le clic souris enfoncé, différentes actions vont se produire en fonction de la figure que l'on souhaite tracer
+		
 		if ( this.statut == "Segment" ) {
 			
-			p1 = new Point2D( e.getX(), e.getY());
+			p1 = new Point2D(e.getX(), e.getY());
 		}
 		
 		if ( this.statut == "Rectangle" ) {
 			
-			p1 = new Point2D( e.getX(), e.getY());
+			p1 = new Point2D(e.getX(), e.getY());
 		}
 		
 		if ( this.statut == "Cercle" ) {
 			
 			p1 = new Point2D(e.getX(),e.getY());
-			
 		}
 
 		if ( this.statut == "Losange" ) {
 			
-			p1 = new Point2D( e.getX(), e.getY());
+			p1 = new Point2D(e.getX(), e.getY());
 		}
 		
 		if ( this.statut == "Quadrangle" ) {
 			
-			if (construction==false) {
+			if ( construction == false ) {
 				
 				p1 = new Point2D(e.getX(),e.getY());
 			}	
 		}
 		
-		if ( this.statut == "Aucun" ) {
-			
-			// TODO
-		}
-		
 		if ( this.statut == "Ellipse" ) {
 					
-			p1 = new Point2D( e.getX(), e.getY());
+			p1 = new Point2D(e.getX(), e.getY());
 		}
 		
 		if (this.statut == "Arc") {
 			
-			if (construction==false) {
+			if ( construction == false ) {
 				
 				p1 = new Point2D(e.getX(),e.getY());
 			}	
@@ -552,16 +560,14 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 			
 			if ( compteurPoint == 0) {
 				
-				objets.add(new MultiCercle());
-				
-				
+				objets.add(new MultiCercle());	
 			}
 			
 			tempPoints[0] = new Point2D(e.getX(),e.getY());
 			compteurPoint++;
 		}
 		
-		// Rafraichissement zone infos
+		// On actualise la zone de dessin et les informations à chaque fois que la souris reste appuyée
 		
 		((PanelInfos) this.getParent().getComponent(1)).refreshInfos(this.objets);
 		posSouris = new Point2D (e.getX(), e.getY());
@@ -570,13 +576,17 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 	
 	public void mouseReleased(MouseEvent e) {
 		
+		// Lorsque l'on relache le clic souris qui était enfoncé, différentes actions vont se produire en fonction de la figure que l'on souhaite tracer
+		
 		if ( this.statut == "Segment" ) {
 			
 			p2 = new Point2D( e.getX(), e.getY() );
 			
-			// Ajout dans la liste
+			// Ajout de l'objet dans la liste d'objets du Panel
+			
 			objets.add( new Segment(p1, p2) );
 		}
+		
 		
 		if ( this.statut == "Rectangle" ) {
 			
@@ -587,6 +597,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 			objets.add( new Rectangle(p1, p2, p3, p4) );
 		}
 		
+		
 		if ( this.statut == "Cercle" ) {
 			
 			p2 = new Point2D(e.getX(),e.getY());
@@ -594,7 +605,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 			
 			objets.add( new Cercle(p1, rayon) );
 		}
-
+		
 		
 		if ( this.statut == "Losange" ) {
 			
@@ -608,23 +619,20 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 			objets.add( new Losange(tempPoints[0], tempPoints[1], tempPoints[2], tempPoints[3]) );
 		}
 		
+		
 		if ( this.statut == "Quadrangle" ) {
 			
-			if (construction==false) {
+			if ( construction == false ) {
 				
 				p2 = new Point2D( e.getX(), e.getY() );
 				this.rayon = p1.distance(p2);
 				
 				objets.add( new Cercle(p1, rayon) );
 				objets.get(objets.size()-1).setCouleur(Color.GREEN);
-				construction=true;
+				construction = true;
 			}
 		}
 		
-		if ( this.statut == "Aucun" ) {
-			
-			// ???
-		}
 				
 		if ( this.statut == "Ellipse" ) {
 					
@@ -635,7 +643,7 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 			ga = p1.distance(p3);
 			pa = p1.distance(p4);
 			
-			if (p1.getPosY() >p2.getPosY() ) {
+			if ( p1.getPosY() > p2.getPosY() ) {
 				
 				tempo=p1;
 				p1=p2;
@@ -644,8 +652,9 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 				tempo=p3;
 				p3=p4;
 				p4=tempo;
-}
-			if (p1.getPosX() >p3.getPosX() ) {
+			}
+			
+			if ( p1.getPosX() > p3.getPosX() ) {
 				
 				tempo=p1;
 				p1=p3;
@@ -654,26 +663,27 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 				tempo=p4;
 				p4=p2;
 				p2=tempo;
-				
 			}
 			
 			objets.add( new Ellipse(p1, ga, pa) );
 		}
 		
-		if (this.statut == "Arc") {
+		
+		if (this.statut == "Arc" ) {
 
-			if (construction==false) {
+			if ( construction == false ) {
 				
-				p2 = new Point2D( e.getX(), e.getY() );
+				p2 = new Point2D(e.getX(), e.getY() );
 				this.rayon = p1.distance(p2);
 				
 				this.objets.add( new Cercle(p1, rayon) );
 				objets.get(objets.size()-1).setCouleur(Color.GREEN);
-				construction=true;
+				construction = true;
 			}
 		}
 		
-		if ( statut == "Multi-rectangles") {
+		
+		if ( statut == "Multi-rectangles" ) {
 			
 			if ( compteurPoint != 0 ) {
 			
@@ -681,31 +691,29 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 				p2 = new Point2D(p3.getPosX(),p1.getPosY());
 				p4 = new Point2D(p1.getPosX(),p3.getPosY());
 				
-				( (MultiRectangle) this.objets.get(this.objets.size()-1) ).addObjet( new Rectangle(p1, p2, p3, p4) );
+				( (MultiRectangle) this.objets.get(this.objets.size()-1) ).addObjet(new Rectangle(p1, p2, p3, p4));
 			}
 		}
 		
-		if (this.statut == "Multi-cercles") {
+		if ( this.statut == "Multi-cercles" ) {
 			
 			if ( compteurPoint != 0 ) {
 				
 				tempPoints[1] = new Point2D (e.getX(),e.getY());
 				( (MultiCercle) this.objets.get(this.objets.size()-1) ).addObjet( new Cercle(tempPoints[0],tempPoints[0].distance(tempPoints[1])));
 				compteurPoint++;
-				
 			}
 		}
 		
-		// Rafraichissement zone dessin et infos
+		// On actualise la zone de dessin et les informations à chaque fois que l'on relâche le clic souris
 		
 		((PanelInfos) this.getParent().getComponent(1)).refreshInfos(this.objets);
 		this.refreshDessin();
 	}
 
-	public void mouseEntered(MouseEvent e) {
-		// Rien du tout
-	}
-
+	
+    /////////////////////////////////////////// Fonctions permettant de tracer les figures ///////////////////////////////////////////  
+	
 	
 	public void mouseExited(MouseEvent e) {
 		
@@ -714,54 +722,55 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 	
 	public void drawLine(Graphics g) {
 		
-		g.setColor( couleur );
+		g.setColor(couleur);
 		g.drawLine(  (int) p1.getPosX(), (int) p1.getPosY(),(int) p2.getPosX() , (int)p2.getPosY( ));
 	}
 	
 	public void drawRectangle(Graphics g) {
 		
-		g.setColor( couleur );
+		g.setColor(couleur);
 		g.drawRect( (int) p1.getPosX(), (int) p1.getPosY(), (int)  Math.abs( p2.getPosX()-p1.getPosX() ), (int)Math.abs( p4.getPosY()-p1.getPosY())) ;
 	}
 	
 	public void drawPoly(Graphics g, int nbPoints) {
 		
-		g.setColor( couleur );
+		g.setColor(couleur);
 		g.drawPolygon(x, y, nbPoints);
 	}
 	
 	public void drawCercle(Graphics g, double rayon) {
 		
-		g.setColor( couleur );
+		g.setColor(couleur);
 		g.drawOval((int)p3.getPosX(), (int)p3.getPosY(), 2* (int)rayon, 2* (int)rayon);
 	}
 	
 	public void drawEllipse(Graphics g) {
 		
-		g.setColor( couleur ); 
+		g.setColor(couleur); 
 		g.drawOval((int) p1.getPosX(), (int) p1.getPosY(), (int) ga, (int) pa );	
 	}
 	
 	public void drawArcCercle(Graphics g) {
 		
-		g.setColor( couleur ); 
+		g.setColor(couleur); 
 		g.drawArc( (int) (p3.getPosX()),(int)  (p3.getPosY()) , (int)  (2*rayon), (int)  (2*rayon),  (int) pa, (int)ga);
 	}
 	
 	public double calculAngle(Point2D point , Point2D centre) {
 		
-		double cos =  (point.getPosX() - centre.getPosX())/rayon;
-		double sin =  (point.getPosY()-centre.getPosY())/rayon;
+		double cos = (point.getPosX() - centre.getPosX())/rayon;
+		double sin = (point.getPosY()-centre.getPosY())/rayon;
 		
 		double angle = Math.toDegrees(Math.acos(cos));
 		
-		if ( sin > 0) angle =-angle;
+		if ( sin > 0) angle = -angle;
 		
-		return (angle);
+			return (angle);
 	}
 
-	@Override
 	public void mouseDragged(MouseEvent e) {
+		
+		// Lorsque l'on effectue un déplacement
 		
 		if ( deplacement ) {
 		
@@ -772,42 +781,36 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 					int resX = (int) (e.getX() - posSouris.getPosX());
 					int resY = (int) (e.getY() - posSouris.getPosY());
 					
-					Point2D nouvPoint = new Point2D( 	( obj.getPoint(i).getPosX() + resX  ),
-														( obj.getPoint(i).getPosY() + resY  ));
+					Point2D nouvPoint = new Point2D( ( obj.getPoint(i).getPosX() + resX  ) , ( obj.getPoint(i).getPosY() + resY  ) );
 					
 					obj.setPoint(i, nouvPoint);
 				}
 			}
 			
-			else if ( obj instanceof ObjetComposite ) {
+			 else if ( obj instanceof ObjetComposite ) {
 
-				for ( int i=0 ; i< ((ObjetComposite) obj).getTaille() ; i++ ) {
+				 for ( int i=0 ; i< ((ObjetComposite) obj).getTaille() ; i++ ) {
 					
-					for ( int j=0 ; j<((ObjetComposite) obj).getObjet(i).getSize(); j++ ) {
+					 for ( int j=0 ; j<((ObjetComposite) obj).getObjet(i).getSize(); j++ ) {
 						
 						int resX = (int) (e.getX() - posSouris.getPosX());
 						int resY = (int) (e.getY() - posSouris.getPosY());
 						
-						Point2D nouvPoint = new Point2D( 	
-								( (ObjetComposite) obj).getObjet(i).getPoint(j).getPosX() + resX,
-								( (ObjetComposite) obj).getObjet(i).getPoint(j).getPosY() + resY  );
+						Point2D nouvPoint = new Point2D ( ((ObjetComposite) obj).getObjet(i).getPoint(j).getPosX() + resX, 
+														( (ObjetComposite) obj).getObjet(i).getPoint(j).getPosY() + resY );
 						
 						((ObjetComposite) obj).getObjet(i).setPoint(j, nouvPoint);
-					}
-				}
-			}
+					 }
+				 }
+			 }
 			
 			refreshDessin();
 			posSouris = new Point2D (e.getX(), e.getY());
 		}
 	}
 
-	@Override
-	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	// Fonction permettant de réinitialiser les attributs à leur valeur par défaut
+	
 	public void refreshAttributs() {
 		
 		p1 = p2 = p3 = p4 = null;
@@ -816,4 +819,15 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 		construction = false;
 		couleur = Color.BLACK;
 	}
+
+	
+	/////////////////////////////////// Méthodes inutilisées implentées par l'ActionListener ///////////////////////////////////
+	
+	
+	public void mouseMoved(MouseEvent arg0) {	
+	}
+
+	public void mouseEntered(MouseEvent e) {	
+	}
+	
 }

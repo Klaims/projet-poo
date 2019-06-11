@@ -492,21 +492,20 @@ public class PanelInfos extends JPanel implements MouseListener, ListSelectionLi
 		btn.actionPerformed( new ActionEvent(btn, 0, null) );
 	}
 
-	@Override
+
 	public void mousePressed(MouseEvent e) {
 	}
 
-	@Override
+
 	public void mouseReleased(MouseEvent e) {
 	}
 
-	@Override
+
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
 	}
 
-	@Override
+
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
 	}
+	
 }
