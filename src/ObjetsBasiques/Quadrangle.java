@@ -88,8 +88,7 @@ public class Quadrangle extends ObjetBasique implements CalculsGeometriques, Inf
 	
 	public String infosObjet() {
 
-		return    ( "\n"
-				  + "Type : Quadrangle \n"
+		return    ( "Type : Quadrangle \n"
 				  + "Rayon = " + this.rayon + "\n"
 				  + "p1 (" + ( this.getPoint(0).getPosX() + " , " + (this.getPoint(0).getPosY() + ")\n"
 				  + "p2 (" +  ( this.getPoint(1)).getPosX()) + " , " +  this.getPoint(1).getPosY() + ")\n" 

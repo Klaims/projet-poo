@@ -50,6 +50,7 @@ public class PanelSelection extends JPanel {
 		
 		BoutonOutil btnQuad = new BoutonOutil();
 		btnQuad.setText("Quadrangle");
+		btnQuad.setFont( new Font("Arial", Font.PLAIN, 12) );
 		pnlBoutons.add(btnQuad);
 		
 		BoutonOutil btnEllipse = new BoutonOutil();
@@ -82,7 +83,7 @@ public class PanelSelection extends JPanel {
 		
 		BoutonOutil btnSuiteCercle= new BoutonOutil();
 		btnSuiteCercle.setText("Suite de Cercles");
-		btnSuiteCercle.setFont( new Font("Arial", Font.PLAIN, 8) );
+		btnSuiteCercle.setFont( new Font("Arial", Font.PLAIN, 14) );
 		pnlBoutons.add(btnSuiteCercle);
 		
 		BoutonOutil btnAucun = new BoutonOutil();
