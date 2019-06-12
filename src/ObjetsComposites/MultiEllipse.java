@@ -14,7 +14,7 @@ public class MultiEllipse extends ObjetComposite{
 
 	public String infosObjet() {
 
-		return null;
+		return "Multi-ellipses \nNombre d'ellipses : " + this.getTaille();
 	}
 	
 	public String toString() {

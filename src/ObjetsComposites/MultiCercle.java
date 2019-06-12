@@ -28,7 +28,7 @@ public class MultiCercle extends ObjetComposite{
 
 	public String infosObjet() {
 		
-		return null;
+		return "Multi-cercles \nNombre de cercles : " + this.getTaille();
 	}
 	
 	public String toString() {

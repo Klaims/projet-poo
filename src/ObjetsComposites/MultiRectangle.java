@@ -28,7 +28,7 @@ public class MultiRectangle extends ObjetComposite{
 
 	public String infosObjet() {
 		
-		return "Multi-rectangles \nTaille : " + this.getTaille();
+		return "Multi-rectangles \nNombre de rectangles : " + this.getTaille();
 	}
 	
 	public String toString() {

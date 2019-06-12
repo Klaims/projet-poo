@@ -24,4 +24,10 @@ public class SuiteCercle extends MultiSegment {
 		return "Suite de Cercles";
 	}
 	
+	public String infosObjet() {
+		
+		return "Suite de Cercles 	\nNombre de segments : " + this.getTaille()
+									+"\nNombre de cercles : " + this.getTaille();
+	}
+	
 }

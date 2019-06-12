@@ -28,7 +28,7 @@ public class MultiSegment extends ObjetComposite implements Informations {
 
 	public String infosObjet() {
 
-		return null;
+		return "Multi-segments \nNombre de segments : " + this.getTaille();
 	}
 	
 	public String toString() {
