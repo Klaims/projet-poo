@@ -480,32 +480,6 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 			}
 		}
 			
-		
-		if ( this.statut == "Multi-ellipses" ) {
-				
-			if ( compteurPoint == 0) {
-				 tempPoints[0] = new Point2D(e.getX(),e.getY());
-				 compteurPoint++;
-			}
-				
-			else if ( compteurPoint == 1 ) {
-
-				 tempPoints[1]= new Point2D(e.getX(),e.getY());
-				 this.objets.add(new SuiteEllipse());
-				 ((SuiteEllipse) this.objets.get(this.objets.size()-1)).addObjet(new Segment(tempPoints[0],tempPoints[1]));
-			     compteurPoint++;
-				 tempPoints[0]=tempPoints[1];			
-			}
-				
-			else {
-				
-				  tempPoints[1]=new Point2D(e.getX(),e.getY());
-				  ((SuiteEllipse) this.objets.get(this.objets.size()-1)).addObjet(new Segment(tempPoints[0],tempPoints[1]));
-				  compteurPoint++;
-				  tempPoints[0]=tempPoints[1];
-			}
-		}
-			
 		// On actualise la zone de dessin et les informations à chaque clic
 		
 		((PanelInfos) this.getParent().getComponent(1)).refreshInfos(this.objets);
