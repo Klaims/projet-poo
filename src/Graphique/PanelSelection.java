@@ -62,22 +62,27 @@ public class PanelSelection extends JPanel {
 
 		BoutonOutil btnMultSeg = new BoutonOutil();
 		btnMultSeg.setText("Multi-segments");
+		btnMultSeg.setFont( new Font("Arial", Font.PLAIN, 12) );
 		pnlBoutons.add(btnMultSeg);
 		
 		BoutonOutil btnMultRect = new BoutonOutil();
 		btnMultRect.setText("Multi-rectangles");
+		btnMultRect.setFont( new Font("Arial", Font.PLAIN, 13) );
 		pnlBoutons.add(btnMultRect);
 		
 		BoutonOutil btnMultCercle = new BoutonOutil();
 		btnMultCercle.setText("Multi-cercles");
+		btnMultCercle.setFont( new Font("Arial", Font.PLAIN, 11) );
 		pnlBoutons.add(btnMultCercle);
 		
 		BoutonOutil btnMultEllipse = new BoutonOutil();
 		btnMultEllipse.setText("Multi-ellipses");
+		btnMultEllipse.setFont( new Font("Arial", Font.PLAIN, 11) );
 		pnlBoutons.add(btnMultEllipse);
 		
 		BoutonOutil btnSuiteCercle= new BoutonOutil();
 		btnSuiteCercle.setText("Suite de Cercles");
+		btnSuiteCercle.setFont( new Font("Arial", Font.PLAIN, 8) );
 		pnlBoutons.add(btnSuiteCercle);
 		
 		BoutonOutil btnAucun = new BoutonOutil();
