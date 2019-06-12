@@ -144,9 +144,10 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 					
 				p1 = obj.getPoint(0);
 				rayon = ((Cercle) obj).getRayon();
-				p3 = new Point2D(p1.getPosX()-rayon,p1.getPosY()-rayon); // Utile à drawCercle
+				p3 = new Point2D(p1.getPosX()-rayon,p1.getPosY()-rayon);  // Utile à drawCercle
 						
-				this.drawCercle(this.getGraphics(), rayon);}
+				this.drawCercle(this.getGraphics(), rayon);
+				}
 			}
 			
 			if ( obj instanceof Triangle ) {
@@ -278,6 +279,19 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 					drawCercle(this.getGraphics(),this.rayon);
 				}
 			}
+			
+            if ( obj instanceof MultiEllipse ) {
+				
+				for ( int i=0; i< (((ObjetComposite) obj).getTaille());i++ ) {
+									
+					p1 = ((Ellipse) (( (MultiEllipse)obj).getObjet(i))).getPoint(0);
+					ga = ((Ellipse) (( (MultiEllipse)obj).getObjet(i))).getGa();
+					pa = ((Ellipse) (( (MultiEllipse)obj).getObjet(i))).getPa();
+					
+					drawEllipse(getGraphics());				
+				}
+			}
+            
 		}
 	}
 	
@@ -567,6 +581,18 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 			compteurPoint++;
 		}
 		
+		
+		if ( this.statut == "Multi-ellipses") {
+			
+			if ( compteurPoint == 0) {
+				
+				objets.add(new MultiEllipse());	
+			}
+			
+			tempPoints[0] = new Point2D(e.getX(),e.getY());
+			compteurPoint++;
+		}
+		
 		// On actualise la zone de dessin et les informations à chaque fois que la souris reste appuyée
 		
 		((PanelInfos) this.getParent().getComponent(1)).refreshInfos(this.objets);
@@ -705,6 +731,44 @@ public class PanelDessin extends JPanel implements MouseListener, MouseMotionLis
 			}
 		}
 		
+        if ( this.statut == "Multi-ellipses" ) {
+			
+			if ( compteurPoint != 0 ) {
+				
+				p2 = new Point2D(e.getX(),e.getY());
+				p3 = new Point2D( p2.getPosX(), tempPoints[0].getPosY() );
+				p4 = new Point2D( tempPoints[0].getPosX(), p2.getPosY() );
+				
+				ga = tempPoints[0].distance(p3);
+				pa = tempPoints[0].distance(p4);
+				
+				if ( tempPoints[0].getPosY() > p2.getPosY() ) {
+					
+					tempo=tempPoints[0];
+					tempPoints[0]=p2;
+					p2=tempo;
+					
+					tempo=p3;
+					p3=p4;
+					p4=tempo;
+				}
+				
+				if ( tempPoints[0].getPosX() > p3.getPosX() ) {
+					
+					tempo=tempPoints[0];
+					tempPoints[0]=p3;
+					p3=tempo;
+					
+					tempo=p4;
+					p4=p2;
+					p2=tempo;
+				}
+								
+				( (MultiEllipse) this.objets.get(this.objets.size()-1) ).addObjet(new Ellipse(tempPoints[0], ga, pa));
+				compteurPoint++;
+			}
+		}
+        
 		// On actualise la zone de dessin et les informations à chaque fois que l'on relâche le clic souris
 		
 		((PanelInfos) this.getParent().getComponent(1)).refreshInfos(this.objets);
